@@ -8,7 +8,7 @@ do
 		direc=RESULTS_EA_`echo $sys`_C`echo $cen`
 		if [ -d "$direc" ]
 		then
-			./run_svwr.sh &
+			./run_svwr.sh $direc &
 		fi
 	done
 	wait
