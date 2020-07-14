@@ -3,6 +3,16 @@
 
 workingDirectory=$1
 
+for direc in $workingDirectory/HoTCoffeeh
+do
+	rm -rf $direc
+done
+
+for direc in $workingDirectory/job-1/event-1/post_processing_results
+do
+        rm -rf $direc
+done
+
 cp -r EBE-Node/HoTCoffeeh $workingDirectory
 resultsDirectory=$workingDirectory/HoTCoffeeh/results
 mkdir $resultsDirectory
