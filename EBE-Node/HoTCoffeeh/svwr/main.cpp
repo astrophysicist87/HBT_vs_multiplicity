@@ -204,6 +204,7 @@ int main(int argc, char *argv[])
 
 	// Output most interesting results
 	Source_function.Output_total_target_dN_dypTdpTdphi();
+	Source_function.Output_target_quantities_to_average();		// thermal only!
 	Source_function.Output_chosen_resonances();
 	Source_function.Output_results();
 	output << "Finished calculating HBT radii via source variances method" << endl;

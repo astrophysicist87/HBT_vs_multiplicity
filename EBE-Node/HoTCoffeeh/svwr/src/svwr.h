@@ -108,12 +108,15 @@ class SourceVariances
 		
 		//array to temporarily hold results of resonance SV integrations
 		int n_weighting_functions;  //number of source variances to consider
+		int n_quantities_to_average;  //number of miscellaneous quantities to average w.r.t. S(x,K)
 		//double * source_variances_array;
 		double **** integrated_spacetime_moments;
 		double **** dN_dypTdpTdphi_moments;
 		double **** ln_dN_dypTdpTdphi_moments;
 		double **** sign_of_dN_dypTdpTdphi_moments;
 		double **** all_particles_dN_dypTdpTdphi_moments;
+
+		double **** quantities_to_average;
 	
 		//needed for resonance calculations
 		//kinematic info
@@ -299,6 +302,7 @@ class SourceVariances
 		void Output_dN_dypTdpT();
 		void Output_all_dN_dypTdpTdphi();
 		void Output_total_target_dN_dypTdpTdphi();
+		void Output_target_quantities_to_average();
 		void Output_results();
 		void Readin_results();
 		void Read_in_all_dN_dypTdpTdphi();
