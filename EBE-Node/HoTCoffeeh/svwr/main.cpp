@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 	decdatfile << workingDirectory << "/decdat2.dat";
 	output << decdatfile.str() << endl;
 	FO_length=get_filelength(decdatfile.str().c_str());
-	output << "Total number of freeze out fluid cell: " <<  FO_length << endl;
+	output << "Total number of freeze out fluid cell: " << FO_length << endl;
 
 	//read the data arrays for the decoupling information
 	FO_surf* FOsurf_ptr = new FO_surf[FO_length];
