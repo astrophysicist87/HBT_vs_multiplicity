@@ -320,7 +320,7 @@ void SourceVariances::Read_in_all_dN_dypTdpTdphi()
 		for(int ipT = 0; ipT < n_pT_pts; ipT++)
 		{
 			input_all_dN_dypTdpTdphi >> dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi];
-			if (abs(dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi]) > 1.e-100)
+			if (abs(dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi]) > 1e-100)
 			{
 				ln_dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi] = log(abs(dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi]));
 				sign_of_dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi] = sgn(dN_dypTdpTdphi_moments[ii][wfi][ipT][ipphi]);
