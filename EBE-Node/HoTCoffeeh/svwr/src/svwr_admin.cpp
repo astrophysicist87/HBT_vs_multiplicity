@@ -86,7 +86,7 @@ SourceVariances::SourceVariances(ParameterReader* paraRdr_in, particle_info* par
 	Set_use_delta_f();
 
 	n_weighting_functions = 15;	//AKA, number of SV's
-	n_quantities_to_average = 2;	// in order: vT^2, tanh(
+	n_quantities_to_average = 2;	// in order: vT^2, vT
 
 	zvec = new double [4];
 
@@ -222,7 +222,7 @@ SourceVariances::SourceVariances(ParameterReader* paraRdr_in, particle_info* par
 		ln_dN_dypTdpTdphi_moments[ir]      = new double ** [n_weighting_functions];
 		sign_of_dN_dypTdpTdphi_moments[ir] = new double ** [n_weighting_functions];
 		quantities_to_average[ir]          = new double ** [n_quantities_to_average];
-		for (int iqta = 0; iqta < n_weighting_functions; iqta++)
+		for (int iqta = 0; iqta < n_quantities_to_average; iqta++)
 		{
 			quantities_to_average[ir][iqta] = new double * [n_pT_pts];
 			for (int ipT = 0; ipT < n_pT_pts; ipT++)
