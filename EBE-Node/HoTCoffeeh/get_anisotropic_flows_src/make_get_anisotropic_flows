@@ -1,0 +1,65 @@
+SHELL=/bin/sh
+
+SRCDIR= \
+../svwr/src
+
+SRCS= \
+get_anisotropic_flows.cpp \
+$(SRCDIR)/readindata.cpp \
+$(SRCDIR)/svwr.cpp \
+$(SRCDIR)/svwr_R2ij.cpp \
+$(SRCDIR)/svwr_GFroutines.cpp \
+$(SRCDIR)/svwr_admin.cpp \
+$(SRCDIR)/svwr_IO.cpp \
+$(SRCDIR)/Arsenal.cpp \
+$(SRCDIR)/gauss_quadrature.cpp
+
+HDRS= \
+get_anisotropic_flows.h \
+$(SRCDIR)/parameters.h \
+$(SRCDIR)/readindata.h \
+$(SRCDIR)/svwr.h \
+$(SRCDIR)/Arsenal.h \
+$(SRCDIR)/Stopwatch.h \
+$(SRCDIR)/gauss_quadrature.h \
+$(SRCDIR)/generate_processing_record.h 
+
+MAKEFILE=make_get_anisotropic_flows
+
+COMMAND=get_anisotropic_flows
+
+OBJS= $(addsuffix .o, $(basename $(SRCS)))
+
+CC= g++
+CFLAGS=  -g
+WARNFLAGS= -ansi -pedantic -Wall -W \
+   -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align \
+   -Wwrite-strings -fshort-enums -fno-common 
+LDFLAGS= -lgsl -lgslcblas 
+LIBS= -L/sw/lib -I/sw/include
+
+ 
+$(COMMAND): $(OBJS) $(HDRS) $(MAKEFILE) 
+	$(CC) -o $(COMMAND) $(OBJS) $(LDFLAGS) $(LIBS)
+                 
+get_anisotropic_flows.o : get_anisotropic_flows.cpp $(SRCDIR)/parameters.h $(SRCDIR)/readindata.h $(SRCDIR)/svwr.h $(SRCDIR)/generate_processing_record.h 
+	$(CC) $(CFLAGS) $(WARNFLAGS) $(LIBS) -c get_anisotropic_flows.cpp -o get_anisotropic_flows.o
+ 
+readindata.o : $(SRCDIR)/parameters.h $(SRCDIR)/readindata.h $(SRCDIR)/readindata.cpp
+	$(CC) $(CFLAGS) $(WARNFLAGS) $(LIBS) -c $(SRCDIR)/readindata.cpp -o readindata.o
+
+svwr.o : $(SRCDIR)/svwr.h parameters.h $(SRCDIR)/svwr.cpp $(SRCDIR)/svwr_R2ij.cpp $(SRCDIR)/svwr_GFroutines.cpp $(SRCDIR)/svwr_admin.cpp $(SRCDIR)/svwr_IO.cpp $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h 
+	$(CC) $(CFLAGS) $(WARNFLAGS) $(LIBS) -c $(SRCDIR)/svwr.cpp -o svwr.o
+
+Arsenal.o : $(SRCDIR)/Arsenal.cpp $(SRCDIR)/Arsenal.h
+	$(CC) $(CFLAGS) $(WARNFLAGS) $(LIBS) -c $(SRCDIR)/Arsenal.cpp -o Arsenal.o
+
+gauss_quadrature.o : $(SRCDIR)/gauss_quadrature.cpp $(SRCDIR)/gauss_quadrature.h
+	$(CC) $(CFLAGS) $(WARNFLAGS) $(LIBS) -c $(SRCDIR)/gauss_quadrature.cpp -o gauss_quadrature.o
+
+clean:
+	rm -f $(OBJS)
+ 
+tarz:
+	tar zcf - $(MAKEFILE) $(SRCS) $(HDRS) > $(COMMAND).tar.gz
+ 

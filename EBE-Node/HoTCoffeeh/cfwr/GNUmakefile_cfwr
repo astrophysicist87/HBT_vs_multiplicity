@@ -1,0 +1,149 @@
+# ============================================================================
+#  Makefile CFWR                             Chris Plumberg, September 8, 2015
+# ============================================================================
+##
+##  Environments :	MAIN	= 	main sourcefile	
+##
+##  Usage : 	(g)make	[all]		compile the whole project		
+##			install	make all and copy binary to $INSTPATH
+##			clean		remove objectfiles in obj_$TYPE 
+##			distclean	remove all objectsfiles and binaries
+##  
+
+#running with icpc
+#export OMP_NUM_THREADS=$(nproc --all)
+export HDF5_CXX=$(shell ../../crank/configure_compiler_C++.sh)
+export HDF5_CXXLINKER=$(shell ../../crank/configure_compiler_C++.sh)
+export HDF5_CLINKER=$(shell ../../crank/configure_compiler_C++.sh)
+#running with g++
+#export HDF5_CXX= g++
+#export HDF5_CXXLINKER= g++
+#export HDF5_CLINKER= g++
+
+CC := h5c++
+#running with icpc
+CFLAGS= $(shell ../../crank/configure_compiler_C++_Flags.sh)
+#running with g++
+#CFLAGS= -O3 -Wall
+#CFLAGS += -lgsl -lgslcblas -g -Wall -Warray-bounds -Wchar-subscripts -Wcomment \
+#						-Wenum-compare -Wformat -Wuninitialized -Wmaybe-uninitialized \
+#						-Wmain -Wnarrowing -Wnonnull -Wparentheses -Wpointer-sign \
+#						-Wreorder -Wreturn-type -Wsign-compare -Wsequence-point -Wtrigraphs \
+#						-Wunused-function -Wunused-but-set-variable -Wunused-variable \
+#						-Wwrite-strings
+CFLAGS += -lgsl -lgslcblas -g
+#$(MKL_LIBS_INT64)
+#-openmp
+# -w3 -wd981
+###CFLAGS += -lgsl -lgslcblas -g -profile-functions -profile-loops=all -profile-loops-report=2
+
+RM		=	rm -f
+O               =       .o
+LDFLAGS         =       $(CFLAGS)
+SYSTEMFILES     =       $(SRCGNU)
+SRCDIR		=	src
+
+# --------------- Files involved ------------------
+
+ifeq "$(MAIN)" ""
+MAIN		=	cfwr.e
+endif
+
+SRC		=	main.cpp \
+			$(SRCDIR)/lib.cpp \
+			$(SRCDIR)/cbessik.cpp \
+			$(SRCDIR)/cbessjy.cpp \
+			$(SRCDIR)/bessik.cpp \
+			$(SRCDIR)/bessjy.cpp \
+			$(SRCDIR)/gamma.cpp \
+			$(SRCDIR)/readindata.cpp \
+			$(SRCDIR)/cfwr.cpp \
+			$(SRCDIR)/cfwr_HDF.cpp \
+			$(SRCDIR)/cfwr_admin.cpp \
+			$(SRCDIR)/cfwr_exact.cpp \
+			$(SRCDIR)/cfwr_resonance.cpp \
+			$(SRCDIR)/cfwr_IO.cpp \
+			$(SRCDIR)/cfwr_GFroutines.cpp \
+			$(SRCDIR)/Arsenal.cpp \
+			$(SRCDIR)/gauss_quadrature.cpp \
+			$(SRCDIR)/ParameterReader.cpp \
+			$(SRCDIR)/chebyshev.cpp
+
+INC		= 	main.h \
+			$(SRCDIR)/parameters.h \
+			$(SRCDIR)/readindata.h \
+			$(SRCDIR)/cfwr.h \
+			$(SRCDIR)/Arsenal.h \
+			$(SRCDIR)/Stopwatch.h \
+			$(SRCDIR)/cfwr_lib.h \
+			$(SRCDIR)/gauss_quadrature.h \
+			$(SRCDIR)/generate_processing_record.h \
+			$(SRCDIR)/lib.h \
+			$(SRCDIR)/bessel.h \
+			$(SRCDIR)/ParameterReader.h \
+			$(SRCDIR)/chebyshev.h \
+			$(SRCDIR)/chebyshev_library.h \
+			$(SRCDIR)/fastexp.h
+#			$(SRCDIR)/cast.h \
+#			$(SRCDIR)/sse.h \
+#			$(SRCDIR)/fasttrig.h
+
+# -------------------------------------------------
+
+OBJDIR		=	.
+SRCFILES 	= 	$(SRC) $(INC) GNUmakefile_cfwr
+OBJECTS		=	$(addprefix $(OBJDIR)/, $(addsuffix $O, \
+			$(basename $(SRC))))
+TARGET		=	$(MAIN)
+INSTPATH	=	..
+#INSTPATH	=	$(HOME)/local/bin
+
+# --------------- Pattern rules -------------------
+
+$(OBJDIR)/%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.cpp:
+	if [ -f $@ ] ; then touch $@ ; else false ; fi
+
+# -------------------------------------------------
+
+.PHONY:		all mkobjdir clean distclean install
+
+all:		mkobjdir $(TARGET)
+
+help:
+		@grep '^##' GNUmakefile_cfwr
+
+mkobjdir:	
+		-@mkdir -p $(OBJDIR)
+
+$(TARGET):	$(OBJECTS)	
+		$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS) 
+#		strip $(TARGET)
+
+clean:		
+		-rm $(OBJECTS)
+
+distclean:	
+		-rm $(TARGET)
+		-rm $(OBJECTS)
+		-rm $(MAIN)
+
+install:	$(TARGET)
+		cp $(TARGET) $(INSTPATH)
+
+# --------------- Dependencies -------------------
+$(SRCDIR)/Arsenal.cpp: $(SRCDIR)/Arsenal.h
+$(SRCDIR)/ParameterReader.cpp: $(SRCDIR)/ParameterReader.h $(SRCDIR)/Arsenal.h
+$(SRCDIR)/readindata.cpp: $(SRCDIR)/readindata.h $(SRCDIR)/lib.h
+$(SRCDIR)/lib.cpp: $(SRCDIR)/lib.h
+$(SRCDIR)/cfwr_HDF.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/cfwr_lib.h $(SRCDIR)/lib.h
+$(SRCDIR)/cfwr_admin.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h $(SRCDIR)/cfwr_lib.h $(SRCDIR)/lib.h $(SRCDIR)/parameters.h
+$(SRCDIR)/cfwr_IO.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h $(SRCDIR)/lib.h
+$(SRCDIR)/cfwr_GFroutines.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h $(SRCDIR)/Stopwatch.h $(SRCDIR)/cfwr_lib.h $(SRCDIR)/lib.h
+$(SRCDIR)/cfwr_resonance.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h $(SRCDIR)/cfwr_lib.h $(SRCDIR)/lib.h $(SRCDIR)/Stopwatch.h $(SRCDIR)/fastexp.h
+$(SRCDIR)/cfwr.cpp: $(SRCDIR)/cfwr.h $(SRCDIR)/Arsenal.h $(SRCDIR)/gauss_quadrature.h $(SRCDIR)/Stopwatch.h $(SRCDIR)/cfwr_lib.h $(SRCDIR)/lib.h
+./main.cpp: $(SRCDIR)/Stopwatch.h $(SRCDIR)/parameters.h $(SRCDIR)/readindata.h $(SRCDIR)/cfwr.h \
+				$(SRCDIR)/ParameterReader.h $(SRCDIR)/generate_processing_record.h $(SRCDIR)/lib.h main.h $(SRCDIR)/chebyshev.h
+

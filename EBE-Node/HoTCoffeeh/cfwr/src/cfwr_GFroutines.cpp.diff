@@ -1,0 +1,167 @@
+10,15c10,15
+< #include "cfwr.h"
+< #include "cfwr_lib.h"
+< #include "Stopwatch.h"
+< #include "Arsenal.h"
+< #include "gauss_quadrature.h"
+< #include "chebyshev.h"
+---
+> #include "../include/cfwr.h"
+> #include "../include/cfwr_lib.h"
+> #include "../include/Stopwatch.h"
+> #include "../include/Arsenal.h"
+> #include "../include/gauss_quadrature.h"
+> #include "../include/chebyshev.h"
+21c21
+< 	*global_out_stream_ptr << "--> Getting HBT radii by Gaussian fit method" << endl;
+---
+> 	*out << "--> Getting HBT radii by Gaussian fit method" << endl;
+31c31
+< 		*global_out_stream_ptr << "   --> Doing pT = " << SP_pT[ipt] << ", pphi = " << SP_pphi[ipphi] << "..." << endl;
+---
+> 		*out << "   --> Doing pT = " << SP_pT[ipt] << ", pphi = " << SP_pphi[ipphi] << "..." << endl;
+57c57
+< 	*global_out_stream_ptr << "Calculating the " << projection_stem << " correlation function..." << endl;
+---
+> 	*out << "Calculating the " << projection_stem << " correlation function..." << endl;
+75c75
+< 	*global_out_stream_ptr << "Computing the full, " << projection_stem << " correlator in XYZ coordinates..." << endl;
+---
+> 	*out << "Computing the full, " << projection_stem << " correlator in XYZ coordinates..." << endl;
+95c95
+< 	*global_out_stream_ptr << "Finished computing " << projection_stem << " correlator in " << sw.printTime() << " seconds." << endl;
+---
+> 	*out << "Finished computing " << projection_stem << " correlator in " << sw.printTime() << " seconds." << endl;
+99a100,102
+> 	// print this too
+> 	Output_total_target_eiqx_dN_dypTdpTdphi();
+> 
+134c137
+< 		*global_out_stream_ptr << "Warning: qt_interp point essentially zero!" << endl
+---
+> 		*out << "Warning: qt_interp point essentially zero!" << endl
+182,183c185,186
+< 				//cerr << "WARNING: " << qt_interp << "	  " << ipt << "	  " << ipphi << "   " << iqx << "   " << iqy << "   " << iqz << "   "
+< 				//		<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
+---
+> 				cerr << "WARNING: " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
+> 						<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
+191,192c194,199
+< 					//cerr << "Check CF terms: " << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
+< 					//		<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
+---
+> 					cerr << "Check CF terms: "
+> 							<< qt_pts[iqtidx] << "	 "
+> 							<< ipt << "   " << ipphi << "	"
+> 							<< iqx << "   " << iqy << "   " << iqz << "   "
+> 							<< tmpC << "   " << tmpCt << "	 "
+> 							<< tmpCct << "	 " << tmpCr << endl;
+241,242c248,251
+< 				//cerr << "WARNING(OKAY): " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
+< 				//		<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
+---
+> 				if (ipt==7 and ipphi==0 and iqz==2)
+> 				{
+> 				cerr << "WARNING: " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
+> 						<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
+250,251c259,266
+< 					//cerr << "Check CF terms: " << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
+< 					//		<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
+---
+> 					cerr << __FUNCTION__ << ": "
+> 							<< qt_pts[iqtidx] << "	 "
+> 							//<< ipt << "	" << ipphi << "	  "
+> 							//<< iqx << "	" << iqy << "	" << iqz << "	"
+> 							<< qx_pts[iqx] << "   "
+> 							<< tmpC << "   " << tmpCt << "	 "
+> 							<< tmpCct << "	 " << tmpCr << endl;
+> 				}
+254d268
+< 
+260d273
+< //debugger(__LINE__, __FILE__);
+272c285
+< //debugger(__LINE__, __FILE__);
+---
+> 
+281c294
+< 		*global_out_stream_ptr << "Warning: qt_interp point was outside of computed grid!" << endl
+---
+> 		*out << "Warning: qt_interp point was outside of computed grid!" << endl
+497c510
+< 																								//thermal term
+---
+> 	//thermal term
+502c515,516
+< 	num = 2.0 * (cosNT_spectra*cos_transf_tspectra+sinNT_spectra*sin_transf_tspectra);			//cross term
+---
+> 	//cross term
+> 	num = 2.0 * (cosNT_spectra*cos_transf_tspectra+sinNT_spectra*sin_transf_tspectra);
+505c519,520
+< 	num = cosNT_spectra*cosNT_spectra+sinNT_spectra*sinNT_spectra;								//resonances only
+---
+> 	//resonances only
+> 	num = cosNT_spectra*cosNT_spectra+sinNT_spectra*sinNT_spectra;
+507a523
+> 	//total
+510a527,543
+> 	if (ipt==7 and ipphi==0 and iqz==2)
+> 	{
+> 		cerr << __FUNCTION__ << ": "
+> 			<< qt_pts[iqt] << "   "
+> 			<< qx_pts[iqx] << "   "
+> 			<< thermal_spectra[target_particle_id][ipt][ipphi] << "	  "
+> 			<< thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,0)] << "   "
+> 			<< thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,1)] << "   "
+> 			<< thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,2)] << "   "
+> 			<< thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,3)] << "   "
+> 			<< spectra[target_particle_id][ipt][ipphi] << "	  "
+> 			<< full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,0)] << "	 "
+> 			<< full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,1)] << "	 "
+> 			<< full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,2)] << "	 "
+> 			<< full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,3)] << endl;
+> 	}
+> 
+563c596
+< 		//*global_out_stream_ptr << "\t\t" << q1pts[i] << "   " << q2pts[i] << "   " << q3pts[i] << "	" << q_out_local << "	" << q_side_local << "	 " << q_long_local << "	  " << correl_local << endl;
+---
+> 		//*out << "\t\t" << q1pts[i] << "   " << q2pts[i] << "	 " << q3pts[i] << "   " << q_out_local << "   " << q_side_local << "   " << q_long_local << "	" << correl_local << endl;
+827c860,862
+< 		if (abs(current_pY_shift) > SP_Del_pY_max)	//if resonance decays basically contribute nothing at this (qt, qz)-pair
+---
+> 
+> 		//if resonance decays basically contribute nothing at this (qt, qz)-pair
+> 		if (abs(current_pY_shift) > SP_Del_pY_max)
+829,830c864,869
+< 			cout << "Set_full_target_moments(" << loc_qt << ", " << loc_qz << "): y_{sym} = " << current_pY_shift << " > SP_Del_pY_max = " << SP_Del_pY_max <<
+< 					" ==>> No contributions to full target moments." << endl;
+---
+> 			cout << "Set_full_target_moments("
+> 					<< loc_qt << ", " << loc_qz << "): y_{sym} = "
+> 					<< current_pY_shift << " > SP_Del_pY_max = "
+> 					<< SP_Del_pY_max <<
+> 					" ==>> No contributions to full target moments."
+> 					<< endl;
+853c892,895
+< 					chebyshev_a_cfs[ipY] += exp(abs(SP_Del_pY[kpY])) * chebTcfs[ipY * n_pY_pts + kpY] * current_dN_dypTdpTdphi_moments[fixQTQZ_indexer(ipT,ipphi,kpY,iqx,iqy,itrig)];
+---
+> 					chebyshev_a_cfs[ipY]
+> 						+= exp(abs(SP_Del_pY[kpY]))
+> 							* chebTcfs[ipY * n_pY_pts + kpY]
+> 							* current_dN_dypTdpTdphi_moments[fixQTQZ_indexer(ipT,ipphi,kpY,iqx,iqy,itrig)];
+866,867c908,910
+< 			full_target_Yeq0_moments[indexer(ipT, ipphi, iqt, iqx, iqy, iqz, itrig)] += exp(-abs(tmp_Del_pY)) * current_trig_parity_factor
+< 																						* gsl_cheb_eval (cs_accel_expEdNd3p, abs(tmp_Del_pY));
+---
+> 			full_target_Yeq0_moments[indexer(ipT, ipphi, iqt, iqx, iqy, iqz, itrig)]
+> 								+= exp(-abs(tmp_Del_pY)) * current_trig_parity_factor
+> 									* gsl_cheb_eval (cs_accel_expEdNd3p, abs(tmp_Del_pY));
+870c913
+< 			//							* gsl_cheb_eval (cs_accel_expEdNd3p, abs(tmp_Del_pY)) << endl;
+---
+> 			///							* gsl_cheb_eval (cs_accel_expEdNd3p, abs(tmp_Del_pY)) << endl;
+883c926,927
+< 			full_target_Yeq0_moments[indexer(ipT, ipphi, iqt, iqx, iqy, iqz, itrig)] += current_dN_dypTdpTdphi_moments[fixQTQZ_indexer(ipT,ipphi,ipY0,iqx,iqy,itrig)];
+---
+> 			full_target_Yeq0_moments[indexer(ipT, ipphi, iqt, iqx, iqy, iqz, itrig)]
+> 				+= current_dN_dypTdpTdphi_moments[fixQTQZ_indexer(ipT,ipphi,ipY0,iqx,iqy,itrig)];
