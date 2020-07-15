@@ -502,7 +502,7 @@ void CorrelationFunction::Output_total_target_denominator_NO_SA()
 	string temp_particle_name = particle_name;
 	replace_parentheses(temp_particle_name);
 
-	outstream << path << "/total_" << local_name << "_denominator_NO_SA.dat";
+	outstream << path << "/total_" << temp_particle_name << "_denominator_NO_SA.dat";
 	ofstream out;
 	out.open(outstream.str().c_str());
 
