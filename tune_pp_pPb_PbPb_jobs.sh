@@ -7,7 +7,7 @@ case "$sys" in
 	pp)
 	    cen='0-100%'
 	    #Target dNchdeta: 6.0
-            for ff in 70 75 76 77 78 79 80 81 82 83 84 85 90
+            for ff in 78 79 80 81 82
             do
                 python updateParameterDict.py ParameterDict_EA_${sys}_C${cen}_ff${ff}.py \
                         initial_condition_control:'centrality'=${cen} \
@@ -17,7 +17,7 @@ case "$sys" in
                         superMCParameters:'finalFactor'=${ff} \
                         HoTCoffeehControl:'runHoTCoffeeh'=False
                         
-                ./generateJobs_local.py 1 10000 \
+                ./generateJobs_local.py 1 50000 \
                   PlayGround_EA_${sys}_C${cen}_ff${ff} \
                   RESULTS_EA_${sys}_C${cen}_ff${ff} \
                   03:00:00 no \

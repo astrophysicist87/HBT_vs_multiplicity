@@ -752,6 +752,7 @@ def iSWithResonancesWithHydroResultFiles(fileList):
             move(aFile, iSOperationDirectory)
     copy(path.join(iSDirectory, 'EOS', 'chosen_particles_s95pv1.dat'), 
          path.join(iSDirectory, 'EOS', 'chosen_particles.dat'))
+    # N.B. - The 'withDecayPhotons' option is now apparently necessary
     copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1_withDecayPhotons.dat'), 
          path.join(iSDirectory, 'EOS', 'pdg.dat'))
     #copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1.dat'), 
