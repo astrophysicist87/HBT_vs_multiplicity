@@ -12,7 +12,7 @@ case "$sys" in
                         superMCParameters:'Aproj'=1 \
                         superMCParameters:'Atarg'=1 \
                         superMCParameters:'ecm'=7000 \
-                        superMCParameters:'finalFactor'=81.1114
+                        superMCParameters:'finalFactor'=80.377
                         
                 ./generateJobs_local.py 1 10000 \
                     PlayGround_EA_${sys}_C${cen} \
@@ -33,7 +33,7 @@ case "$sys" in
                         superMCParameters:'Aproj'=1 \
                         superMCParameters:'Atarg'=208 \
                         superMCParameters:'ecm'=5020 \
-                        superMCParameters:'finalFactor'=52.663
+                        superMCParameters:'finalFactor'=54.0347
                        
                 ./generateJobs_local.py 1 10000 \
                   PlayGround_EA_${sys}_C${cen} \

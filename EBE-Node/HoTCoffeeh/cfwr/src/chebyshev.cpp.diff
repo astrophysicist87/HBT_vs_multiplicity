@@ -1,6 +1,0 @@
-5,6c5,6
-< #include "chebyshev_library.h"
-< #include "chebyshev.h"
----
-> #include "../include/chebyshev_library.h"
-> #include "../include/chebyshev.h"

@@ -134,6 +134,7 @@ class CorrelationFunction
 		double * full_target_dN_dypTdpTdphi_moments;
 		double * thermal_target_Yeq0_moments;
 		double * full_target_Yeq0_moments;
+		vector<double> thermal_target_Yeq0_NO_SA;
 
 		// needed these to avoid too many trigonometric evaluations
 		double ** oscx, ** oscy;
@@ -260,6 +261,7 @@ class CorrelationFunction
 		inline int mom_indexer(const int ipt, const int ipphi, const int ipY);
 		inline int fixQTQZ_indexer(const int ipT, const int ipphi, const int ipY, const int iqx, const int iqy, const int itrig);
 		inline int indexer4(const int ipt, const int ipphi, const int iqx, const int iqy);
+		//inline int indexer5(const int ipt, const int ipphi, const int iqx, const int iqy, const int iqz);
 		inline int FM_indexer(const int ipY, const int iqt, const int iqx, const int iqy, const int iqz);
 		inline int HDF_indexer(const int ir, const int iqt, const int iqz);
 		inline int NB2_indexer(const int iv, const int izeta);
@@ -416,6 +418,7 @@ class CorrelationFunction
 
 		// input and output function prototypes
 		void Output_total_target_dN_dypTdpTdphi();
+		void Output_total_target_denominator_NO_SA();
 		void Output_total_target_eiqx_dN_dypTdpTdphi(double current_fraction = -1.0);
 		void Readin_total_target_eiqx_dN_dypTdpTdphi();
 		void Output_total_eiqx_dN_dypTdpTdphi(int local_pid);

@@ -75,6 +75,13 @@ inline int CorrelationFunction::indexer4(const int ipT, const int ipphi, const i
 	);
 }
 
+/*inline int CorrelationFunction::indexer5(const int ipT, const int ipphi, const int iqx, const int iqy, const int iqz)
+{
+	return (
+		( ( ( ( ipT * n_pphi_pts + ipphi ) * qtnpts + iqt ) * qxnpts + iqx ) * qynpts + iqy ) * qznpts + iqz
+	);
+}*/
+
 inline int CorrelationFunction::NB2_indexer(const int iv, const int izeta)
 {
 	return (

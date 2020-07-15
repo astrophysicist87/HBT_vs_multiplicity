@@ -1,2 +1,0 @@
-15a16
-> void stratify_npts( double min, double a, double b, int n1, int npts, double * x );

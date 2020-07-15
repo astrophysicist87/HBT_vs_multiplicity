@@ -187,7 +187,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_with_weights_function_approx(
 	// set the rapidity-integration symmetry factor
 	double eta_odd_factor = 0.0, eta_even_factor = 2.0;
 
-	double pY_shift = 0.5 * log(abs((qt+qz + 1.e-100)/(qt-qz + 1.e-100)));
+	double pY_shift = 0.5 * log(abs((qt+qz + 1e-100)/(qt-qz + 1e-100)));
 	//double pY_shift = 0.0;
 
 	double sin_pphi = sin(pphi);

@@ -1060,7 +1060,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_no_weights(int local_pid)
 		//update spectra
 		spectra[local_pid][ipT][ipphi] = spectra_at_pTpphi;
 		thermal_spectra[local_pid][ipT][ipphi] = spectra_at_pTpphi;
-		log_spectra[local_pid][ipT][ipphi] = log(abs(spectra_at_pTpphi) + 1.e-100);
+		log_spectra[local_pid][ipT][ipphi] = log(abs(spectra_at_pTpphi) + 1e-100);
 		sign_spectra[local_pid][ipT][ipphi] = sgn(spectra_at_pTpphi);
 	}		// end of pT, pphi loop
 
@@ -1406,8 +1406,8 @@ if (RUN_TRUNCATED_CALCULATION && ipphi > 0)
 			double ypt = surf->ypt;
 			double rpt = surf->r;
 			double phipt = place_in_range(surf->phi, SP_pphi_min, SP_pphi_max);
-			double ch_eta_t = cosh(eta_t(rpt));
-			double sh_eta_t = sinh(eta_t(rpt));
+			//double ch_eta_t = cosh(eta_t(rpt));
+			//double sh_eta_t = sinh(eta_t(rpt));
 
 			double vx = surf->vx;
 			double vy = surf->vy;
@@ -1454,7 +1454,7 @@ if (RUN_TRUNCATED_CALCULATION && ipphi > 0)
 		//update spectra
 		spectra[local_pid][ipT][ipphi] = spectra_at_pTpphi;
 		thermal_spectra[local_pid][ipT][ipphi] = spectra_at_pTpphi;
-		log_spectra[local_pid][ipT][ipphi] = log(abs(spectra_at_pTpphi) + 1.e-100);
+		log_spectra[local_pid][ipT][ipphi] = log(abs(spectra_at_pTpphi) + 1e-100);
 		sign_spectra[local_pid][ipT][ipphi] = sgn(spectra_at_pTpphi);
 	}
 
@@ -1593,6 +1593,122 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_with_weights_Yeq0_alternate(int iqt
 	delete [] eta_s_weight;
 	delete [] ch_eta_s;
 	delete [] sh_eta_s;
+
+	return;
+}
+
+void CorrelationFunction::Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMPTION(int iqt, int iqz)
+{
+
+	//pions
+	int local_pid = target_particle_id;
+
+	//q-point info
+	//double qt = qt_pts[iqt], qz = qz_pts[iqz];
+
+	// set particle information
+	double sign = all_particles[local_pid].sign;
+	double degen = all_particles[local_pid].gspin;
+	double localmass = all_particles[local_pid].mass;
+	double mu = all_particles[local_pid].mu;
+
+	// set some freeze-out surface information that's constant the whole time
+	double prefactor = 1.0*degen/(8.0*M_PI*M_PI*M_PI)/(hbarC*hbarC*hbarC);
+	double Tdec = (&FOsurf_ptr[0])->Tdec;
+	double Pdec = (&FOsurf_ptr[0])->Pdec;
+	double Edec = (&FOsurf_ptr[0])->Edec;
+	double one_by_Tdec = 1./Tdec;
+	double deltaf_prefactor = 0.;
+	if (use_delta_f)
+		deltaf_prefactor = 1./(2.0*Tdec*Tdec*(Edec+Pdec));
+
+	for (int isurf = 0; isurf < FO_length; ++isurf)
+	{
+		FO_surf * surf = &FOsurf_ptr[isurf];
+
+		double tau = surf->tau;
+		double xpt = surf->xpt;
+		double ypt = surf->ypt;
+		double rpt = surf->r;
+		double phipt = place_in_range(surf->phi, SP_pphi_min, SP_pphi_max);
+
+		double vx = surf->vx;
+		double vy = surf->vy;
+		double gammaT = surf->gammaT;
+
+		double da0 = surf->da0;
+		double da1 = surf->da1;
+		double da2 = surf->da2;
+
+		double pi00 = surf->pi00;
+		double pi01 = surf->pi01;
+		double pi02 = surf->pi02;
+		double pi11 = surf->pi11;
+		double pi12 = surf->pi12;
+		double pi22 = surf->pi22;
+		double pi33 = surf->pi33;
+
+		for (int ipT = 0; ipT < n_pT_pts; ++ipT)
+		for (int ipphi = 0; ipphi < n_pphi_pts; ++ipphi)
+		for (int iqx = 0; iqx < qxnpts; ++iqx)
+		for (int iqy = 0; iqy < qynpts; ++iqy)
+		{
+			//if (ipT > 0 or ipphi > 0)
+			//	continue;
+			double KT = SP_pT[ipT];
+			double Kphi = SP_pphi[ipphi];
+			double Kz = 0.0;	// by definition at Y=0
+			double px = KT*cos_SP_pphi[ipphi] + 0.5*qx_pts[iqx];
+			double py = KT*sin_SP_pphi[ipphi] + 0.5*qy_pts[iqy];
+			double mT = sqrt(px*px + py*py + localmass*localmass);
+
+			for (int ieta = 0; ieta < eta_s_npts; ++ieta)
+			{
+				// this eta_s is really Delta eta_s = eta_s - y
+				// ==> y-dependence is "shifted away" for boost-invariant source
+				double p0 = mT*ch_eta_s[ieta];
+				double pz = mT*sh_eta_s[ieta];
+				// Boost invariance ==> independent of qz
+				//double pz = Kz + 0.5*qz_pts[iqz];
+				//double p0 = sqrt(px*px + py*py + pz*pz + localmass*localmass);
+
+				// thermal equilibrium distributions
+				double f0 = 1.0/(
+							exp( one_by_Tdec*( gammaT*(p0*1. - px*vx - py*vy)
+                                               - mu ) )
+							+ sign
+							);
+
+				// viscous corrections
+				double deltaf = 0.;
+				if (use_delta_f)
+					deltaf = deltaf_prefactor * (1. - sign*f0)
+								* (p0*p0*pi00 - 2.0*p0*px*pi01 - 2.0*p0*py*pi02
+									+ px*px*pi11 + 2.0*px*py*pi12
+									+ py*py*pi22 + pz*pz*pi33);
+
+				// p^mu d^3sigma_mu factor: The plus sign is due to the fact
+				// that the DA# variables are for the covariant surface
+				// integration
+				double S_p_with_weight = eta_s_weight[ieta]*tau*prefactor
+										 *(p0*da0 + px*da1 + py*da2)
+										 *f0*(1.+deltaf);
+
+				// ignore points where delta f is large or
+				// emission function goes negative from pdsigma
+				if ( (1. + deltaf < 0.0) or
+					 (flagneg == 1 && S_p_with_weight < tol) )
+				{
+					S_p_with_weight = 0.0;
+					continue;
+				}
+
+				// update sum and move on
+				thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
+					+= eta_even_factor * S_p_with_weight;
+			}
+		}
+	}
 
 	return;
 }

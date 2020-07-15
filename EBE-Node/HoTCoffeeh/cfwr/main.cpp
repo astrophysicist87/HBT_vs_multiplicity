@@ -290,6 +290,7 @@ int main(int argc, char *argv[])
 		if ((int)(paraRdr->getVal("calculate_CF_mode")) == 0)
 		{
 			correlation_function.Output_total_target_dN_dypTdpTdphi();
+			correlation_function.Output_total_target_denominator_NO_SA();
 			correlation_function.Output_total_target_eiqx_dN_dypTdpTdphi();
 			correlation_function.Output_chosen_resonances();
 			correlation_function.Output_resonance_fraction();

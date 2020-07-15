@@ -496,6 +496,38 @@ void CorrelationFunction::Output_total_target_dN_dypTdpTdphi()
 	return;
 }
 
+void CorrelationFunction::Output_total_target_denominator_NO_SA()
+{
+	ostringstream outstream;
+	string temp_particle_name = particle_name;
+	replace_parentheses(temp_particle_name);
+
+	outstream << path << "/total_" << local_name << "_denominator_NO_SA.dat";
+	ofstream out;
+	out.open(outstream.str().c_str());
+
+	for (int ipT = 0; ipT < n_pT_pts; ++ipT)
+	for (int ipphi = 0; ipphi < n_pphi_pts; ++ipphi)
+	for (int iqx = 0; iqx < qxnpts; ++iqx)
+	for (int iqy = 0; iqy < qynpts; ++iqy)
+	for (int iqz = 0; iqz < qznpts; ++iqz)
+	{
+		double ckp = cos_SP_pphi[ipphi], skp = sin_SP_pphi[ipphi];
+		out << scientific << setprecision(8) << setw(12)
+			<< SP_pT[ipT] << "   " << SP_pphi[ipphi] << "	"
+			<< setprecision(3) << setw(5) << qx_pts[iqx] << "   "
+			<< qy_pts[iqy] << "   " << qz_pts[iqz] << "   "
+			<< setprecision(6) << setw(10)
+			<< spectra[target_particle_id][ipT][ipphi] << "	  "
+			<< thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
+				* thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, qxnpts-iqx-1, qynpts-iqy-1)] << endl;
+	}
+
+	out.close();
+
+	return;
+}
+
 void CorrelationFunction::Output_total_target_eiqx_dN_dypTdpTdphi(double current_fraction /*==-1.0*/)
 {
 	string local_name = all_particles[target_particle_id].name;

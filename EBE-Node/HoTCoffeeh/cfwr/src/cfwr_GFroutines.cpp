@@ -799,7 +799,7 @@ void CorrelationFunction::Set_thermal_target_moments(int iqt, int iqz)
 {
 	double loc_qz = qz_pts[iqz];
 	double loc_qt = qt_pts[iqt];
-	current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1.e-100)/(loc_qt-loc_qz + 1.e-100)));
+	current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1e-100)/(loc_qt-loc_qz + 1e-100)));
 
 	for (int ipY = 0; ipY < n_pY_pts; ++ipY)
 	{
@@ -808,6 +808,10 @@ void CorrelationFunction::Set_thermal_target_moments(int iqt, int iqz)
 	}
 
 	Cal_dN_dypTdpTdphi_with_weights_Yeq0_alternate(iqt, iqz);
+
+	// only need to calculate once
+	if (iqt==0 and iqz==0)
+		Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMPTION(iqt, iqz);
 
 	return;
 }
@@ -823,7 +827,7 @@ void CorrelationFunction::Set_full_target_moments(int iqt, int iqz)
 	{
 		double loc_qz = qz_pts[iqz];
 		double loc_qt = qt_pts[iqt];
-		current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1.e-100)/(loc_qt-loc_qz + 1.e-100)));
+		current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1e-100)/(loc_qt-loc_qz + 1e-100)));
 		if (abs(current_pY_shift) > SP_Del_pY_max)	//if resonance decays basically contribute nothing at this (qt, qz)-pair
 		{
 			cout << "Set_full_target_moments(" << loc_qt << ", " << loc_qz << "): y_{sym} = " << current_pY_shift << " > SP_Del_pY_max = " << SP_Del_pY_max <<

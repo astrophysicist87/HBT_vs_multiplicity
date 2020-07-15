@@ -1,6 +1,0 @@
-12,13c12,13
-< #include "readindata.h"
-< #include "lib.h"
----
-> #include "../include/readindata.h"
-> #include "../include/lib.h"
