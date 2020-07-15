@@ -316,6 +316,7 @@ class CorrelationFunction
 					int local_pid, double pT, double pphi, double pY,
 					double qt, double qx, double qy, double qz,
 					double * cosqx_dN_dypTdpTdphi, double * sinqx_dN_dypTdpTdphi);
+		void Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMPTION(int iqt, int iqz);
 		void Cal_dN_dypTdpTdphi_with_weights_function_approx(
 					int local_pid, double pT, double pphi, double p_Y,
 					double qt, double qx, double qy, double qz,
