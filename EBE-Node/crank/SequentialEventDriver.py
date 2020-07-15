@@ -752,8 +752,12 @@ def iSWithResonancesWithHydroResultFiles(fileList):
             move(aFile, iSOperationDirectory)
     copy(path.join(iSDirectory, 'EOS', 'chosen_particles_s95pv1.dat'), 
          path.join(iSDirectory, 'EOS', 'chosen_particles.dat'))
-    copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1_withDecayPhotons.dat'), 
+    #copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1_withDecayPhotons.dat'), 
+    #     path.join(iSDirectory, 'EOS', 'pdg.dat'))
+    copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1.dat'), 
          path.join(iSDirectory, 'EOS', 'pdg.dat'))
+    copy(path.join(iSDirectory, 'EOS', 'EOS_tables', 's95p-v1', 'EOS_particletable.dat'), 
+         path.join(iSDirectory, 'EOS', 'EOS_particletable.dat'))
 
     # execute!
     run("nice -n %d bash ./" % (ProcessNiceness) + iSExecutionEntry, 
@@ -809,6 +813,10 @@ def doHBTWithHydroResultFiles(fileList):
 			raise ExecutionError("Hydro result file %s not found!" % aFile)
 		else:
 			copy(aFile, HoTCoffeehOperationDirectory)
+
+        copy(path.join(HoTCoffeehDirectory, 'EOS', 'EOS_particletable_s95pv1.dat'), 
+             path.join(HoTCoffeehDirectory, 'EOS', 'EOS_particletable.dat'))
+
     
 	# form assignment string
 	#HoTCoffeehParameters['SV_resonanceThreshold'] = '0.00'
