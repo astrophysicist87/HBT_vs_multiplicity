@@ -23,6 +23,7 @@ cp $workingDirectory/job-1/event-1/surface.dat   $resultsDirectory
 
 (
 	cd $workingDirectory/HoTCoffeeh
+	echo 'Now in: ' `pwd`
 		
 	nice -n 0 time bash ./HoTCoffeeh.sh true false \
 		SV_npphi=48 chosenParticlesMode=0 qtnpts=51 delta_qz=0.0125 \
@@ -38,6 +39,6 @@ cp $workingDirectory/job-1/event-1/surface.dat   $resultsDirectory
 
 	mv results ../job-1/event-1/post_processing_results
 
-	cd -
+	cd - &>/dev/null
 )
 
