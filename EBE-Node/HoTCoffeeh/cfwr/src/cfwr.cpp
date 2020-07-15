@@ -1621,6 +1621,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMP
 	double deltaf_prefactor = 0.;
 	if (use_delta_f)
 		deltaf_prefactor = 1./(2.0*Tdec*Tdec*(Edec+Pdec));
+	double eta_even_factor = 2.0;
 
 	for (int isurf = 0; isurf < FO_length; ++isurf)
 	{
