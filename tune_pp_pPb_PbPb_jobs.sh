@@ -29,7 +29,7 @@ case "$sys" in
 		done
 		;;
 	pPb)
-		cen='0-5%'
+		cen='0-100%'
 		#Target dNchdeta: 17.5
 		for ff in 35 40 45 50 53 54 55 56 57 60 65 70 75 80
 		do
