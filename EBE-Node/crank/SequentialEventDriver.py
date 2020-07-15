@@ -752,10 +752,10 @@ def iSWithResonancesWithHydroResultFiles(fileList):
             move(aFile, iSOperationDirectory)
     copy(path.join(iSDirectory, 'EOS', 'chosen_particles_s95pv1.dat'), 
          path.join(iSDirectory, 'EOS', 'chosen_particles.dat'))
-    #copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1_withDecayPhotons.dat'), 
-    #     path.join(iSDirectory, 'EOS', 'pdg.dat'))
-    copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1.dat'), 
+    copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1_withDecayPhotons.dat'), 
          path.join(iSDirectory, 'EOS', 'pdg.dat'))
+    #copy(path.join(iSDirectory, 'EOS', 'pdg-s95pv1.dat'), 
+    #     path.join(iSDirectory, 'EOS', 'pdg.dat'))
     copy(path.join(iSDirectory, 'EOS', 'EOS_tables', 's95p-v1', 'EOS_particletable.dat'), 
          path.join(iSDirectory, 'EOS', 'EOS_particletable.dat'))
 
