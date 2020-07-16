@@ -465,8 +465,8 @@ void CorrelationFunction::get_CF_terms(double * totalresult, double * thermalres
 	//thermal
 	double nonFTd_tspectra     = USE_SMOOTHNESS_ASSUMPTION ? 
 								  thermal_spectra[target_particle_id][ipt][ipphi]
-								: sqrt( thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
-										* thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, qxnpts-iqx-1, qynpts-iqy-1)]);
+								: sqrt( thermal_target_Yeq0_NO_SA[indexer4(ipt, ipphi, iqx, iqy)]
+										* thermal_target_Yeq0_NO_SA[indexer4(ipt, ipphi, qxnpts-iqx-1, qynpts-iqy-1)]);
 	double cos_transf_tspectra = thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,0)]
 									+ thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,3)];	//add real components
 	double sin_transf_tspectra = thermal_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,1)]
@@ -474,8 +474,8 @@ void CorrelationFunction::get_CF_terms(double * totalresult, double * thermalres
 	//total
 	double nonFTd_spectra      = USE_SMOOTHNESS_ASSUMPTION ?
 								  spectra[target_particle_id][ipt][ipphi]
-								: sqrt( total_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
-										* total_target_Yeq0_NO_SA[indexer4(ipT, ipphi, qxnpts-iqx-1, qynpts-iqy-1)]);
+								: sqrt( total_target_Yeq0_NO_SA[indexer4(ipt, ipphi, iqx, iqy)]
+										* total_target_Yeq0_NO_SA[indexer4(ipt, ipphi, qxnpts-iqx-1, qynpts-iqy-1)]);
 	double cos_transf_spectra  = full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,0)]
 									+ full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,3)];		//add real components
 	double sin_transf_spectra  = full_target_Yeq0_moments[indexer(ipt,ipphi,iqt,iqx,iqy,iqz,1)]
