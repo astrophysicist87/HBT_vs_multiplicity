@@ -135,6 +135,7 @@ class CorrelationFunction
 		double * thermal_target_Yeq0_moments;
 		double * full_target_Yeq0_moments;
 		vector<double> thermal_target_Yeq0_NO_SA;
+		vector<double> total_target_Yeq0_NO_SA;
 
 		// needed these to avoid too many trigonometric evaluations
 		double ** oscx, ** oscy;

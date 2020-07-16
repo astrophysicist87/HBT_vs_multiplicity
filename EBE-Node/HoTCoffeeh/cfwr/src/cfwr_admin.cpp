@@ -250,6 +250,7 @@ CorrelationFunction::CorrelationFunction(ParameterReader * paraRdr_in, particle_
 		full_target_Yeq0_moments[i] = 0.0;
 	}
 	thermal_target_Yeq0_NO_SA.resize( n_pT_pts * n_pphi_pts * qxnpts * qynpts, 0.0 );
+	total_target_Yeq0_NO_SA.resize( n_pT_pts * n_pphi_pts * qxnpts * qynpts, 0.0 );
 
 	int qidx = 0;
 	qlist = new double * [qxnpts*qynpts];

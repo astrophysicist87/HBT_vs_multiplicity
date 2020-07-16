@@ -1368,7 +1368,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_no_weights_Yeq0_alternate()
 
 	//spatial rapidity grid
 	//const int eta_s_npts = 31;
-	double * eta_s = new double [eta_s_npts];
+	/*double * eta_s = new double [eta_s_npts];
 	double * eta_s_weight = new double [eta_s_npts];
 	//double eta_s_i = 0.0, eta_s_f = 4.0;
 	gauss_quadrature(eta_s_npts, 1, 0.0, 0.0, eta_s_i, eta_s_f, eta_s, eta_s_weight);
@@ -1378,7 +1378,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_no_weights_Yeq0_alternate()
 	{
 		ch_eta_s[ieta] = cosh(eta_s[ieta]);
 		sh_eta_s[ieta] = sinh(eta_s[ieta]);
-	}
+	}*/
 	// set the rapidity-integration symmetry factor
 	double eta_even_factor = 2.0;
 
@@ -1459,10 +1459,10 @@ if (RUN_TRUNCATED_CALCULATION && ipphi > 0)
 	}
 
 	//clean up
-	delete [] eta_s;
+	/*delete [] eta_s;
 	delete [] eta_s_weight;
 	delete [] ch_eta_s;
-	delete [] sh_eta_s;
+	delete [] sh_eta_s;*/
 
 	return;
 }
@@ -1493,7 +1493,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_with_weights_Yeq0_alternate(int iqt
 		deltaf_prefactor = 1./(2.0*Tdec*Tdec*(Edec+Pdec));
 
 	//spatial rapidity grid
-	double * eta_s = new double [eta_s_npts];
+	/*double * eta_s = new double [eta_s_npts];
 	double * eta_s_weight = new double [eta_s_npts];
 	gauss_quadrature(eta_s_npts, 1, 0.0, 0.0, eta_s_i, eta_s_f, eta_s, eta_s_weight);
 	double * ch_eta_s = new double [eta_s_npts];
@@ -1502,7 +1502,7 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_with_weights_Yeq0_alternate(int iqt
 	{
 		ch_eta_s[ieta] = cosh(eta_s[ieta]);
 		sh_eta_s[ieta] = sinh(eta_s[ieta]);
-	}
+	}*/
 
 	for (int isurf = 0; isurf < FO_length; ++isurf)
 	{
@@ -1589,10 +1589,10 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_with_weights_Yeq0_alternate(int iqt
 	}
 
 	//clean up
-	delete [] eta_s;
+	/*delete [] eta_s;
 	delete [] eta_s_weight;
 	delete [] ch_eta_s;
-	delete [] sh_eta_s;
+	delete [] sh_eta_s;*/
 
 	return;
 }
@@ -1710,6 +1710,10 @@ void CorrelationFunction::Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMP
 			}
 		}
 	}
+
+	// copy over to total as well
+	for (int tmp_idx = 0; tmp_idx < thermal_target_Yeq0_NO_SA.size(); tmp_idx++)
+		total_target_Yeq0_NO_SA[tmp_idx] = thermal_target_Yeq0_NO_SA[tmp_idx];
 
 	return;
 }

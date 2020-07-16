@@ -518,9 +518,9 @@ void CorrelationFunction::Output_total_target_denominator_NO_SA()
 			<< setprecision(3) << setw(5) << qx_pts[iqx] << "   "
 			<< qy_pts[iqy] << "   " << qz_pts[iqz] << "   "
 			<< setprecision(6) << setw(10)
-			<< spectra[target_particle_id][ipT][ipphi] << "	  "
-			<< thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
-				* thermal_target_Yeq0_NO_SA[indexer4(ipT, ipphi, qxnpts-iqx-1, qynpts-iqy-1)] << endl;
+			<< spectra[target_particle_id][ipT][ipphi]*spectra[target_particle_id][ipT][ipphi] << "	  "
+			<< total_target_Yeq0_NO_SA[indexer4(ipT, ipphi, iqx, iqy)]
+				* total_target_Yeq0_NO_SA[indexer4(ipT, ipphi, qxnpts-iqx-1, qynpts-iqy-1)] << endl;
 	}
 
 	out.close();
@@ -534,7 +534,9 @@ void CorrelationFunction::Output_total_target_eiqx_dN_dypTdpTdphi(double current
 	string current_fraction_string = "";
 	replace_parentheses(local_name);
 	ostringstream filename_stream_target_dN_dypTdpTdphi;
-	filename_stream_target_dN_dypTdpTdphi << path << "/total_" << local_name << current_fraction_string << "_eiqx_dN_dypTdpTdphi" << no_df_stem << ".dat";
+	filename_stream_target_dN_dypTdpTdphi << path
+		<< "/total_" << local_name << current_fraction_string
+		<< "_eiqx_dN_dypTdpTdphi" << no_df_stem << ".dat";
 	ofstream output_target_dN_dypTdpTdphi(filename_stream_target_dN_dypTdpTdphi.str().c_str());
 
 	for (int iqt = 0; iqt < qtnpts; ++iqt)
