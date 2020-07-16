@@ -37,7 +37,7 @@ for parameterChange in sys.argv[2:]:
         dictionary[parameter] = value
 
 # Print out updated ParameterDict
-outFile = sys.argv[1].replace(".","_").replace("%","").replace("-","_")
+outFile = sys.argv[1] #.replace(".","_").replace("%","").replace("-","_")
 with open(outFile, 'w') as f:
     dictionaries = [item for item in dir(ParameterDict) if not item.startswith("__")]
     for name in dictionaries:
