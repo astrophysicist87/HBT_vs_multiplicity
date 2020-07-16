@@ -15,6 +15,7 @@
 #include "cfwr.h"
 #include "cfwr_lib.h"
 #include "lib.h"
+#include "Stopwatch.h"
 
 using namespace std;
 
@@ -75,6 +76,7 @@ void CorrelationFunction::Initialize_HDF_target_full_array()
 /////////////////////////////////////////////
 int CorrelationFunction::Administrate_resonance_HDF_array(int administration_mode)
 {
+HDF_sw.Start();
 //debugger(__LINE__, __FILE__);
 	// administration_mode:
 	//	0 - Initialize
@@ -218,6 +220,7 @@ debugger(__LINE__, __FILE__);
 
 	delete [] resonance_chunk;
 //debugger(__LINE__, __FILE__);
+HDF_sw.Stop();
 
 	return (return_flag);
 }
@@ -228,6 +231,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Administrate_target_thermal_HDF_array(int administration_mode)
 {
+HDF_sw.Start();
 	// administration_mode:
 	//	0 - Initialize
 	//	1 - Open (already initialized)
@@ -347,6 +351,7 @@ debugger(__LINE__, __FILE__);
 
 	delete [] tta_chunk;
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -354,6 +359,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Administrate_target_full_HDF_array(int administration_mode)
 {
+HDF_sw.Start();
 	// administration_mode:
 	//	0 - Initialize
 	//	1 - Open (already initialized)
@@ -463,6 +469,7 @@ int CorrelationFunction::Administrate_target_full_HDF_array(int administration_m
 
 	delete [] tfa_chunk;
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -470,6 +477,7 @@ int CorrelationFunction::Administrate_target_full_HDF_array(int administration_m
 
 int CorrelationFunction::Access_resonance_in_HDF_array(int local_pid, int iqt, int iqz, int access_mode, double * resonance_array_to_use, bool verbose)
 {
+HDF_sw.Start();
 	// access_mode:
 	//	0 - set array chunk
 	//	1 - get array chunk
@@ -540,6 +548,7 @@ debugger(__LINE__, __FILE__);
 
 	//if (verbose) debugger(__LINE__, __FILE__);
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -547,6 +556,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Access_target_thermal_in_HDF_array(int iqt, int iqz, int access_mode, double * tta_array_to_use, bool verbose)
 {
+HDF_sw.Start();
 	// access_mode:
 	//	0 - set array chunk
 	//	1 - get array chunk
@@ -609,6 +619,7 @@ debugger(__LINE__, __FILE__);
 		return_flag = -3;
 	}
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -618,6 +629,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Access_target_full_in_HDF_array(int iqt, int iqz, int access_mode, double * tfa_array_to_use, bool verbose)
 {
+HDF_sw.Start();
 	// access_mode:
 	//	0 - set array chunk
 	//	1 - get array chunk
@@ -679,6 +691,7 @@ int CorrelationFunction::Access_target_full_in_HDF_array(int iqt, int iqz, int a
 		return_flag = -3;
 	}
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -686,6 +699,7 @@ int CorrelationFunction::Access_target_full_in_HDF_array(int iqt, int iqz, int a
 
 int CorrelationFunction::Copy_chunk(int current_resonance_index, int reso_idx_to_be_copied)
 {
+HDF_sw.Start();
 	const int chunk_size = n_pT_pts * n_pphi_pts * n_pY_pts * qxnpts * qynpts * ntrig;
 
 	double * resonance_chunk = new double [chunk_size];
@@ -749,6 +763,7 @@ debugger(__LINE__, __FILE__);
 
 	delete [] resonance_chunk;
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -758,6 +773,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Administrate_besselcoeffs_HDF_array(int administration_mode, int particle_mode /*==0*/)
 {
+HDF_sw.Start();
 	// administration_mode:
 	//	0 - Initialize
 	//	1 - Open (already initialized)
@@ -887,6 +903,7 @@ debugger(__LINE__, __FILE__);
 
 	delete [] besselcoeffs_chunk;
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 
@@ -894,6 +911,7 @@ debugger(__LINE__, __FILE__);
 
 int CorrelationFunction::Access_besselcoeffs_in_HDF_array(int ipY, int access_mode, double * besselcoeffs_array_to_use, int particle_mode /*==0*/)
 {
+HDF_sw.Start();
 	// access_mode:
 	//	0 - set array chunk
 	//	1 - get array chunk
@@ -962,6 +980,7 @@ debugger(__LINE__, __FILE__);
 
 	delete [] besselcoeffs_chunk;
 
+HDF_sw.Stop();
 	return (return_flag);
 }
 

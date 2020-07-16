@@ -242,6 +242,7 @@ int main(int argc, char *argv[])
 		{
 			//if (iqt + iqz > 0) continue;
 			sw.Start();
+			correlation_function.HDF_sw.Reset();
 
 			correlation_function.Reset_HDF_resonance_array();
 
@@ -255,6 +256,8 @@ int main(int argc, char *argv[])
 
 			sw.Stop();
 			output << "Completed this (iqt=" << iqt << ",iqz=" << iqz << ")-loop in " << sw.printTime() << " seconds." << endl;
+			output << "Completed this (iqt=" << iqt << ",iqz=" << iqz << ")-loop with "
+				<< correlation_function.HDF_sw.printTime() << " seconds spent in HDF routines." << endl;
 			sw.Reset();
 		}
 	}

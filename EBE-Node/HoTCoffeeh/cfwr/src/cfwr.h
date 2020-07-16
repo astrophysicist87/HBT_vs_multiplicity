@@ -21,6 +21,7 @@
 #include "gauss_quadrature.h"
 #include "chebyshev.h"
 #include "ParameterReader.h"
+#include "Stopwatch.h"
 
 using namespace std;
 
@@ -449,6 +450,9 @@ class CorrelationFunction
 		double fraction_of_resonances;
 
 		// need to hold giant array stuff
+		// timing
+		Stopwatch HDF_sw;
+
 		//thermal target array
 		H5::DataSpace * tta_dataspace, * tta_memspace;
 		H5::H5File * tta_file;
