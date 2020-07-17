@@ -5,7 +5,7 @@ sys=$1
 
 case "$sys" in
 	pp)
-		for ff in 1000 1100 1200 1300 1400 1500 1600
+		for ff in 1000 1100 1200 1300 1400 1500 1600 2000 2500 3000 3500 4000 4500 5000
 		do
 			python updateParameterDict.py ParameterDict_EA_${sys}_dNchdeta100_ff${ff}.py \
 					initial_condition_control:'centrality'='0-100%' \
@@ -27,7 +27,7 @@ case "$sys" in
 		done
 		;;
 	pPb)
-		for ff in 150 200 250 300 350 400 450
+		for ff in 150 200 250 300 350 400 450 500 600 700 800 900
 		do
 			python updateParameterDict.py ParameterDict_EA_${sys}_dNchdeta100_ff${ff}.py \
 					initial_condition_control:'centrality'='0-100%' \
