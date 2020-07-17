@@ -68,7 +68,7 @@ case "$sys" in
 				superMCParameters:'Aproj'=208 \
 				superMCParameters:'Atarg'=208 \
 				superMCParameters:'ecm'=2760 \
-				superMCParameters:'finalFactor'=55.3037 \
+				superMCParameters:'finalFactor'=55.1918 \
 				superMCParameters:'maxx'='20.0' \
 				superMCParameters:'maxy'='20.0' \
 				superMCParameters:'dx'='0.1' \
