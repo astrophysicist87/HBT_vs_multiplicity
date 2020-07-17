@@ -189,7 +189,7 @@ void CorrelationFunction::Fourier_transform_emission_function(int iqt, int iqz)
 	current_iqz = iqz;
 	double loc_qz = qz_pts[iqz];
 	double loc_qt = qt_pts[iqt];
-	current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1e-100)/(loc_qt-loc_qz + 1e-100)));
+	current_pY_shift = 0.5 * log(abs((loc_qt+loc_qz + 1.e-100)/(loc_qt-loc_qz + 1.e-100)));
 	//current_pY_shift = 0.0;
 
 	///////
