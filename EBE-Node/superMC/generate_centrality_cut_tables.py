@@ -10,10 +10,11 @@ if __name__ == "__main__":
 	data = np.loadtxt(sys.argv[1], usecols=(4,6,7))
 	data = (data[data[:,1].argsort()])[::-1]
 	nev = len(data[:,0])
-	centralities = np.concatenate((np.linspace(0.1,1,10),np.linspace(2,100,99)))
-	#centralities = concatenate((linspace(0.1,2,20),linspace(3,100,98)))
+	#centralities = np.concatenate((np.linspace(0.1,1,10),np.linspace(2,100,99)))
+	centralities = np.concatenate((np.linspace(0.001,0.01,10), np.linspace(0.02,0.1,9), np.linspace(0.2,1,9),np.linspace(2,100,99)))
 	percents = 100.0-centralities
 	#percentiles = asarray([percentile(data[:,1], pc) for pc in percents])
+	#print centralities
 	#print percentiles
 	#print data[(nev*1.e-2*percents-1).astype(int),1]
 	splitIndices = (((nev*1.e-2*centralities-1.0)[:-1]).astype(int)).tolist()
