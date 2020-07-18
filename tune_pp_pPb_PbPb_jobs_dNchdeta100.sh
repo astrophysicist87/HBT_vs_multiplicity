@@ -53,7 +53,7 @@ case "$sys" in
 		;;
 
 	PbPb)
-		for ff in 40 45 50 55 60 65 70
+		for ff in 15 20 25 30 35 40 45 50 55 60 65 70 75 80
 		do
 			python updateParameterDict.py ParameterDict_EA_${sys}_dNchdeta100_ff${ff}.py \
 					initial_condition_control:'centrality'='0-100%' \

@@ -10,7 +10,7 @@ case "$sys" in
 			superMCParameters:'Aproj'=1 \
 			superMCParameters:'Atarg'=1 \
 			superMCParameters:'ecm'=7000 \
-			superMCParameters:'finalFactor'=80.377 \
+			superMCParameters:'finalFactor'=3048.24 \
 			superMCParameters:'maxx'='5.0' \
 			superMCParameters:'maxy'='5.0' \
 			superMCParameters:'dx'='0.05' \
@@ -35,7 +35,7 @@ case "$sys" in
 			superMCParameters:'Aproj'=1 \
 			superMCParameters:'Atarg'=208 \
 			superMCParameters:'ecm'=5020 \
-			superMCParameters:'finalFactor'=54.3181 \
+			superMCParameters:'finalFactor'=308.215 \
 			superMCParameters:'maxx'='10.0' \
 			superMCParameters:'maxy'='10.0' \
 			superMCParameters:'dx'='0.1' \
