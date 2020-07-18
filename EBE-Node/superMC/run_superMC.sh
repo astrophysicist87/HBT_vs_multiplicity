@@ -1,9 +1,33 @@
 #!/usr/bin/env bash
 
+sys=$1
+beamEnergy=$2
+
+aProjectile=1
+aTarget=1
+
+case "$sys" in
+	pp)
+		aProjectile=1
+		aTarget=1
+		;;
+	pPb)
+		aProjectile=1
+		aTarget=208
+		;;
+	PbPb)
+		aProjectile=208
+		aTarget=208
+		;;
+	*)
+		echo $"Usage: $0 {pp|pPb|PbPb}"
+		exit 1
+esac
+
 nohup ./superMC.e which_mc_model=5  sub_model=1  lambda=0.288  et=0  lgx=0  tmax=71  tmax_subdivision=3  \
-	alpha=0.14  glb_entropy_width=0.5  aproj=1  atarg=1  proj_deformed=0  targ_deformed=0 \
-	include_nn_correlation=1  shape_of_nucleons=2  shape_of_entropy=2  quark_width=0.2  \
-	gaussian_lambda=1.27  gauss_nucl_width=0.5  ecm=7000  bmin=0  bmax=12.7739  npmin=2  npmax=500 \
+	alpha=0.14  glb_entropy_width=0.5  aproj=${aProjectile}  atarg=${aTarget}  proj_deformed=0  targ_deformed=0 \
+	include_nn_correlation=1  shape_of_nucleons=2  shape_of_entropy=3  quark_width=0.2  \
+	gaussian_lambda=1.27  gauss_nucl_width=0.5  ecm=${beamEnergy}  bmin=0  bmax=12.7739  npmin=2  npmax=500 \
 	cutdsdy=0  cutdsdy_lowerbound=0.000122956  cutdsdy_upperbound=1e+06  nev=1e+06  randomseed=-1 \
 	backup_number=100000  operation=9  finalfactor=1.0  average_from_order=1  average_to_order=2 \
 	ecc_from_order=1  ecc_to_order=2  use_sd=1  use_ed=0  use_4col=0  use_block=1  use_5col=0 \

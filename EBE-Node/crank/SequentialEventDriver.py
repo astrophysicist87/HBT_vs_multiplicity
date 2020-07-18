@@ -316,7 +316,7 @@ def translate_centrality_cut():
     """
     cut_type = initial_condition_control['cut_type']
     if cut_type not in ['total_entropy', 'Npart']:
-        print "invalid centrality cut type: ", cut_type
+        print("invalid centrality cut type: ", cut_type)
         exit(1)
 
     centrality_string = initial_condition_control['centrality']
@@ -383,8 +383,8 @@ def translate_centrality_cut():
             path.join(path.abspath('../centrality_cut_tables'),
                       centrality_cut_file_name))
     except IOError:
-        print "Can not find the centrality cut table for the collision system"
-        print centrality_cut_file_name
+        print("Can not find the centrality cut table for the collision system")
+        print(centrality_cut_file_name)
         exit(1)
 
     lower_idx = (
@@ -428,17 +428,17 @@ def translate_centrality_cut():
     superMCParameters['bmin'] = b_min
 
     #print out information
-    print '-'*80
+    print('-'*80)
     print('%s collisions at sqrt{s} = %s A GeV with %s initial conditions'
           % (nucleus_name , collision_energy, model_name))
     print("Centrality : %g - %g"
           % (centrality_lower_bound, centrality_upper_bound) + r"%")
-    print 'centrality cut on ', cut_type
+    print('centrality cut on ', cut_type)
     if cut_type == 'total_entropy':
-        print 'dS/dy :', cut_value_low, '-', cut_value_upper
-    print "Npart: ", npart_min, '-', npart_max
-    print "b: ", b_min, '-', b_max, ' fm'
-    print '-'*80
+        print('dS/dy :', cut_value_low, '-', cut_value_upper)
+    print("Npart: ", npart_min, '-', npart_max)
+    print("b: ", b_min, '-', b_max, ' fm')
+    print('-'*80)
     return
 
 
@@ -465,7 +465,7 @@ def get_pre_generated_initial_conditions_list():
     # set directory strings
     initial_condition_path = path.join(controlParameterList['rootDir'], 
                                        'initial_conditions')
-    print 'Initial conditions path:', initial_condition_path
+    print('Initial conditions path:', initial_condition_path)
     
     #copytree( path.commonprefix(fileList), HoTCoffeehOperationDirectory )
     
@@ -552,9 +552,9 @@ def hydroWithInitialCondition(aFile):
                                      superMCControl['mainDir'])
         superMCDataDirectory = path.join(superMCDirectory,
                                          superMCControl['dataDir'])
-        print 'Now processing', aFile
+        print('Now processing', aFile)
         evIdx = (path.basename(aFile)).split('_')[2]
-        print 'evIdx =', evIdx
+        print('evIdx =', evIdx)
         otherFilesToSave = glob(path.join(superMCDataDirectory,
                                           superMCControl['filesToSave'] % {'ev': evIdx}))
         for anotherFile in otherFilesToSave:
@@ -785,18 +785,18 @@ def doHBTWithHydroResultFiles(fileList):
 	HoTCoffeehOperationDirectory = path.join(HoTCoffeehDirectory, HoTCoffeehControl['operationDir'])
 	HoTCoffeehExecutables = HoTCoffeehControl['executables']
 	HoTCoffeehExecutionEntry = HoTCoffeehControl['entryShell']
-	print '=========================================================='
-	print 'Using the following settings: '
-        print '=========================================================='
-        print 'HoTCoffeehDirectory =', HoTCoffeehDirectory
-        print 'HoTCoffeehOperationDirectory =', HoTCoffeehOperationDirectory
-        print 'HoTCoffeehExecutables =', HoTCoffeehExecutables
-        print 'HoTCoffeehExecutionEntry =', HoTCoffeehExecutionEntry
-        print '=========================================================='
-	print 'HoTCoffeehControl[saveResultGlobs] = ', HoTCoffeehControl['saveResultGlobs']
-        print '=========================================================='
-	print 'fileList =', fileList
-        print '=========================================================='
+	print('==========================================================')
+	print('Using the following settings: ')
+        print('==========================================================')
+        print('HoTCoffeehDirectory =', HoTCoffeehDirectory)
+        print('HoTCoffeehOperationDirectory =', HoTCoffeehOperationDirectory)
+        print('HoTCoffeehExecutables =', HoTCoffeehExecutables)
+        print('HoTCoffeehExecutionEntry =', HoTCoffeehExecutionEntry)
+        print('==========================================================')
+	print('HoTCoffeehControl[saveResultGlobs] = ', HoTCoffeehControl['saveResultGlobs'])
+        print('==========================================================')
+	print('fileList =', fileList)
+        print('==========================================================')
 
 	# check executable
 	checkExistenceOfExecutables(
@@ -833,13 +833,13 @@ def doHBTWithHydroResultFiles(fileList):
 	#	runCFWR = "false"
 	
 	# execute!
-	#print 'Running', "nice -n %d bash ./" % (ProcessNiceness) \
-	#					+ HoTCoffeehExecutionEntry + " " + runSVWR + " " + runCFWR + " " + assignments
+	#print('Running', "nice -n %d bash ./" % (ProcessNiceness) \
+	#					+ HoTCoffeehExecutionEntry + " " + runSVWR + " " + runCFWR + " " + assignments)
 	#run("nice -n %d bash ./" % (ProcessNiceness) \
 	#		+ HoTCoffeehExecutionEntry + " " + runSVWR + " " + runCFWR + " " + assignments, \
 	#	cwd=HoTCoffeehDirectory)
-	print 'Running', "nice -n %d bash ./" % (ProcessNiceness) \
-						+ HoTCoffeehExecutionEntry + " true true " + assignments
+	print('Running', "nice -n %d bash ./" % (ProcessNiceness) \
+						+ HoTCoffeehExecutionEntry + " true true " + assignments)
 	run("nice -n %d bash ./" % (ProcessNiceness) \
 			+ HoTCoffeehExecutionEntry + " true true " + assignments, \
 		cwd=HoTCoffeehDirectory)
@@ -1231,7 +1231,7 @@ def sequentialEventDriverShell():
 
         # create result folder
         resultDir = controlParameterList['resultDir']
-        print 'resultDir =', resultDir
+        print('resultDir =', resultDir)
         if path.exists(resultDir):
             rmtree(resultDir)
 
@@ -1244,14 +1244,14 @@ def sequentialEventDriverShell():
 
         # generate initial conditions then loop over initial conditions
         initial_condition_list = get_initial_condition_list()
-        print 'initial_condition_list =', initial_condition_list
+        print('initial_condition_list =', initial_condition_list)
         nev = len(initial_condition_list)
 
-        # print current progress to terminal
+        # printcurrent progress to terminal
         stdout.write("PROGRESS: %d events out of %d finished.\n" 
                      % (event_id, nev))
         stdout.flush()
-        #print initial_condition_list
+        #print(initial_condition_list)
 
         # loop over initial conditions
         for aInitialConditionFile in initial_condition_list:
@@ -1281,9 +1281,9 @@ def sequentialEventDriverShell():
             elif initial_type == 'pre-generated':  
                 # initial conditions from pre-generated files
                 copy(aInitialConditionFile, controlParameterList['eventResultDir'])
-                print 'Associating ' + aInitialConditionFile + ' with event ' + str(event_id)
+                print('Associating ' + aInitialConditionFile + ' with event ' + str(event_id))
             
-            print controlParameterList['rootDir']
+            print(controlParameterList['rootDir'])
             
             if simulationType == 'hydroEM_preEquilibrium':
                 # perform hydro calculations with pre-equilibrium evolution 
@@ -1294,7 +1294,7 @@ def sequentialEventDriverShell():
                 # perform hydro calculations and get a list of all the result 
                	# filenames
                 hydroResultFiles = [aFile for aFile in hydroWithInitialCondition(aInitialConditionFile)]
-                print controlParameterList['rootDir']            
+                print(controlParameterList['rootDir'])
             
             # fork simulation type here
             if simulationType == 'hybrid':
@@ -1321,18 +1321,18 @@ def sequentialEventDriverShell():
                 remove(urqmdOutputFilePath)
 
             # Plumberg: add HBT calculations here (defined only for hydroResultFiles so far)
-            print controlParameterList['rootDir']
-            print 'simulationType =', simulationType
-            print 'HoTCoffeehControl[runHoTCoffeeh] =', HoTCoffeehControl['runHoTCoffeeh'] 
+            print(controlParameterList['rootDir'])
+            print('simulationType =', simulationType)
+            print('HoTCoffeehControl[runHoTCoffeeh] =', HoTCoffeehControl['runHoTCoffeeh'] )
             if simulationType != 'hybrid' and HoTCoffeehControl['runHoTCoffeeh']:
-                print 'Doing HBT!'
+                print('Doing HBT!')
                 doHBTWithHydroResultFiles(hydroResultFiles)
 
             if simulationType == 'hydro':
                 # perform iS calculation and resonance decays
-                print controlParameterList['rootDir']            
+                print(controlParameterList['rootDir']    )        
                	iSWithResonancesWithHydroResultFiles(hydroResultFiles)
-                print controlParameterList['rootDir']            
+                print(controlParameterList['rootDir']          )  
             
             elif simulationType == 'hydroEM':
                 h5file = iSSeventplaneAngleWithHydroResultFiles(
