@@ -17,9 +17,11 @@ try:
     # set parameters
     numberOfJobs = int(argv[1])
     numberOfEventsPerJob = int(argv[2])
+    # cluster name
+    cluster_name = str(argv[3])
 
     # set optional parameters
-    argId = 2
+    argId = 3
 
     argId += 1
     if len(argv)>=argId+1: # set working folder
@@ -37,7 +39,7 @@ try:
     if len(argv)>=argId+1: # set wall time
         walltime = argv[argId]
     else:
-        walltime = "%d:00:00" % (3*numberOfEventsPerJob) # 3 hours per job
+        walltime = "%d:00:00" % (2*numberOfEventsPerJob) # 3 hours per job
 
     argId += 1
     if len(argv)>=argId+1: # whether to compress final results folder
@@ -51,7 +53,7 @@ try:
     else:
         parameterDictFilename = "ParameterDict.py"
 except:
-    print('Usage: generateJobs.py number_of_jobs number_of_events_per_job [working_folder="./PlayGround"] [results_folder="./RESULTS"] [walltime="03:00:00" (per event)] [compress_results_folder="yes"] [parameter_dict_filename="ParameterDict.py"]')
+    print('Usage: generateJobs.py number_of_jobs number_of_events_per_job cluster_name [working_folder="./PlayGround"] [results_folder="./RESULTS"] [walltime="03:00:00" (per event)] [compress_results_folder="yes"] [compress_results_folder="yes"]')
     exit()
 
 # save config files
@@ -108,16 +110,13 @@ ebeNodeFolder = "EBE-Node"
 crankFolderName = "crank"
 crankFolder = path.join(ebeNodeFolder, crankFolderName)
 
-# copy parameter file into the crank folder,
-# but rename it to "ParameterDict.py"
+# copy parameter file into the crank folder
 #copy("ParameterDict.py", crankFolder)
 copy(parameterDictFilename, 
      path.join(crankFolder, "ParameterDict.py"))
 
-
 # backup parameter files to the result folder
 copy(path.join(crankFolder, "SequentialEventDriver.py"), resultsFolder)
-# rename to ParameterDict.py here as well
 copy(path.join(crankFolder, "ParameterDict.py"), resultsFolder)
 
 # duplicate EBE-Node folder to working directory, write .pbs file
@@ -130,6 +129,7 @@ for i in range(1, numberOfJobs+1):
 #!/usr/bin/env bash
 #PBS -N iEBE-%d
 #PBS -l walltime=%s
+#PBS -l nodes=1:ppn=1:%s
 #PBS -j oe
 #PBS -S /bin/bash
 cd %s
@@ -139,15 +139,16 @@ cd %s
     cp RunRecord.txt ErrorRecord.txt ../finalResults/
 )
 mv ./finalResults %s/job-%d
-""" % (i, walltime, targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
+""" % (i, walltime, cluster_name, targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
     )
     if compressResultsFolderAnswer == "yes":
         open(path.join(targetWorkingFolder, "job-%d.pbs" % i), "a").write(
 """
 (cd %s
-    zip -r -m -q job-%d.zip job-%d
+    tar -zcf job-%d.tar.gz job-%d
+    rm -fr job-%d
 )
-""" % (resultsFolder, i, i)
+""" % (resultsFolder, i, i, i)
         )
 
 # add a data collector watcher
@@ -163,14 +164,15 @@ if compressResultsFolderAnswer == "yes":
 #!/usr/bin/env bash
 #PBS -N watcher
 #PBS -l walltime=%s
+#PBS -l nodes=1:ppn=1:%s
 #PBS -j oe
 #PBS -S /bin/bash
 cd %s
 (cd %s
-    python autoZippedResultsCombiner.py %s %d "job-(\d*).zip" 60 1> WatcherReport.txt
+    python autoZippedResultsCombiner.py %s %d "job-(\d*).tar.gz" 60 1> WatcherReport.txt
     mv WatcherReport.txt %s
 )
-""" % (walltime, watcherDirectory, utilitiesFolder, resultsFolder, numberOfJobs, resultsFolder)
+""" % (walltime, cluster_name, watcherDirectory, utilitiesFolder, resultsFolder, numberOfJobs, resultsFolder)
     )
 
 from importlib import import_module

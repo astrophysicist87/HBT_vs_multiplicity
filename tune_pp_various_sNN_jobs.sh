@@ -3,6 +3,7 @@
 
 # Use sqrt(s_NN), not s_NN
 sNN=$1
+cluster=$2
 sys="pp"
 
 for ff in 50 55 60 65 70 75 80 85 90 95 100
@@ -15,13 +16,14 @@ do
 			superMCParameters:'finalFactor'=${ff} \
 			HoTCoffeehControl:'runHoTCoffeeh'=False
 
-	./generateJobs_local.py 1 50000 \
+	./generateJobs_cluster.py 1 50000 $cluster \
 	  PlayGround_EA_${sys}_sqrtSNN${sNN}_ff${ff} \
 	  RESULTS_EA_${sys}_sqrtSNN${sNN}_ff${ff} \
-	  12:00:00 no \
+	  16:00:00 no \
 	  ParameterDict_EA_${sys}_sqrtSNN${sNN}_ff${ff}.py
 
-	./submitJobs_local.py
+	./submitJobs_qsub.py
 
+	#do this to make sure job is completely submitted before starting next submission
 	sleep 5
 done
