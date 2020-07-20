@@ -5,7 +5,7 @@ sys=$1
 
 case "$sys" in
 	pp)
-		python updateParameterDict.py ParameterDict_EA_${sys}_C${cen}.py \
+		python updateParameterDict.py ParameterDict_EA_${sys}_MB_dNchdeta100.py \
 			initial_condition_control:'centrality'='0-100%' \
 			superMCParameters:'Aproj'=1 \
 			superMCParameters:'Atarg'=1 \
@@ -20,17 +20,17 @@ case "$sys" in
 			hydroParameters:'dy'='0.05'
 
 		./generateJobs_local.py 1 10000 \
-			PlayGround_EA_${sys}_C${cen} \
-			RESULTS_EA_${sys}_C${cen} \
+			PlayGround_EA_${sys}_MB_dNchdeta100 \
+			RESULTS_EA_${sys}_MB_dNchdeta100 \
 			03:00:00 no \
-			ParameterDict_EA_${sys}_C${cen}.py
+			ParameterDict_EA_${sys}_MB_dNchdeta100.py
 
 		./submitJobs_local.py
 
 		sleep 5
 		;;
 	pPb)
-		python updateParameterDict.py ParameterDict_EA_${sys}_C${cen}.py \
+		python updateParameterDict.py ParameterDict_EA_${sys}_MB_dNchdeta100.py \
 			initial_condition_control:'centrality'='0-100%' \
 			superMCParameters:'Aproj'=1 \
 			superMCParameters:'Atarg'=208 \
@@ -45,22 +45,22 @@ case "$sys" in
 			hydroParameters:'dy'='0.1'
 
 		./generateJobs_local.py 1 10000 \
-			PlayGround_EA_${sys}_C${cen} \
-			RESULTS_EA_${sys}_C${cen} \
+			PlayGround_EA_${sys}_MB_dNchdeta100 \
+			RESULTS_EA_${sys}_MB_dNchdeta100 \
 			03:00:00 no \
-			ParameterDict_EA_${sys}_C${cen}.py
+			ParameterDict_EA_${sys}_MB_dNchdeta100.py
 
 		./submitJobs_local.py
 
 		sleep 5
 		;;
 	PbPb)
-		python updateParameterDict.py ParameterDict_EA_${sys}_C${cen}.py \
+		python updateParameterDict.py ParameterDict_EA_${sys}_MB_dNchdeta100.py \
 			initial_condition_control:'centrality'='0-100%' \
 			superMCParameters:'Aproj'=208 \
 			superMCParameters:'Atarg'=208 \
 			superMCParameters:'ecm'=2760 \
-			superMCParameters:'finalFactor'=55.1918 \
+			superMCParameters:'finalFactor'=12.6947 \
 			superMCParameters:'maxx'='20.0' \
 			superMCParameters:'maxy'='20.0' \
 			superMCParameters:'dx'='0.1' \
@@ -70,10 +70,10 @@ case "$sys" in
 			hydroParameters:'dy'='0.1'
 
 		./generateJobs_local.py 1 10000 \
-			PlayGround_EA_${sys}_C${cen} \
-			RESULTS_EA_${sys}_C${cen} \
+			PlayGround_EA_${sys}_MB_dNchdeta100 \
+			RESULTS_EA_${sys}_MB_dNchdeta100 \
 			24:00:00 no \
-			ParameterDict_EA_${sys}_C${cen}.py
+			ParameterDict_EA_${sys}_MB_dNchdeta100.py
 
 		./submitJobs_local.py
 
