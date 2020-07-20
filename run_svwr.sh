@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 #-------------------
 
+# some results directory to post-process
+# assumes structure: $WD/job-1/event-1/*
 workingDirectory=$1
 
 for direc in $workingDirectory/HoTCoffeeh
@@ -15,6 +17,7 @@ done
 
 cp -r EBE-Node/HoTCoffeeh $workingDirectory
 resultsDirectory=$workingDirectory/HoTCoffeeh/results
+rm -rf $resultsDirectory
 mkdir $resultsDirectory
 
 cp $workingDirectory/job-1/event-1/decdat2.dat   $resultsDirectory
