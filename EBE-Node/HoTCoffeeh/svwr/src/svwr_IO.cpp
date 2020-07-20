@@ -264,7 +264,7 @@ void SourceVariances::Output_target_quantities_to_average()
 	filename_stream_target_qta << path << "/total_" << local_name << "_quantities_to_average" << no_df_stem << ".dat";
 	ofstream output_target_qta(filename_stream_target_qta.str().c_str());
 
-	for (int iqta = 0; iqta < n_weighting_functions; iqta++)	
+	for (int iqta = 0; iqta < n_quantities_to_average; iqta++)	
 	for (int ipphi = 0; ipphi < n_pphi_pts; ipphi++)
 	{
 		for (int ipT = 0; ipT < n_pT_pts; ipT++)
