@@ -819,6 +819,11 @@ void CorrelationFunction::Set_thermal_target_moments(int iqt, int iqz)
 	if (iqt==0 and iqz==0)
 		Cal_dN_dypTdpTdphi_Yeq0_alternate_NO_SMOOTHNESS_ASSUMPTION(iqt, iqz);
 
+	if ( USE_SMOOTHNESS_ASSUMPTION )
+		cout << "Using smoothness assumption!" << endl;
+	else
+		cout << "Not using smoothness assumption!" << endl;
+
 	return;
 }
 
