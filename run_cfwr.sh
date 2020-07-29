@@ -40,6 +40,7 @@ cp $workingDirectory/job-1/event-1/surface.dat   $resultsDirectory
 		n_order=4 qxnpts=7 qznpts=7 nKphi=48 \
 		&> ./results/all.out
 
+	\rm results/*.h5 results/*eiqx*dat
 	mv results ../job-1/event-1/post_processing_results
 
 	cd - &>/dev/null
