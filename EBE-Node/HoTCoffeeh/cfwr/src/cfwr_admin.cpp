@@ -1075,7 +1075,7 @@ void CorrelationFunction::Get_q_points(double q1, double q2, double q3, double p
 bool CorrelationFunction::fexists(const char *filename)
 {
   ifstream ifile(filename);
-  return ifile;
+  return ifile.good();
 }
 
 //print output to output filestream, one line at a time
