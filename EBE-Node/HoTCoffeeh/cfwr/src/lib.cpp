@@ -41,57 +41,6 @@ int get_folder_index (string& str)
   return atoi((str.substr(found+1)).c_str());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// sorter.h
-////////////////////////////////////////////////////////////////////////////////
-
-/*template <typename T>
-vector<size_t> ordered(vector<T> values, int lt_or_gt)
-{
-	using namespace boost::phoenix;
-	using namespace boost::phoenix::arg_names;
-
-	vector<size_t> indices(values.size());
-	int i = 0;
-	transform(values.begin(), values.end(), indices.begin(), ref(i)++);
-	if (lt_or_gt == 0)
-		sort(indices.begin(), indices.end(), ref(values)[arg1] < ref(values)[arg2]);
-	else
-		sort(indices.begin(), indices.end(), ref(values)[arg1] > ref(values)[arg2]);
-	return indices;
-}
-
-template <typename T>
-vector<size_t> partial_ordered(vector<T> const& values, int cutoff, int lt_or_gt)
-{
-	using namespace boost::phoenix;
-	using namespace boost::phoenix::arg_names;
-
-	vector<size_t> indices(values.size());
-	int i = 0;
-	transform(values.begin(), values.end(), indices.begin(), ref(i)++);
-	if (lt_or_gt == 0)
-		partial_sort(indices.begin(), indices.begin() + cutoff, indices.end(), ref(values)[arg1] < ref(values)[arg2]);
-	else
-		partial_sort(indices.begin(), indices.begin() + cutoff, indices.end(), ref(values)[arg1] > ref(values)[arg2]);
-	return indices;
-}
-
-
-template <typename T>
-bool cmp(const vector<T>& a, const vector<T>& b)
-{
-    return a[COLUMN_INDEX_TO_SORT_BY] < b[COLUMN_INDEX_TO_SORT_BY];
-}
-
-template <typename T>
-void sort_by_column(vector< vector<T> > * values)
-{
-	std::stable_sort((*values).begin(), (*values).end(), cmp<T>);
-
-	return;
-}
-*/
 
 /*USAGE: debugger(__LINE__, __FILE__)*/
 void debugger(int cln, const char* cfn)
