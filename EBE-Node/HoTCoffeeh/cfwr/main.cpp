@@ -141,6 +141,7 @@ int main(int argc, char *argv[])
 	{
 		threshold = paraRdr->getVal("CF_resonanceThreshold");
 		output << "Working with threshold = " << threshold << endl;
+		if (threshold < 1e-10) break;
 		get_important_resonances(particle_idx, &chosen_resonance_indices, particle, Nparticle, threshold, net_fraction_resonance_contribution, output);
 		get_all_descendants(&chosen_resonance_indices, particle, Nparticle, output);
 

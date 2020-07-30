@@ -602,7 +602,7 @@ void get_important_resonances(int chosen_target_particle_idx, vector<int> * chos
 	for (int i = 0; i < Nparticle; i++)
 		percent_contributions.push_back(particle[i].percent_contribution);
 	//vector<size_t> sorted_resonance_indices = ordered(percent_contributions);
-	vector<size_t> sorted_resonance_indices = percent_contributions;	//WRONG
+	vector<size_t> sorted_resonance_indices(10);	//WRONG
 	reverse(sorted_resonance_indices.begin(), sorted_resonance_indices.end());
 	//vector<int> chosen_resonance_indices_ptr;
 	//double running_total_percentage = 0.0;
