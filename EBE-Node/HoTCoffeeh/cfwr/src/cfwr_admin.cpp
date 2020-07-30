@@ -25,6 +25,8 @@ template <typename T> int sgn(T val)
     return (T(0) < val) - (val < T(0));
 }
 
+double cot(double){ return 1.0/tan(x); }
+
 struct bessel_params { double beta; double gamma; };
 
 CorrelationFunction::CorrelationFunction(ParameterReader * paraRdr_in, particle_info* particle, particle_info* all_particles_in, int Nparticle_in,
