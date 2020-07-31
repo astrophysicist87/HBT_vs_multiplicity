@@ -8,8 +8,9 @@
 #include<sys/time.h>
 #include<algorithm>
 
-
 #include "ParameterReader.h"
+#include "Arsenal.h"
+#include "fit.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
 
 	Read_in_correlationfunction("results/correlation_function_3D_Pion_+.dat");
 
-	Get_GF_HBTradii()
+	Get_GF_HBTradii();
 
 	return 0;
 }
