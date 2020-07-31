@@ -524,9 +524,9 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     R_l = sqrt(results[3])*hbarC;
     // the cross term is not necessary positive
     double R2_os = results[4]*hbarC*hbarC;
-    /*cout << "lambda = " << lambda << endl;
-    cout << "R_o = " << R_o << " fm, R_s = " << R_s << " fm, R_l = " << R_l << " fm" << endl;
-    cout << "R_os = " << R_os << " fm." << endl;*/
+    cout << "lambda = " << lambda << endl;
+    cout << "R2_o = " << R_o*R_o << " fm^2, R2_s = " << R_s*R_s << " fm^2, R2_l = " << R_l*R_l << " fm^2" << endl;
+    cout << "R2_os = " << R2_os << " fm^2." << endl;
 
 	const int iKT_iKphi_idx 			= indexer_KT_Kphi( iKT, iKphi );
 	lambda_Correl[iKT_iKphi_idx] 		= lambda;
