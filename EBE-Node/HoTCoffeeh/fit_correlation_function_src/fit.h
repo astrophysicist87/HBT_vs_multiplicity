@@ -56,8 +56,8 @@ const int n_order = 4;
 
 const int nKT = 101;
 const int nKphi = 48;
-const doubleKTmin = 0.01;
-const doubleKTmax = 1.01;
+const double KTmin = 0.01;
+const double KTmax = 1.01;
 
 
 const double fit_tolerance = 1e-6;
@@ -93,7 +93,7 @@ extern vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
 extern vector<vector<double> > CFvals;
 
 
-void Get_GF_HBTradii();
+void Get_GF_HBTradii(string filename);
 void Read_in_correlationfunction(string filename);
 void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi);
 void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, int iKphi);
