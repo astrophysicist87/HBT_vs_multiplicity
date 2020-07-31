@@ -18,11 +18,11 @@ vector<vector<double> > CFvals;
 void Get_GF_HBTradii()
 {
 
-	KT_pts = vector<double>(n_KT_pts);
-	Kphi_pts = vector<double>(n_Kphi_pts);
-	qx_pts = vector<double>(nqxpts);
-	qy_pts = vector<double>(nqypts);
-	qz_pts = vector<double>(nqzpts);
+	KT_pts.resize(n_KT_pts);
+	Kphi_pt.sresize(n_Kphi_pts);
+	qx_pts.resize(nqxpts);
+	qy_pts.resize(nqypts);
+	qz_pts.resize(nqzpts);
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
@@ -201,10 +201,6 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 
 void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, int iKphi)
 {
-	double * qx_pts = qx_pts;
-	double * qy_pts = qy_pts;
-	double * qz_pts = qz_pts;
-
 	const size_t data_length = nqxpts*nqypts*nqzpts;  // # of points
 	const size_t n_para = 5;  // # of parameters
 
@@ -370,9 +366,6 @@ int print_fit_state_3D_withlambda (size_t iteration, gsl_multifit_fdfsolver * so
 
 void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int iKT, int iKphi)
 {
-	double * qx_pts = qx_pts;
-	double * qy_pts = qy_pts;
-	double * qz_pts = qz_pts;
 	const size_t data_length = nqxpts*nqypts*nqzpts;  // # of points
 
     double lambda, R_o, R_s, R_l, R_os;
