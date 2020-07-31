@@ -37,9 +37,9 @@ void Read_in_correlationfunction(string filename)
 	double dummy;
 	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
 	for (int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
-	for (int iqx = 0; iqx < qxnpts; ++iqx)
-	for (int iqy = 0; iqy < qynpts; ++iqy)
-	for (int iqz = 0; iqz < qznpts; ++iqz)
+	for (int iqx = 0; iqx < nqxpts; ++iqx)
+	for (int iqy = 0; iqy < nqypts; ++iqy)
+	for (int iqz = 0; iqz < nqzpts; ++iqz)
 	{
 		iCorrFunc >> KT_pts[iKT]
                   >> Kphi_pts[iKphi]
@@ -79,11 +79,11 @@ void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi)
 	//set up test data
 	struct Correlationfunction3D_data Correlfun3D_data;
 	Correlfun3D_data.data_length = data_length;
-	Correlfun3D_data.q_o = new double [data_length];
-	Correlfun3D_data.q_s = new double [data_length];
-	Correlfun3D_data.q_l = new double [data_length];
-	Correlfun3D_data.y = new double [data_length];
-	Correlfun3D_data.sigma = new double [data_length];
+	Correlfun3D_data.q_o.resize(data_length);
+	Correlfun3D_data.q_s.resize(data_length);
+	Correlfun3D_data.q_l.resize(data_length);
+	Correlfun3D_data.y.resize(data_length);
+	Correlfun3D_data.sigma.resize(data_length);
 
 	int idx = 0;
 	double ckp = cos(KPhi_pts[iKphi]), skp = sin(KPhi_pts[iKphi]);
@@ -179,12 +179,6 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	gsl_matrix_free (covariance_ptr);
 	gsl_rng_free (rng_ptr);
 
-	delete[] Correlfun3D_data.q_o;
-	delete[] Correlfun3D_data.q_s;
-	delete[] Correlfun3D_data.q_l;
-	delete[] Correlfun3D_data.y;
-	delete[] Correlfun3D_data.sigma;
-
 	gsl_multifit_fdfsolver_free (solver_ptr);  // free up the solver
 
 	return;
@@ -210,11 +204,11 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 	//set up test data
 	struct Correlationfunction3D_data Correlfun3D_data;
 	Correlfun3D_data.data_length = data_length;
-	Correlfun3D_data.q_o = new double [data_length];
-	Correlfun3D_data.q_s = new double [data_length];
-	Correlfun3D_data.q_l = new double [data_length];
-	Correlfun3D_data.y = new double [data_length];
-	Correlfun3D_data.sigma = new double [data_length];
+	Correlfun3D_data.q_o.resize(data_length);
+	Correlfun3D_data.q_s.resize(data_length);
+	Correlfun3D_data.q_l.resize(data_length);
+	Correlfun3D_data.y.resize(data_length);
+	Correlfun3D_data.sigma.resize(data_length);
 
 	int idx = 0;
 	double ckp = cos(KPhi_pts[iKphi]), skp = sin(KPhi_pts[iKphi]);
@@ -225,9 +219,9 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 		Correlfun3D_data.q_o[idx] = qx_pts[i] * ckp + qy_pts[j] * skp;
 		Correlfun3D_data.q_s[idx] = -qx_pts[i] * skp + qy_pts[j] * ckp;
 		Correlfun3D_data.q_l[idx] = qz_pts[k];
-		Correlfun3D_data.y[idx] = Correl_3D[i][j][k];
+		Correlfun3D_data.y[idx] = Correl_3D[idx];
 		//Correlfun3D_data.sigma[idx] = Correl_3D_err[i][j][k];
-		Correlfun3D_data.sigma[idx] = 1.e-3;
+		Correlfun3D_data.sigma[idx] = 1e-3;
 if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	Correlfun3D_data.sigma[idx] = 1.e10;	//ignore central point
 		idx++;
@@ -310,12 +304,6 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	gsl_matrix_free (covariance_ptr);
 	gsl_rng_free (rng_ptr);
 
-	delete[] Correlfun3D_data.q_o;
-	delete[] Correlfun3D_data.q_s;
-	delete[] Correlfun3D_data.q_l;
-	delete[] Correlfun3D_data.y;
-	delete[] Correlfun3D_data.sigma;
-
 	gsl_multifit_fdfsolver_free (solver_ptr);  // free up the solver
 
 	return;
@@ -397,7 +385,7 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
         double q_out_local = qx_pts[i] * ckp + qy_pts[j] * skp;
         double q_side_local = -qx_pts[i] * skp + qy_pts[j] * ckp;
         double q_long_local = qz_pts[k];
-        double correl_local = Correl_3D[idx]-1;
+        double correl_local = Correl_3D[indexer_qx_qy_qz(i,j,k)]-1.0;
         if(correl_local < 1e-15) continue;
 		//if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 		//	Correlfun3D_data.sigma[idx] = 1.e10;	//ignore central point
@@ -462,7 +450,8 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     R_sl = results[6]*hbarC*hbarC;
     cout << "lambda = " << lambda << endl;
     cout << "R_o = " << R_o << " fm, R_s = " << R_s << " fm, R_l = " << R_l << " fm" << endl;
-    cout << "R_os^2 = " << R_os << " fm^2, R_ol^2 = " << R_ol << " fm^2, R_sl^2 = " << R_sl << " fm^2." << endl;
+    cout << "R_os^2 = " << R_os << " fm^2." << endl;
+	//, R_ol^2 = " << R_ol << " fm^2, R_sl^2 = " << R_sl << " fm^2
 
     double chi_sq = 0.0;
 	for (int i = 0; i < nqxpts; i++)
@@ -472,7 +461,7 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
         double q_out_local = qx_pts[i] * ckp + qy_pts[j] * skp;
         double q_side_local = -qx_pts[i] * skp + qy_pts[j] * ckp;
         double q_long_local = qz_pts[k];
-        double correl_local = Correl_3D[idx]-1;
+        double correl_local = Correl_3D[indexer_qx_qy_qz(i,j,k)]-1.0;
         if(correl_local < 1e-15) continue;
         double sigma_k_prime = CF_err/correl_local;
 
@@ -510,11 +499,11 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
 int Fittarget_correlfun3D_f (const gsl_vector *xvec_ptr, void *params_ptr, gsl_vector *f_ptr)
 {
 	size_t n = ((struct Correlationfunction3D_data *) params_ptr)->data_length;
-	double * q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
-	double * q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
-	double * q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
-	double * y = ((struct Correlationfunction3D_data *) params_ptr)->y;
-	double * sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
+	vector<double> q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
+	vector<double> q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
+	vector<double> q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
+	vector<double> y = ((struct Correlationfunction3D_data *) params_ptr)->y;
+	vector<double> sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
 
 	//fit parameters
 	double R2_o = gsl_vector_get (xvec_ptr, 0);
@@ -538,11 +527,11 @@ int Fittarget_correlfun3D_f (const gsl_vector *xvec_ptr, void *params_ptr, gsl_v
 int Fittarget_correlfun3D_f_withlambda (const gsl_vector *xvec_ptr, void *params_ptr, gsl_vector *f_ptr)
 {
 	size_t n = ((struct Correlationfunction3D_data *) params_ptr)->data_length;
-	double * q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
-	double * q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
-	double * q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
-	double * y = ((struct Correlationfunction3D_data *) params_ptr)->y;
-	double * sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
+	vector<double> q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
+	vector<double> q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
+	vector<double> q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
+	vector<double> y = ((struct Correlationfunction3D_data *) params_ptr)->y;
+	vector<double> sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
 
 	//fit parameters
 	double lambda = gsl_vector_get (xvec_ptr, 0);
@@ -571,10 +560,10 @@ int Fittarget_correlfun3D_f_withlambda (const gsl_vector *xvec_ptr, void *params
 int Fittarget_correlfun3D_df (const gsl_vector *xvec_ptr, void *params_ptr,  gsl_matrix *Jacobian_ptr)
 {
 	size_t n = ((struct Correlationfunction3D_data *) params_ptr)->data_length;
-	double * q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
-	double * q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
-	double * q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
-	double * sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
+	vector<double> q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
+	vector<double> q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
+	vector<double> q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
+	vector<double> sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
 
 	//fit parameters
 	double R2_o = gsl_vector_get (xvec_ptr, 0);
@@ -604,10 +593,10 @@ int Fittarget_correlfun3D_df (const gsl_vector *xvec_ptr, void *params_ptr,  gsl
 int Fittarget_correlfun3D_df_withlambda (const gsl_vector *xvec_ptr, void *params_ptr,  gsl_matrix *Jacobian_ptr)
 {
 	size_t n = ((struct Correlationfunction3D_data *) params_ptr)->data_length;
-	double * q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
-	double * q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
-	double * q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
-	double * sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
+	vector<double> q_o = ((struct Correlationfunction3D_data *) params_ptr)->q_o;
+	vector<double> q_s = ((struct Correlationfunction3D_data *) params_ptr)->q_s;
+	vector<double> q_l = ((struct Correlationfunction3D_data *) params_ptr)->q_l;
+	vector<double> sigma = ((struct Correlationfunction3D_data *) params_ptr)->sigma;
 
 	//fit parameters
 	double lambda = gsl_vector_get (xvec_ptr, 0);

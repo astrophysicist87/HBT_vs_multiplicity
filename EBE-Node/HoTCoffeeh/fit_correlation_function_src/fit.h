@@ -41,13 +41,19 @@ int Fittarget_correlfun3D_f_withlambda (const gsl_vector *xvec_ptr, void *params
 int Fittarget_correlfun3D_df_withlambda (const gsl_vector *xvec_ptr, void *params_ptr,	gsl_matrix *Jacobian_ptr);
 int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *params_ptr, gsl_vector* f_ptr, gsl_matrix* Jacobian_ptr);
 
+const double hbarc = 0.19733;
+
 const bool USE_LAMBDA = true;
+const bool VERBOSE = 10;
 
 const int n_KT_pts = 15;
 const int n_Kphi_pts = 36;
 const int nqxpts = 7;
 const int nqypts = 7;
 const int nqzpts = 7;
+
+const double fit_tolerance = 1e-6;
+const int fit_max_iterations = 100;
 
 inline int indexer_KT_Kphi( int iKT, int iKphi )
 {
@@ -59,7 +65,17 @@ inline int indexer_qx_qy_qz( int iqx, int iqy, int iqz )
 	return ( (iqx * nqypts + iqy) * nqzpts + iqz );
 }
 
-vector<double> KT_pts(n_KT_pts), KPhi_pts(n_Kphi_pts);
+inline double CorrelationFunction::get_fit_results(int i, gsl_multifit_fdfsolver * solver_ptr)
+{
+	return gsl_vector_get (solver_ptr->x, i);
+}
+
+inline double CorrelationFunction::get_fit_err (int i, gsl_matrix * covariance_ptr)
+{
+	return sqrt (gsl_matrix_get (covariance_ptr, i, i));
+}
+
+vector<double> KT_pts(n_KT_pts), Kphi_pts(n_Kphi_pts);
 vector<double> qx_pts(nqxpts), qy_pts(nqypts), qz_pts(nqzpts);
 
 vector<vector<double> > CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts ) );
