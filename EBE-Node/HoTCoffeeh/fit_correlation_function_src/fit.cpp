@@ -18,11 +18,11 @@ vector<vector<double> > CFvals;
 void Get_GF_HBTradii()
 {
 
-	KT_pts.resize(n_KT_pts);
-	Kphi_pt.sresize(n_Kphi_pts);
-	qx_pts.resize(nqxpts);
-	qy_pts.resize(nqypts);
-	qz_pts.resize(nqzpts);
+	KT_pts = vector<double>(n_KT_pts);
+	Kphi_ptd = vector<double>(n_Kphi_pts);
+	qx_pts = vector<double>(nqxpts);
+	qy_pts = vector<double>(nqypts);
+	qz_pts = vector<double>(nqzpts);
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
