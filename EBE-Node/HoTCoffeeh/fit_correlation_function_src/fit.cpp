@@ -45,14 +45,14 @@ void Get_GF_HBTradii(string filename)
 	R2_long_err = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_outside_err = vector<double>( n_KT_pts * n_Kphi_pts );
 
-	R2_side_GF_C = vector<double>( n_KT_pts * n_order );
-	R2_side_GF_S = vector<double>( n_KT_pts * n_order );
-	R2_out_GF_C = vector<double>( n_KT_pts * n_order );
-	R2_out_GF_S = vector<double>( n_KT_pts * n_order );
-	R2_long_GF_C = vector<double>( n_KT_pts * n_order );
-	R2_long_GF_S = vector<double>( n_KT_pts * n_order );
-	R2_outside_GF_C = vector<double>( n_KT_pts * n_order );
-	R2_outside_GF_S = vector<double>( n_KT_pts * n_order );
+	R2_side_GF_C = vector<double>( nKT * n_order );
+	R2_side_GF_S = vector<double>( nKT * n_order );
+	R2_out_GF_C = vector<double>( nKT * n_order );
+	R2_out_GF_S = vector<double>( nKT * n_order );
+	R2_long_GF_C = vector<double>( nKT * n_order );
+	R2_long_GF_S = vector<double>( nKT * n_order );
+	R2_outside_GF_C = vector<double>( nKT * n_order );
+	R2_outside_GF_S = vector<double>( nKT * n_order );
 
 	Read_in_correlationfunction(filename);
 
@@ -723,7 +723,7 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 	double * array_KT_pts = new double [n_KT_pts];
 	double * array_Kphi_pts = new double [n_Kphi_pts];
 	double * K_phi = new double [nKphi];
-	double * Kphi_wts = new double [n_Kphi_pts];
+	double * Kphi_wts = new double [nKphi];
 
 	gauss_quadrature(n_Kphi_pts, 1, 0.0, 0.0, 0.0, 2.0*M_PI, K_phi, Kphi_wts);
 
@@ -761,9 +761,9 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 	//int mode: 0 - GF
 	for(int Morder = 0; Morder < n_order; ++Morder)
 	{
-		double cos_mKphi_pts[n_Kphi_pts], sin_mKphi_pts[n_Kphi_pts];
+		double cos_mKphi_pts[nKphi], sin_mKphi_pts[nKphi];
 
-		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		for(int iKphi = 0; iKphi < nKphi; ++iKphi)
 		{
 			cos_mKphi_pts[iKphi] = cos(Morder*(K_phi[iKphi] - plane_psi));
 			sin_mKphi_pts[iKphi] = sin(Morder*(K_phi[iKphi] - plane_psi));
