@@ -11,12 +11,23 @@
 
 using namespace std;
 
-extern vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
-extern vector<vector<double> > CFvals;
+vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
+vector<vector<double> > CFvals;
 
 
 void Get_GF_HBTradii()
 {
+
+	KT_pts = vector<double>(n_KT_pts);
+	Kphi_pts = vector<double>(n_Kphi_pts);
+	qx_pts = vector<double>(nqxpts);
+	qy_pts = vector<double>(nqypts);
+	qz_pts = vector<double>(nqzpts);
+
+	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
+
+	Read_in_correlationfunction("./results/correlfunct3D_Pion_+.dat");
+
 
 	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
 	for (int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)

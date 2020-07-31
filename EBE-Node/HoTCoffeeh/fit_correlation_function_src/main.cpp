@@ -14,8 +14,6 @@
 
 using namespace std;
 
-vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
-vector<vector<double> > CFvals;
 
 int main(int argc, char *argv[])
 {
@@ -31,16 +29,6 @@ int main(int argc, char *argv[])
 	paraRdr->readFromFile("parameters.dat");
 	paraRdr->readFromArguments(argc, argv);
 	paraRdr->echo();*/
-
-	KT_pts = vector<double>(n_KT_pts);
-	Kphi_pts = vector<double>(n_Kphi_pts);
-	qx_pts = vector<double>(nqxpts);
-	qy_pts = vector<double>(nqypts);
-	qz_pts = vector<double>(nqzpts);
-
-	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
-
-	Read_in_correlationfunction("./results/correlfunct3D_Pion_+.dat");
 
 	Get_GF_HBTradii();
 
