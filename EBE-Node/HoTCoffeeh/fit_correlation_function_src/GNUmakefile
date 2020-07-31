@@ -36,7 +36,7 @@ SRCDIR		=	src
 # --------------- Files involved ------------------
 
 ifeq "$(MAIN)" ""
-MAIN		=	cfwr.e
+MAIN		=	fit_correlation_function.e
 endif
 
 SRC		=	main.cpp \

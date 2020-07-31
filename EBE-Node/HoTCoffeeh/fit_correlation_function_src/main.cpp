@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
-	Read_in_correlationfunction("results/correlation_function_3D_Pion_+.dat");
+	Read_in_correlationfunction("./results/correlfunct3D_Pion_+.dat");
 
 	Get_GF_HBTradii();
 
