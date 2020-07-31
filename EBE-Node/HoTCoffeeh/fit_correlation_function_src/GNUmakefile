@@ -42,11 +42,14 @@ endif
 SRC		=	main.cpp \
 			Arsenal.cpp \
 			ParameterReader.cpp \
-			fit.cpp
+			fit.cpp \
+			gauss_quadrature.cpp
 
 INC		= 	fit.h \
 			Arsenal.h \
-			ParameterReader.h
+			ParameterReader.h \
+			gauss_quadrature.h
+
 
 # -------------------------------------------------
 
@@ -94,9 +97,10 @@ install:	$(TARGET)
 		cp $(TARGET) $(INSTPATH)
 
 # --------------- Dependencies -------------------
+gauss_quadrature.cpp: gauss_quadrature.h
 Arsenal.cpp: Arsenal.h
 ParameterReader.cpp: ParameterReader.h Arsenal.h
-fit.cpp: fit.h ParameterReader.h Arsenal.h
+fit.cpp: fit.h ParameterReader.h Arsenal.h gauss_quadrature.h
 
-./main.cpp: ParameterReader.h fit.h Arsenal.h
+./main.cpp: ParameterReader.h fit.h Arsenal.h gauss_quadrature.h
 

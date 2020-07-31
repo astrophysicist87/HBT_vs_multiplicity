@@ -14,8 +14,14 @@ using namespace std;
 vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
 vector<vector<double> > CFvals;
 
+//HBT radii coefficients
+vector<double> R2_side_GF, R2_out_GF, R2_long_GF, R2_outside_GF;
+vector<double> R2_side_GF_C, R2_out_GF_C, R2_long_GF_C, R2_outside_GF_C;
+vector<double> R2_side_GF_S, R2_out_GF_S, R2_long_GF_S, R2_outside_GF_S;
+vector<double> R2_side_err, R2_out_err, R2_long_err, R2_outside_err;
 
-void Get_GF_HBTradii()
+
+void Get_GF_HBTradii(string filename)
 {
 
 	KT_pts = vector<double>(n_KT_pts);
@@ -26,7 +32,7 @@ void Get_GF_HBTradii()
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
-	Read_in_correlationfunction("./results/correlfunct3D_Pion_+.dat");
+	Read_in_correlationfunction(filename);
 
 
 	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
@@ -40,6 +46,9 @@ void Get_GF_HBTradii()
 		else
 			Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );
 	}
+
+	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
+		R2_Fourier_transform(iKT, 0.0);
 
 	return;
 }
@@ -172,7 +181,7 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	cout.precision (5);		                // # of digits in doubles
 
 	int width = 7;		// setw width for output
-	cout << endl << "Best fit results:" << endl;
+	/*cout << endl << "Best fit results:" << endl;
 	cout << "R2o = " << setw (width) << get_fit_results (0, solver_ptr)
 		<< " +/- " << setw (width) << get_fit_err (0, covariance_ptr) << endl;
 	cout << "R2s      = " << setw (width) << get_fit_results (1, solver_ptr)
@@ -184,11 +193,23 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 		<< " +/- " << setw (width) << get_fit_err (3, covariance_ptr) << endl;
     
 	cout << "status = " << gsl_strerror (status) << endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------" << endl;*/
 
 	double chi = gsl_blas_dnrm2(solver_ptr->f);
 	double dof = data_length - n_para;
 	double c = GSL_MAX_DBL(1, chi/sqrt(dof));
+
+	const int iKT_iKphi_idx 		= indexer_KT_Kphi( iKT, iKphi );
+	lambda_Correl[iKT_iKphi_idx] 		= 1.0;
+	lambda_Correl_err[iKT_iKphi_idx] 	= 0.0;
+	R2_out_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(0, solver_ptr))*hbarC*hbarC;
+	R2_side_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(1, solver_ptr))*hbarC*hbarC;
+	R2_long_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(2, solver_ptr))*hbarC*hbarC;
+	R2_outside_GF[iKT_iKphi_idx] 		= get_fit_results(3, solver_ptr)*hbarC*hbarC;
+	R2_out_err[iKT_iKphi_idx] 			= c*get_fit_err(0, covariance_ptr)*hbarC*hbarC;
+	R2_side_err[iKT_iKphi_idx] 			= c*get_fit_err(1, covariance_ptr)*hbarC*hbarC;
+	R2_long_err[iKT_iKphi_idx] 			= c*get_fit_err(2, covariance_ptr)*hbarC*hbarC;
+	R2_outside_err[iKT_iKphi_idx] 		= c*get_fit_err(3, covariance_ptr)*hbarC*hbarC;
 
 	//clean up
 	gsl_matrix_free (covariance_ptr);
@@ -295,11 +316,11 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	double c = GSL_MAX_DBL(1, chi/sqrt(dof));
 
 	int width = 7;		// setw width for output
-	cout << endl << "Best fit results:" << endl;
+	/*cout << endl << "Best fit results:" << endl;
 	cout << "KT = " << KT_pts[iKT] << endl;
 	cout << "Kphi = " << Kphi_pts[iKphi] << endl;
 	cout << "lambda      = " << setw (width)
-		<< get_fit_results (0, solver_ptr)*hbarC*hbarC
+		<< get_fit_results (0, solver_ptr)
 		<< " +/- " << setw (width)
 		<< c*get_fit_err (0, covariance_ptr) << endl;
 	cout << "R2o = " << setw (width)
@@ -321,7 +342,19 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 		<< c*get_fit_err (4, covariance_ptr)*hbarC*hbarC << endl;
     
 	cout << "status = " << gsl_strerror (status) << endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------" << endl;*/
+
+	const int iKT_iKphi_idx 			= indexer_KT_Kphi( iKT, iKphi );
+	lambda_Correl[iKT_iKphi_idx] 		= get_fit_results(0, solver_ptr);
+	lambda_Correl_err[iKT_iKphi_idx] 	= c*get_fit_err(0, covariance_ptr);
+	R2_out_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(1, solver_ptr))*hbarC*hbarC;
+	R2_side_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(2, solver_ptr))*hbarC*hbarC;
+	R2_long_GF[iKT_iKphi_idx] 			= fabs(get_fit_results(3, solver_ptr))*hbarC*hbarC;
+	R2_outside_GF[iKT_iKphi_idx] 		= get_fit_results(4, solver_ptr)*hbarC*hbarC;
+	R2_out_err[iKT_iKphi_idx] 			= c*get_fit_err(1, covariance_ptr)*hbarC*hbarC;
+	R2_side_err[iKT_iKphi_idx] 			= c*get_fit_err(2, covariance_ptr)*hbarC*hbarC;
+	R2_long_err[iKT_iKphi_idx] 			= c*get_fit_err(3, covariance_ptr)*hbarC*hbarC;
+	R2_outside_err[iKT_iKphi_idx] 		= c*get_fit_err(4, covariance_ptr)*hbarC*hbarC;
 
 	//clean up
 	gsl_matrix_free (covariance_ptr);
@@ -660,6 +693,134 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 	Fittarget_correlfun3D_df_withlambda(xvec_ptr, params_ptr, Jacobian_ptr);
 
 	return GSL_SUCCESS;
+}
+
+//Fourier transform of HBT radii once they're calculated
+void R2_Fourier_transform(int jKT, double plane_psi)
+{
+	double * array_KT_pts = new double [n_KT_pts];
+	double * array_Kphi_pts = new double [n_Kphi_pts];
+	double * K_phi = new double [nKphi];
+	double * Kphi_wts = new double [n_Kphi_pts];
+
+	gauss_quadrature(n_Kphi_pts, 1, 0.0, 0.0, 0.0, 2.0*M_PI, K_phi, Kphi_wts);
+
+	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+		array_KT_pts[iKT] = KT_pts[iKT];
+	for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		array_Kphi_pts[iKphi] = Kphi_pts[iKphi];
+
+	double ** arr_R2_side_GF = new double * [n_KT_pts];
+	double ** arr_R2_out_GF = new double * [n_KT_pts];
+	double ** arr_R2_long_GF = new double * [n_KT_pts];
+	double ** arr_R2_outside_GF = new double * [n_KT_pts];
+	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+	{
+		arr_R2_side_GF[iKT] = new double [n_Kphi_pts];
+		arr_R2_out_GF[iKT] = new double [n_Kphi_pts];
+		arr_R2_long_GF[iKT] = new double [n_Kphi_pts];
+		arr_R2_outside_GF[iKT] = new double [n_Kphi_pts];
+		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		{
+			arr_R2_side_GF[iKT][iKphi] = 0.0;
+			arr_R2_out_GF[iKT][iKphi] = 0.0;
+			arr_R2_long_GF[iKT][iKphi] = 0.0;
+			arr_R2_outside_GF[iKT][iKphi] = 0.0;
+		}
+	}
+
+	double * K_T = new double [nKT];
+	double dK_T = (KT_max - KT_min)/(nKT - 1 + 1e-100);
+	for (int i = 0; i < nKT; ++i)
+		K_T[i] = KT_min + i*dK_T;
+
+
+	const int interpMode = 1;
+	//int mode: 0 - GF
+	for(int Morder = 0; Morder < n_order; ++Morder)
+	{
+		double cos_mKphi_pts[n_Kphi_pts], sin_mKphi_pts[n_Kphi_pts];
+
+		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		{
+			cos_mKphi_pts[iKphi] = cos(Morder*(Kphi_pts[iKphi] - plane_psi));
+			sin_mKphi_pts[iKphi] = sin(Morder*(Kphi_pts[iKphi] - plane_psi));
+		}
+
+		double temp_sum_side_cos = 0.0,     temp_sum_side_sin = 0.0;
+		double temp_sum_out_cos = 0.0,      temp_sum_out_sin = 0.0;
+		double temp_sum_outside_cos = 0.0,  temp_sum_outside_sin = 0.0;
+		double temp_sum_long_cos = 0.0,     temp_sum_long_sin = 0.0;
+		double temp_sum_sidelong_cos = 0.0, temp_sum_sidelong_sin = 0.0;
+		double temp_sum_outlong_cos = 0.0,  temp_sum_outlong_sin = 0.0;
+
+		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		{
+			double local_R2s = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_side_GF,
+												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+			double local_R2o = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_out_GF,
+												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+			double local_R2os = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_outside_GF,
+												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+			double local_R2l = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_long_GF,
+												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+
+			temp_sum_side_cos += local_R2s*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_side_sin += local_R2s*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_out_cos += local_R2o*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_out_sin += local_R2o*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_outside_cos += local_R2os*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_outside_sin += local_R2os*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_long_cos += local_R2l*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_long_sin += local_R2l*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+		}
+
+		R2_side_GF_C[jKT*n_order + Morder] = temp_sum_side_cos/(2.*M_PI);
+		R2_side_GF_S[jKT*n_order + Morder] = temp_sum_side_sin/(2.*M_PI);
+		R2_out_GF_C[jKT*n_order + Morder] = temp_sum_out_cos/(2.*M_PI);
+		R2_out_GF_S[jKT*n_order + Morder] = temp_sum_out_sin/(2.*M_PI);
+		R2_outside_GF_C[jKT*n_order + Morder] = temp_sum_outside_cos/(2.*M_PI);
+		R2_outside_GF_S[jKT*n_order + Morder] = temp_sum_outside_sin/(2.*M_PI);
+		R2_long_GF_C[jKT*n_order + Morder] = temp_sum_long_cos/(2.*M_PI);
+		R2_long_GF_S[jKT*n_order + Morder] = temp_sum_long_sin/(2.*M_PI);
+
+		if (Morder == 0)
+		{
+			cout << K_T[jKT] << "   " << Morder << "   "
+				<< R2_side_GF_C[jKT*n_order + Morder] << "   "
+				<< R2_side_GF_S[jKT*n_order + Morder] << "   "
+				<< R2_out_GF_C[jKT*n_order + Morder] << "   "
+				<< R2_out_GF_S[jKT*n_order + Morder] << "   "
+				<< R2_long_GF_C[jKT*n_order + Morder] << "   "
+				<< R2_long_GF_S[jKT*n_order + Morder] << "   "
+				<< R2_outside_GF_C[jKT*n_order + Morder] << "   "
+				<< R2_outside_GF_S[jKT*n_order + Morder] << endl;
+		}
+
+	}
+
+	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+	{
+		delete [] arr_R2_side_GF[iKT];
+		delete [] arr_R2_out_GF[iKT];
+		delete [] arr_R2_long_GF[iKT];
+		delete [] arr_R2_outside_GF[iKT];
+	}
+
+	delete [] arr_R2_side_GF;
+	delete [] arr_R2_out_GF;
+	delete [] arr_R2_long_GF;
+	delete [] arr_R2_outside_GF;
+
+	delete [] array_KT_pts;
+	delete [] array_Kphi_pts;
+	delete [] K_T;
+	delete [] K_phi;
+	delete [] Kphi_wts;
+
+
+
+	return;
 }
 
 //End of file

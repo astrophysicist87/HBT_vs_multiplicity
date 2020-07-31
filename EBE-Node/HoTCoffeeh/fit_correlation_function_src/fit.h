@@ -22,7 +22,7 @@
 
 #include "ParameterReader.h"
 #include "Arsenal.h"
-
+#include "gauss_quadrature.h"
 
 struct Correlationfunction3D_data
 {
@@ -44,13 +44,21 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 const double hbarC = 0.19733;
 
 const bool USE_LAMBDA = true;
-const int VERBOSE = 10;
+const int VERBOSE = 0;
 
 const int n_KT_pts = 15;
 const int n_Kphi_pts = 36;
 const int nqxpts = 7;
 const int nqypts = 7;
 const int nqzpts = 7;
+
+const int n_order = 4;
+
+const int nKT = 101;
+const int nKphi = 48;
+const doubleKTmin = 0.01;
+const doubleKTmax = 1.01;
+
 
 const double fit_tolerance = 1e-6;
 const int fit_max_iterations = 100;
@@ -92,6 +100,7 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 int print_fit_state_3D (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 int print_fit_state_3D_withlambda (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int iKT, int iKphi);
+void R2_Fourier_transform(int jKT, double plane_psi);
 
 // End of file
 

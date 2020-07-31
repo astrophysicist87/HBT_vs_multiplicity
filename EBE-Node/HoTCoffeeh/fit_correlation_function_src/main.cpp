@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	paraRdr->readFromArguments(argc, argv);
 	paraRdr->echo();*/
 
-	Get_GF_HBTradii();
+	Get_GF_HBTradii("./results/correlfunct3D_Pion_+.dat");
 
 	return 0;
 }
