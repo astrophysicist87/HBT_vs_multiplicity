@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 	cout << endl << "**********************************************************" << endl << endl;
 	
 	// Read-in parameters
-	ParameterReader * paraRdr = new ParameterReader;
+	/*ParameterReader * paraRdr = new ParameterReader;
 	paraRdr->readFromFile("parameters.dat");
 	paraRdr->readFromArguments(argc, argv);
-	paraRdr->echo();
+	paraRdr->echo();*/
 
 	Read_in_correlationfunction("results/correlation_function_3D_Pion_+.dat");
 

@@ -86,7 +86,7 @@ void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi)
 	Correlfun3D_data.sigma.resize(data_length);
 
 	int idx = 0;
-	double ckp = cos(KPhi_pts[iKphi]), skp = sin(KPhi_pts[iKphi]);
+	double ckp = cos(Kphi_pts[iKphi]), skp = sin(Kphi_pts[iKphi]);
 	for (int i = 0; i < nqxpts; i++)
 	for (int j = 0; j < nqypts; j++)
 	for (int k = 0; k < nqzpts; k++)
@@ -211,7 +211,7 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 	Correlfun3D_data.sigma.resize(data_length);
 
 	int idx = 0;
-	double ckp = cos(KPhi_pts[iKphi]), skp = sin(KPhi_pts[iKphi]);
+	double ckp = cos(Kphi_pts[iKphi]), skp = sin(Kphi_pts[iKphi]);
 	for (int i = 0; i < nqxpts; i++)
 	for (int j = 0; j < nqypts; j++)
 	for (int k = 0; k < nqzpts; k++)
@@ -376,7 +376,7 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     gsl_matrix * T_inverse_gsl = gsl_matrix_alloc (dim, dim);
     gsl_permutation * perm = gsl_permutation_alloc (dim);
 
-	double ckp = cos(KPhi_pts[iKphi]), skp = sin(KPhi_pts[iKphi]);
+	double ckp = cos(Kphi_pts[iKphi]), skp = sin(Kphi_pts[iKphi]);
 	double CF_err = 1e-3;
 	for (int i = 0; i < nqxpts; i++)
 	for (int j = 0; j < nqypts; j++)
@@ -446,8 +446,8 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     R_l = sqrt(results[3])*hbarC;
     // the cross term is not necessary positive
     R_os = results[4]*hbarC*hbarC;
-    R_ol = results[5]*hbarC*hbarC;
-    R_sl = results[6]*hbarC*hbarC;
+    //R_ol = results[5]*hbarC*hbarC;
+    //R_sl = results[6]*hbarC*hbarC;
     cout << "lambda = " << lambda << endl;
     cout << "R_o = " << R_o << " fm, R_s = " << R_s << " fm, R_l = " << R_l << " fm" << endl;
     cout << "R_os^2 = " << R_os << " fm^2." << endl;
