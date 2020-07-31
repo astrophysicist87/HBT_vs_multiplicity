@@ -765,8 +765,8 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 
 		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		{
-			cos_mKphi_pts[iKphi] = cos(Morder*(Kphi_pts[iKphi] - plane_psi));
-			sin_mKphi_pts[iKphi] = sin(Morder*(Kphi_pts[iKphi] - plane_psi));
+			cos_mKphi_pts[iKphi] = cos(Morder*(K_phi[iKphi] - plane_psi));
+			sin_mKphi_pts[iKphi] = sin(Morder*(K_phi[iKphi] - plane_psi));
 		}
 
 		double temp_sum_side_cos = 0.0,     temp_sum_side_sin = 0.0;
