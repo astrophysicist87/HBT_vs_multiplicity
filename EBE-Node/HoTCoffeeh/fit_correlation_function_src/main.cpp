@@ -14,6 +14,9 @@
 
 using namespace std;
 
+vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
+vector<vector<double> > CFvals;
+
 int main(int argc, char *argv[])
 {
 	cout << "**********************************************************" << endl;
