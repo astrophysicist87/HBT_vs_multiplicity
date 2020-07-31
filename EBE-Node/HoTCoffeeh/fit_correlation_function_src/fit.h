@@ -65,12 +65,12 @@ inline int indexer_qx_qy_qz( int iqx, int iqy, int iqz )
 	return ( (iqx * nqypts + iqy) * nqzpts + iqz );
 }
 
-inline double CorrelationFunction::get_fit_results(int i, gsl_multifit_fdfsolver * solver_ptr)
+inline double get_fit_results(int i, gsl_multifit_fdfsolver * solver_ptr)
 {
 	return gsl_vector_get (solver_ptr->x, i);
 }
 
-inline double CorrelationFunction::get_fit_err (int i, gsl_matrix * covariance_ptr)
+inline double get_fit_err (int i, gsl_matrix * covariance_ptr)
 {
 	return sqrt (gsl_matrix_get (covariance_ptr, i, i));
 }
