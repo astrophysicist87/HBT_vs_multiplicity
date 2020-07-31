@@ -33,11 +33,13 @@ void Get_GF_HBTradii(string filename)
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
+	lambda_Correl = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_side_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_out_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_long_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_outside_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 
+	lambda_Correl_err = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_side_err = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_out_err = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_long_err = vector<double>( n_KT_pts * n_Kphi_pts );
