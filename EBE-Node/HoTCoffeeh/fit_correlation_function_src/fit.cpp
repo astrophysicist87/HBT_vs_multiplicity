@@ -290,28 +290,38 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	cout.setf (ios::fixed, ios::floatfield);	// output in fixed format
 	cout.precision (5);		                // # of digits in doubles
 
+	double chi = gsl_blas_dnrm2(solver_ptr->f);
+	double dof = data_length - n_para;
+	double c = GSL_MAX_DBL(1, chi/sqrt(dof));
+
 	int width = 7;		// setw width for output
 	cout << endl << "Best fit results:" << endl;
 	cout << "KT = " << KT_pts[iKT] << endl;
 	cout << "Kphi = " << Kphi_pts[iKphi] << endl;
-	cout << "lambda      = " << setw (width) << get_fit_results (0, solver_ptr)
-		<< " +/- " << setw (width) << get_fit_err (0, covariance_ptr) << endl;
-	cout << "R2o = " << setw (width) << get_fit_results (1, solver_ptr)
-		<< " +/- " << setw (width) << get_fit_err (1, covariance_ptr) << endl;
-	cout << "R2s      = " << setw (width) << get_fit_results (2, solver_ptr)
-		<< " +/- " << setw (width) << get_fit_err (2, covariance_ptr) << endl;
-	cout << "R2l      = " << setw (width) << get_fit_results (3, solver_ptr)
-		<< " +/- " << setw (width) << get_fit_err (3, covariance_ptr) << endl;
+	cout << "lambda      = " << setw (width)
+		<< get_fit_results (0, solver_ptr)*hbarC*hbarC
+		<< " +/- " << setw (width)
+		<< c*get_fit_err (0, covariance_ptr) << endl;
+	cout << "R2o = " << setw (width)
+		<< get_fit_results (1, solver_ptr)*hbarC*hbarC
+		<< " +/- " << setw (width)
+		<< c*get_fit_err (1, covariance_ptr)*hbarC*hbarC << endl;
+	cout << "R2s      = " << setw (width)
+		<< get_fit_results (2, solver_ptr)*hbarC*hbarC
+		<< " +/- " << setw (width)
+		<< c*get_fit_err (2, covariance_ptr)*hbarC*hbarC << endl;
+	cout << "R2l      = " << setw (width)
+		<< get_fit_results (3, solver_ptr)*hbarC*hbarC
+		<< " +/- " << setw (width)
+		<< c*get_fit_err (3, covariance_ptr)*hbarC*hbarC << endl;
   
-	cout << "R2os      = " << setw (width) << get_fit_results (4, solver_ptr)
-		<< " +/- " << setw (width) << get_fit_err (4, covariance_ptr) << endl;
+	cout << "R2os      = " << setw (width)
+		<< get_fit_results (4, solver_ptr)*hbarC*hbarC
+		<< " +/- " << setw (width)
+		<< c*get_fit_err (4, covariance_ptr)*hbarC*hbarC << endl;
     
 	cout << "status = " << gsl_strerror (status) << endl;
 	cout << "--------------------------------------------------------------------" << endl;
-
-	double chi = gsl_blas_dnrm2(solver_ptr->f);
-	double dof = data_length - n_para;
-	double c = GSL_MAX_DBL(1, chi/sqrt(dof));
 
 	//clean up
 	gsl_matrix_free (covariance_ptr);

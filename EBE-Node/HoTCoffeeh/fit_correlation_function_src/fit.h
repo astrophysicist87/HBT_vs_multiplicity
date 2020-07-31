@@ -44,7 +44,7 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 const double hbarC = 0.19733;
 
 const bool USE_LAMBDA = true;
-const bool VERBOSE = 10;
+const int VERBOSE = 10;
 
 const int n_KT_pts = 15;
 const int n_Kphi_pts = 36;
