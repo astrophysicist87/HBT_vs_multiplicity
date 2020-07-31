@@ -15,6 +15,7 @@ vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
 vector<vector<double> > CFvals;
 
 //HBT radii coefficients
+vector<double> lambda_Correl, lambda_Correl_err;
 vector<double> R2_side_GF, R2_out_GF, R2_long_GF, R2_outside_GF;
 vector<double> R2_side_GF_C, R2_out_GF_C, R2_long_GF_C, R2_outside_GF_C;
 vector<double> R2_side_GF_S, R2_out_GF_S, R2_long_GF_S, R2_outside_GF_S;
@@ -32,6 +33,25 @@ void Get_GF_HBTradii(string filename)
 
 	CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts, 0.0 ) );
 
+	R2_side_GF = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_out_GF = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_long_GF = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_outside_GF = vector<double>( n_KT_pts * n_Kphi_pts );
+
+	R2_side_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_out_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_long_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_outside_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
+
+	R2_side_GF_C = vector<double>( n_KT_pts * n_order );
+	R2_side_GF_S = vector<double>( n_KT_pts * n_order );
+	R2_out_GF_C = vector<double>( n_KT_pts * n_order );
+	R2_out_GF_S = vector<double>( n_KT_pts * n_order );
+	R2_long_GF_C = vector<double>( n_KT_pts * n_order );
+	R2_long_GF_S = vector<double>( n_KT_pts * n_order );
+	R2_outside_GF_C = vector<double>( n_KT_pts * n_order );
+	R2_outside_GF_S = vector<double>( n_KT_pts * n_order );
+
 	Read_in_correlationfunction(filename);
 
 
@@ -47,7 +67,7 @@ void Get_GF_HBTradii(string filename)
 			Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );
 	}
 
-	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
+	for (int iKT = 0; iKT < nKT; ++iKT)
 		R2_Fourier_transform(iKT, 0.0);
 
 	return;

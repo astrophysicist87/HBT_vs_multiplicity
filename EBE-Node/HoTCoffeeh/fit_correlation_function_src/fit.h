@@ -56,8 +56,8 @@ const int n_order = 4;
 
 const int nKT = 101;
 const int nKphi = 48;
-const double KTmin = 0.01;
-const double KTmax = 1.01;
+const double KT_min = 0.01;
+const double KT_max = 1.01;
 
 
 const double fit_tolerance = 1e-6;
