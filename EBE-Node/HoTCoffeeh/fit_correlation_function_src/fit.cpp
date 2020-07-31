@@ -227,9 +227,6 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 	for (int j = 0; j < nqypts; j++)
 	for (int k = 0; k < nqzpts; k++)
 	{
-		cout << idx << "   " << i << "   " << j << "   "
-			<< Correlfun3D_data.q_o.size() << "   "
-			<< qx_pts.size() << "   " << qy_pts.size() << endl;
 		Correlfun3D_data.q_o[idx] = qx_pts[i] * ckp + qy_pts[j] * skp;
 		Correlfun3D_data.q_s[idx] = -qx_pts[i] * skp + qy_pts[j] * ckp;
 		Correlfun3D_data.q_l[idx] = qz_pts[k];
