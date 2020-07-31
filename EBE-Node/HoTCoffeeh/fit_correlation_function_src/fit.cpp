@@ -7,6 +7,7 @@
 #include<vector>
 #include<stdio.h>
 
+#include "fit.h"
 
 using namespace std;
 
