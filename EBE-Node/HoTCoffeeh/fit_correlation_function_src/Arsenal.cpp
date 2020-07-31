@@ -24,7 +24,7 @@ unsigned long int random_seed()
   unsigned long int *seed_ptr = &seed;
 
   ifstream dev_urandom ("/dev/urandom", ios::in | ios::binary);
-  
+
   dev_urandom.read((char *) seed_ptr, sizeof (long int));
 
   dev_urandom.close();
@@ -87,10 +87,10 @@ void stratify_npts(double a, double b, int n1, int npts, double * x)
 	if (a < 0.0) a *= -1.;
 	if (b < 0.0) b *= -1.;
 	int m = npts - n1;
-	
+
 	double Delta_x_1 = 2.*a / double(n1-1);
 	double Delta_x_2 = 2.*(b-a) / (double)m;
-	
+
 	for (int i = 0; i < (m/2); i++)
 	{
 		x[i] = -b + (double)i * Delta_x_2;
@@ -140,24 +140,213 @@ void scalepoints(double * x, double a, double b, double scale, int n)
 	return;
 }
 
-static int wt[16][16] = {
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-{0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-{-3, 0, 0, 3, 0, 0, 0, 0,-2, 0, 0,-1, 0, 0, 0, 0},
-{2, 0, 0,-2, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0},
-{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-{0, 0, 0, 0,-3, 0, 0, 3, 0, 0, 0, 0,-2, 0, 0,-1},
-{0, 0, 0, 0, 2, 0, 0,-2, 0, 0, 0, 0, 1, 0, 0, 1},
-{-3, 3, 0, 0,-2,-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-{0, 0, 0, 0, 0, 0, 0, 0,-3, 3, 0, 0,-2,-1, 0, 0},
-{9,-9, 9,-9, 6, 3,-3,-6, 6,-6,-3, 3, 4, 2, 1, 2},
-{-6, 6,-6, 6,-4,-2, 2, 4,-3, 3, 3,-3,-2,-1,-1,-2},
-{2,-2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-{0, 0, 0, 0, 0, 0, 0, 0, 2,-2, 0, 0, 1, 1, 0, 0},
-{-6, 6,-6, 6,-3,-3, 3, 3,-4, 4, 2,-2,-2,-2,-1,-1},
-{4,-4, 4,-4, 2, 2,-2,-2, 2,-2,-2, 2, 1, 1, 1, 1}
-};
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+//**********************************************************************
+string toLower(string str)
+// Convert all character in string to lower case
+{
+  string tmp = str;
+  for (string::iterator it=tmp.begin(); it<=tmp.end(); it++) *it = tolower(*it);
+  return tmp;
+}
+
+//**********************************************************************
+string trim(string str)
+// Convert all character in string to lower case
+{
+  string tmp = str;
+  long number_of_char = 0;
+  for (size_t ii=0; ii<str.size(); ii++)
+    if (str[ii]!=' ' && str[ii]!='\t')
+    {
+      tmp[number_of_char]=str[ii];
+      number_of_char++;
+    }
+  tmp.resize(number_of_char);
+  return tmp;
+}
+
+
+//**********************************************************************
+vector<double> stringToDoubles(string str)
+// Return a vector of doubles from the string "str". "str" should
+// be a string containing a line of data.
+{
+  stringstream sst(str+" "); // add a blank at the end so the last data will be read
+  vector<double> valueList;
+  double val;
+  sst >> val;
+  while (sst.eof()==false)
+  {
+    valueList.push_back(val);
+    sst >> val;
+  }
+  return valueList;
+}
+
+
+//**********************************************************************
+double stringToDouble(string str)
+// Return the 1st doubles number read from the string "str". "str" should be a string containing a line of data.
+{
+  stringstream sst(str+" "); // add a blank at the end so the last data will be read
+  double val;
+  sst >> val;
+  return val;
+}
+
+
+
+//**********************************************************************
+vector< vector<double>* >* readBlockData(istream &stream_in)
+// Return a nested vector of vector<double>* object. Each column of data
+// is stored in a vector<double> array and the collection is the returned
+// object. Data are read from the input stream "stream_in". Each line
+// of data is processed by the stringToDoubles function. Note that the
+// data block is dynamicall allocated and is not release within the
+// function.
+// Note that all "vectors" are "new" so don't forget to delete them.
+// Warning that also check if the last line is read correctly. Some files
+// are not endded properly and the last line is not read.
+{
+  vector< vector<double>* >* data;
+  vector<double> valuesInEachLine;
+  long lineSize;
+  long i; // temp variable
+  char buffer[99999]; // each line should be shorter than this
+
+  // first line:
+  stream_in.getline(buffer,99999);
+  valuesInEachLine = stringToDoubles(buffer);
+  // see if it is empty:
+  lineSize = valuesInEachLine.size();
+  if (lineSize==0)
+  {
+    // empty:
+    cout << "readBlockData warning: input stream has empty first row; no data read" << endl;
+    return NULL;
+  }
+  else
+  {
+    // not empty; allocate memory:
+    data = new vector< vector<double>* >(lineSize);
+    for (i=0; i<lineSize; i++) (*data)[i] = new vector<double>;
+  }
+
+  // rest of the lines:
+  while (stream_in.eof()==false)
+  {
+    // set values:
+    for (i=0; i<lineSize; i++) (*(*data)[i]).push_back(valuesInEachLine[i]);
+    // next line:
+    stream_in.getline(buffer,99999);
+    valuesInEachLine = stringToDoubles(buffer);
+  }
+
+  return data;
+}
+
+
+//**********************************************************************
+void releaseBlockData(vector< vector<double>* >* data)
+// Use to delete the data block allocated by readBlockData function.
+{
+  if (data)
+  {
+    for (unsigned long i=0; i<data->size(); i++) delete (*data)[i];
+    delete data;
+  }
+}
+
+//**********************************************************************
+void display_logo(int which)
+// Personal amusement.
+{
+  switch (which)
+  {
+    case 1:
+    cout << " ____  ____	    _			 " << endl;
+    cout << "|_	  ||   _|	   (_)			 " << endl;
+    cout << "  | |__| |	   .---.   __	 _ .--.	   ____	 " << endl;
+    cout << "  |  __  |	  / /__\\\\ [  |  [ `.-. |  [_	 ] " << endl;
+    cout << " _| |  | |_  | \\__.,  | |	  | | | |   .' /_ " << endl;
+    cout << "|____||____|  '.__.' [___] [___||__] [_____]" << endl;
+    cout << "						 " << endl;
+    break;
+
+    case 2:
+    cout << ":::    ::: :::::::::: ::::::::::: ::::    ::: :::::::::" << endl;
+    cout << ":+:    :+: :+:	       :+:     :+:+:   :+:	:+: " << endl;
+    cout << "+:+    +:+ +:+	       +:+     :+:+:+  +:+     +:+  " << endl;
+    cout << "+#++:++#++ +#++:++#       +#+     +#+ +:+ +#+    +#+   " << endl;
+    cout << "+#+    +#+ +#+	       +#+     +#+  +#+#+#   +#+    " << endl;
+    cout << "#+#    #+# #+#	       #+#     #+#   #+#+#  #+#	    " << endl;
+    cout << "###    ### ########## ########### ###    #### #########" << endl;
+    break;
+
+    case 3:
+    cout << " __  __	 ______	    __	   __	__     _____	" << endl;
+    cout << "/\\ \\_\\ \\   /\\	 ___\\	 /\\ \\	  /\\ '-.\\ \\	 /\\___	 \\  " << endl;
+    cout << "\\ \\  __ \\  \\ \\  __\\	 \\ \\ \\  \\ \\ \\-.  \\  \\/_/  /__ " << endl;
+    cout << " \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_\\  \\ \\_\\\\'\\_\\	 /\\_____\\" << endl;
+    cout << "  \\/_/\\/_/   \\/_____/	\\/_/	\\/_/ \\/_/   \\/_____/" << endl;
+    break;
+
+  }
+
+}
+
+//**********************************************************************
+void print_progressbar(double percentage, int length, string symbol)
+// Print out a progress bar with the given percentage. Use a negative value to reset the progress bar.
+{
+  static int status=0;
+  static int previous_stop=0;
+
+  if (percentage<0)
+  {
+    // reset
+    status = 0;
+    previous_stop = 0;
+  }
+
+  // initializing progressbar
+  if (status==0)
+  {
+    cout << "\r";
+    cout << "[";
+    for (int i=1; i<=length; i++) cout << " ";
+    cout << "]";
+    cout << "\r";
+    cout << "[";
+  }
+
+  // plot status
+  int stop;
+  if (percentage>=0.99) stop=0.99*length;
+  else stop = percentage*length;
+  for (int i=previous_stop; i<stop; i++) cout << symbol;
+  if (previous_stop<stop) previous_stop=stop;
+
+  // simulate a rotating bar
+  if (status==0) cout << "-";
+  switch (status)
+  {
+    case 1: cout << "\\"; break;
+    case 2: cout << "|"; break;
+    case 3: cout << "/"; break;
+    case 4: cout << "-"; break;
+  }
+  cout << "\b";
+  status++;
+  if (status==5) status=1;
+  cout.flush();
+}
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //**********************************************************************
@@ -175,7 +364,8 @@ long binarySearch(double * A, int length, double value, bool skip_out_of_range /
    if(value > A[idx_f])
    {
       if (verbose) cerr << "binarySearch: desired value is too large, exceeding the end of the table: value = " << value << " and A[idx_f] = " << A[idx_f] << endl;
-      if (skip_out_of_range) return -1;
+      //if (skip_out_of_range) return -1;
+      if (skip_out_of_range) return length;
       exit(1);
    }
    if(value < A[idx_i])
@@ -190,12 +380,12 @@ long binarySearch(double * A, int length, double value, bool skip_out_of_range /
    {
      if(A[idx] < value)
      {
-        idx_i = idx;
+	idx_i = idx;
 		//if (verbose) cerr << "idx_i = " << idx_i << endl;
      }
      else
      {
-        idx_f = idx;
+	idx_f = idx;
 		//if (verbose) cerr << "idx_f = " << idx_f << endl;
      }
      idx = (int) floor((idx_f+idx_i)/2.);
@@ -204,325 +394,7 @@ long binarySearch(double * A, int length, double value, bool skip_out_of_range /
    return(idx_i);
 }
 
-
-void get_1D_derivatives(double * x, double * f, double * derivatives, int length, double default_edge_fill = 0.0)
-{
-	for (int i = 1; i <= length-2; i++)
-		derivatives[i] = (f[i+1] - f[i-1]) / (x[i+1] - x[i-1]);	//use centered differencing
-	derivatives[0] = default_edge_fill;
-	derivatives[length-1] = default_edge_fill;
-
-	return;
-}
-
-void get_2D_derivatives(double * x, double * y, double ** f, double ** f1, double ** f2, double ** f12, int x_length, int y_length, double default_edge_fill = 0.0)
-{
-	//for the points not on the edge, get derivatives from surrounding points
-	for (int ix = 1; ix <= x_length-2; ix++)
-	for (int iy = 1; iy <= y_length-2; iy++)
-	{//use centered differencing
-		f1[ix][iy] = (f[ix+1][iy] - f[ix-1][iy]) / (x[ix+1] - x[ix-1]);
-		f2[ix][iy] = (f[ix][iy+1] - f[ix][iy-1]) / (y[iy+1] - y[iy-1]);
-		f12[ix][iy] = (f[ix+1][iy+1] - f[ix+1][iy-1] - f[ix-1][iy+1] + f[ix-1][iy-1]) / ((x[ix+1] - x[ix-1]) * (y[iy+1] - y[iy-1]));
-	}
-	for (int ix = 0; ix <= x_length-1; ix++)
-	{
-		f1[ix][0] = default_edge_fill;
-		f2[ix][0] = default_edge_fill;
-		f12[ix][0] = default_edge_fill;
-		f1[ix][y_length-1] = default_edge_fill;
-		f2[ix][y_length-1] = default_edge_fill;
-		f12[ix][y_length-1] = default_edge_fill;
-	}
-	for (int iy = 0; iy <= y_length-1; iy++)
-	{
-		f1[0][iy] = default_edge_fill;
-		f2[0][iy] = default_edge_fill;
-		f12[0][iy] = default_edge_fill;
-		f1[x_length-1][iy] = default_edge_fill;
-		f2[x_length-1][iy] = default_edge_fill;
-		f12[x_length-1][iy] = default_edge_fill;
-	}
-
-	return;
-}
-
-void bcucof(double * y, double * y1, double * y2, double * y12, double d1, double d2, double ** c)
-{
-//Given arrays y[0..3], y1[0..3], y2[0..3], and y12[0..3], containing the function, gradients,
-//and cross-derivative at the four grid points of a rectangular grid cell (numbered counterclockwise
-//from the lower left), and given d1 and d2, the length of the grid cell in the 1 and 2 directions, this
-//routine returns the table c[0..3][0..3] that is used by routine bcuint for bicubic interpolation.
-	int l,k,j,i;
-	double xx, d1d2=d1*d2;
-	double * cl = new double [16];
-	double * x = new double [16];
-	for (i=0;i<4;i++)
-	{
-		x[i]=y[i];
-		x[i+4]=y1[i]*d1;
-		x[i+8]=y2[i]*d2;
-		x[i+12]=y12[i]*d1d2;
-	}
-	for (i=0;i<16;i++)
-	{
-		xx=0.0;
-		for (k=0;k<16;k++) xx += wt[i][k]*x[k];
-		cl[i]=xx;
-	}
-	l=0;
-	for (i=0;i<4;i++)
-	for (j=0;j<4;j++)
-		c[i][j]=cl[l++];
-
-	return;
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////
-void bcuint(double * y, double * y1, double * y2, double * y12,
-double x1l, double x1u, double x2l, double x2u,
-double x1, double x2, double &ansy, double &ansy1, double &ansy2)
-{
-//Bicubic interpolation within a grid square. Input quantities are y,y1,y2,y12 (as described in
-//bcucof); x1l and x1u, the lower and upper coordinates of the grid square in the 1 direction;
-//x2l and x2u likewise for the 2 direction; and x1,x2, the coordinates of the desired point for
-//the interpolation. The interpolated function value is returned as ansy, and the interpolated
-//gradient values as ansy1 and ansy2. This routine calls bcucof.
-	int i;
-	double t,u, d1=x1u-x1l, d2=x2u-x2l;
-	//MatDoub c(4,4);
-	double ** c = new double * [4];
-	for (int ic = 0; ic<4; ic++)
-		c[ic] = new double [4];
-	bcucof(y,y1,y2,y12,d1,d2,c);
-	//Get the c’s.
-	if (x1u == x1l || x2u == x2l)
-		throw("Bad input in routine bcuint");
-	t=(x1-x1l)/d1;
-	//Equation (3.6.4).
-	u=(x2-x2l)/d2;
-	ansy=0.0;
-	ansy2=0.0;
-	ansy1=0.0;
-	for (i=3;i>=0;i--)
-	{
-		//Equation (3.6.6).
-		ansy=t*ansy+((c[i][3]*u+c[i][2])*u+c[i][1])*u+c[i][0];
-		ansy2=t*ansy2+(3.0*c[i][3]*u+2.0*c[i][2])*u+c[i][1];
-		ansy1=u*ansy1+(3.0*c[3][i]*t+2.0*c[2][i])*t+c[1][i];
-	}
-	//for (int ic = 0; ic<4; ic++)
-	//for (int icp = 0; icp<4; icp++)
-	//	cout << "DEBUG: " << ic << "   " << icp << "   " << c[ic][icp] << endl;
-	ansy1 /= d1;
-	ansy2 /= d2;
-
-	return;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-void ratint(double xa[], double ya[], int n, double x, double *y, double *dy)
-{
-	int m,i,ns=1;
-	double w,t,hh,h,dd,*c,*d;
-	c = new double [n];
-	d = new double [n];
-	hh=fabs(x-xa[0]);
-	for (i=0;i<n;i++)
-	{
-		h=fabs(x-xa[i]);
-		if (h == 0.0)
-		{
-			*y=ya[i];
-			*dy=0.0;
-			return;
-		}
-		else if (h < hh)
-		{
-			ns=i+1;
-			hh=h;
-		}
-		c[i]=ya[i];
-		d[i]=ya[i]+TINY;
-	}
-	*y=ya[(ns--) - 1];
-	for (m=1;m<n;m++)
-	{
-		for (i=1;i<=n-m;i++)
-		{
-			w=c[i]-d[i-1];
-			h=xa[i+m-1]-x;
-			t=(xa[i-1]-x)*d[i-1]/h;
-			dd=t-c[i];
-			if (dd == 0.0) cerr << "Error in routine ratint" << endl;
-			dd=w/dd;
-			d[i-1]=c[i]*dd;
-			c[i-1]=t*dd;
-		}
-		*y += (*dy=(2*ns < (n-m) ? c[ns] : d[(ns--) - 1]));
-	}
-	
-	delete [] c;
-	delete [] d;
-
-	return;
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-double ratint(vector<double> & xa, vector<double> & ya, double x, double *dy)
-{
-	double y = 0.0;
-	int m,i,ns=1;
-	const int n = xa.size();
-	double w,t,hh,h,dd;
-	//double *c,*d;
-	//c = new double [n];
-	//d = new double [n];
-	double c[n];
-	double d[n];
-	hh=fabs(x-xa[0]);
-	for (i=0;i<n;i++)
-	{
-		h=fabs(x-xa[i]);
-		if (h == 0.0)
-		{
-//			*y=ya[i];
-			y=ya[i];
-			*dy=0.0;
-			return(y);
-		}
-		else if (h < hh)
-		{
-			ns=i+1;
-			hh=h;
-		}
-		c[i]=ya[i];
-		d[i]=ya[i]+TINY;
-	}
-//	*y=ya[(ns--) - 1];
-	y=ya[(ns--) - 1];
-	for (m=1;m<n;m++)
-	{
-		for (i=1;i<=n-m;i++)
-		{
-			w=c[i]-d[i-1];
-			h=xa[i+m-1]-x;
-			t=(xa[i-1]-x)*d[i-1]/h;
-			dd=t-c[i];
-			if (dd == 0.0) cerr << "Error in routine ratint" << endl;
-			dd=w/dd;
-			d[i-1]=c[i]*dd;
-			c[i-1]=t*dd;
-		}
-//		*y += (*dy=(2*ns < (n-m) ? c[ns] : d[(ns--) - 1]));
-		y += (*dy=(2*ns < (n-m) ? c[ns] : d[(ns--) - 1]));
-	}
-	
-	//delete [] c;
-	//delete [] d;
-
-	return(y);
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-
-void polint(double xa[], double ya[], long n, double x, double *y, double *dy)
-//Given arrays xa[1..n] and ya[1..n], and given a value x, this routine returns a value y, and
-//an error estimate dy. If P(x) is the polynomial of degree n − 1 such that P(xai) = yai
-//, i = 1,...,n, then the returned value y = P(x).
-{
-	int i,m,ns=1;
-	double den,dif,dift,ho,hp,w;
-	double * c = new double [n];
-	double * d = new double [n];
-	dif=fabs(x-xa[0]);
-	//c=vector(1,n);
-	//d=vector(1,n);
-	for (i=1;i<=n;i++)
-	{ //Here we ﬁnd the index ns of the closest table entry,
-		if ( (dift=fabs(x-xa[i-1])) < dif)
-		{
-			ns=i;
-			dif=dift;
-		}
-		c[i-1]=ya[i-1]; //and initialize the tableau of c’s and d’s.
-		d[i-1]=ya[i-1];
-	}
-	*y=ya[(ns--)-1]; //This is the initial approximation to y.
-	for (m=1;m<n;m++)
-	{ //For each column of the tableau,
-		for (i=1;i<=n-m;i++)
-		{ //we loop over the current c’s and d’s and update them.
-			ho=xa[i-1]-x;
-			hp=xa[i+m-1]-x;
-			w=c[i]-d[i-1];
-			if ( (den=ho-hp) == 0.0) cerr << "Error in routine polint" << endl;
-			//This error can occur only if two input xa’s are (to within roundoff) identical.
-			den=w/den;
-			d[i-1]=hp*den; //Here the c’s and d’s are updated.
-			c[i-1]=ho*den;
-		}
-		*y += (*dy=(2*ns < (n-m) ? c[ns+1-1] : d[(ns--)-1]));
-		//After each column in the tableau is completed, we decide which correction, c or d,
-		//we want to add to our accumulating value of y, i.e., which path to take through the
-		//tableau—forking up or down. We do this in such a way as to take the most “straight
-		//line” route through the tableau to its apex, updating ns accordingly to keep track of
-		//where we are. This route keeps the partial approximations centered (insofar as possible)
-		//on the target x. The last dy added is thus the error indication.
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-void polin2(double * x1a, double * x2a, double ** ya, long m, long n, double x1, double x2, double *y, double *dy)
-//Given arrays x1a[1..m] and x2a[1..n] of independent variables, and a submatrix of function
-//values ya[1..m][1..n], tabulated at the grid points deﬁned by x1a and x2a; and given values
-//x1 and x2 of the independent variables; this routine returns an interpolated function value y,
-//and an accuracy indication dy (based only on the interpolation in the x1 direction, however).
-{
-bool do_x2_first = true;
-	if (do_x2_first)
-	{
-		int j;
-		double * ymtmp = new double [m];
-		//ymtmp=vector(1,m);
-		for (j=0;j<m;j++)	//Loop over rows.
-		{
-			//cout << "Made it to loop #" << j << endl;
-			polint(x2a, ya[j], n, x2, &ymtmp[j], dy); //Interpolate answer into temporary storage.
-		}
-		//cout << "Made it through!" << endl;
-		polint(x1a, ymtmp, m, x1, y, dy); //Do the ﬁnal interpolation.
-		//cout << "Finished everything!" << endl;
-	}
-	else
-	{
-		//define and set transpose of data values
-		double ** yaT = new double * [n];
-		for (int ix2 = 0; ix2 < n; ix2++)
-		{
-			yaT[ix2] = new double [m];
-			for (int ix1 = 0; ix1 < m; ix1++)
-				yaT[ix2][ix1] = ya[ix1][ix2];
-		}
-
-		int j;
-		double * ymtmp = new double [n];
-		for (j=0;j<n;j++)
-			polint(x1a, yaT[j], m, x1, &ymtmp[j], dy);
-		polint(x2a, ymtmp, n, x2, y, dy);
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
 
 //**********************************************************************
 double interpLinearDirect(double * x, double * y, double x0, long size, bool returnflag /*= false*/, double default_return_value /* = 0*/)
@@ -544,7 +416,7 @@ double interpLinearDirect(double * x, double * y, double x0, long size, bool ret
 	{
 		if (!returnflag)	//i.e., if returnflag is false, exit
 		{
-			cout    << "interpLinearDirect: x0 out of bounds." << endl
+			cout	<< "interpLinearDirect: x0 out of bounds." << endl
 				<< "x ranges from " << x[0] << " to " << x[size-1] << ", "
 				<< "x0=" << x0 << ", " << "dx=" << dx << ", " << "idx=" << idx << endl;
 			exit(1);
@@ -577,11 +449,11 @@ double interpLinearNondirect(double * x, double * y, double x0, long size, bool 
 	long idx = binarySearch(x, size, x0, true);
 	if (idx<0 || idx>=size-1)
 	{
-cout << "returnflag = " << returnflag << endl;
+//cout << "returnflag = " << returnflag << endl;
 //debugger(__LINE__, __FILE__);
 		if (!returnflag)	//i.e., if returnflag is false, exit
 		{
-			cout    << "interpLinearNondirect: x0 out of bounds." << endl
+			cout	<< "interpLinearNondirect: x0 out of bounds." << endl
 				<< "x ranges from " << x[0] << " to " << x[size-1] << ", "
 				<< "x0=" << x0 << ", " << "dx=" << dx << ", " << "idx=" << idx << endl;
 			exit(1);
@@ -642,7 +514,7 @@ double interpBiLinearNondirect(double * x, double * y, double ** z, double x0, d
 	{
 		if (!returnflag)	//i.e., if returnflag is false, exit
 		{
-			cerr << "interpBiLinearNondirect(): index out of range!  Aborting!" << endl
+			cerr << "interpBiLinearNondirect(): index out of range!	 Aborting!" << endl
 				<< "interpBiLinearNonDirect(): x_size = " << x_size << ", x0 = " << x0 << ", xidx = " << xidx << endl;
 			exit(1);
 		}
@@ -803,8 +675,8 @@ double interpCubicDirect(double * x, double * y, double x0, long size, bool retu
   //if (idx<0 || idx>=size-1)
   //{
   //  cout    << "interpCubicDirect: x0 out of bounds." << endl
-  //          << "x ranges from " << x[0] << " to " << x[size-1] << ", "
-  //          << "x0=" << x0 << ", " << "dx=" << dx << ", " << "idx=" << idx << endl;
+  //	      << "x ranges from " << x[0] << " to " << x[size-1] << ", "
+  //	      << "x0=" << x0 << ", " << "dx=" << dx << ", " << "idx=" << idx << endl;
   //  exit(1);
   //}
 	if (idx < 0 || idx >= size-1)
@@ -815,7 +687,12 @@ double interpCubicDirect(double * x, double * y, double x0, long size, bool retu
 				<< "interpCubicDirect(): size = " << size << ", x0 = " << x0 << ", " << "dx=" << dx << ", " << "idx=" << idx << endl;
 			exit(1);
 		}
-		else return (default_return_value);
+		else
+		{
+			idx = (idx<0) ? 0 : size-2;	//uses linear extrapolation
+			return y[idx] + (y[idx+1]-y[idx])/(x[idx+1]-x[idx])*(x0-x[idx]);
+		}
+		//else return default_return_value;
 	}
 
   if (idx==0)
@@ -836,9 +713,9 @@ double interpCubicDirect(double * x, double * y, double x0, long size, bool retu
     double A0 = y[idx-1], A1 = y[idx], A2 = y[idx+1], A3 = y[idx+2], deltaX = x0 - (x[0] + idx*dx);
     //cout << A0 << "  " << A1 << "  " << A2 << "  " << A3 << endl;
     return (-A0+3.0*A1-3.0*A2+A3)/(6.0*dx*dx*dx)*deltaX*deltaX*deltaX
-            + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
-            - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
-            + A1;
+	    + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
+	    - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
+	    + A1;
   }
 
 }
@@ -857,7 +734,7 @@ double interpCubicNonDirect(double * x, double * y, double xi, long size, bool r
 // -- x,y: the independent and dependent double x0ables; x is *NOT* assumed to be equal spaced but it has to be increasing
 // -- xi: where the interpolation should be performed
 {
-//cout << "interpCubicNondirect: " << xi << "   " << size << endl;
+//cout << "interpCubicNondirect: " << xi << "	" << size << endl;
   //long size = x->size();
   if (size==1) {cout<<"interpCubicNondirect warning: table size = 1"<<endl; return y[0];}
 
@@ -872,8 +749,8 @@ double interpCubicNonDirect(double * x, double * y, double xi, long size, bool r
   //if (idx<0 || idx>=size-1)
   //{
   //  cout    << "interpCubicNondirect: x0 out of bounds." << endl
-   //         << "x ranges from " << x[0] << " to " << x[size-1] << ", "
-  //          << "x0=" << x0 << ", " << "idx=" << idx << endl;
+   //	      << "x ranges from " << x[0] << " to " << x[size-1] << ", "
+  //	      << "x0=" << x0 << ", " << "idx=" << idx << endl;
    // exit(1);
   //}
 	if (idx < 0 || idx >= size-1)
@@ -884,7 +761,11 @@ double interpCubicNonDirect(double * x, double * y, double xi, long size, bool r
 				<< "interpCubicNonDirect(): size = " << size << ", x0 = " << xi << ", " << "idx=" << idx << endl;
 			exit(1);
 		}
-		else return (default_return_value);
+		else
+		{
+			idx = (idx<0) ? 0 : size-2;	//uses linear extrapolation
+		}
+		//else return default_return_value;
 	}
 
   if (idx==0)
@@ -908,33 +789,33 @@ double interpCubicNonDirect(double * x, double * y, double xi, long size, bool r
     long double denominator = x01*x02*x12*x03*x13*x23;
     long double C0, C1, C2, C3;
     C0 = (x0*x02*x2*x03*x23*x3*y1
-          + x1*x1s*(x0*x03*x3*y2+x2s*(-x3*y0+x0*y3)+x2*(x3s*y0-x0s*y3))
-          + x1*(x0s*x03*x3s*y2+x2*x2s*(-x3s*y0+x0s*y3)+x2s*(x3*x3s*y0-x0*x0s*y3))
-          + x1s*(x0*x3*(-x0s+x3s)*y2+x2*x2s*(x3*y0-x0*y3)+x2*(-x3*x3s*y0+x0*x0s*y3))
-          )/denominator;
+	  + x1*x1s*(x0*x03*x3*y2+x2s*(-x3*y0+x0*y3)+x2*(x3s*y0-x0s*y3))
+	  + x1*(x0s*x03*x3s*y2+x2*x2s*(-x3s*y0+x0s*y3)+x2s*(x3*x3s*y0-x0*x0s*y3))
+	  + x1s*(x0*x3*(-x0s+x3s)*y2+x2*x2s*(x3*y0-x0*y3)+x2*(-x3*x3s*y0+x0*x0s*y3))
+	  )/denominator;
     C1 = (x0s*x03*x3s*y12
-          + x2*x2s*(x3s*y01+x0s*y13)
-          + x1s*(x3*x3s*y02+x0*x0s*y23-x2*x2s*y03)
-          + x2s*(-x3*x3s*y01-x0*x0s*y13)
-          + x1*x1s*(-x3s*y02+x2s*y03-x0s*y23)
-          )/denominator;
+	  + x2*x2s*(x3s*y01+x0s*y13)
+	  + x1s*(x3*x3s*y02+x0*x0s*y23-x2*x2s*y03)
+	  + x2s*(-x3*x3s*y01-x0*x0s*y13)
+	  + x1*x1s*(-x3s*y02+x2s*y03-x0s*y23)
+	  )/denominator;
     C2 = (-x0*x3*(x0s-x3s)*y12
-          + x2*(x3*x3s*y01+x0*x0s*y13)
-          + x1*x1s*(x3*y02+x0*y23-x2*y03)
-          + x2*x2s*(-x3*y01-x0*y13)
-          + x1*(-x3*x3s*y02+x2*x2s*y03-x0*x0s*y23)
-          )/denominator;
+	  + x2*(x3*x3s*y01+x0*x0s*y13)
+	  + x1*x1s*(x3*y02+x0*y23-x2*y03)
+	  + x2*x2s*(-x3*y01-x0*y13)
+	  + x1*(-x3*x3s*y02+x2*x2s*y03-x0*x0s*y23)
+	  )/denominator;
     C3 = (x0*x03*x3*y12
-          + x2s*(x3*y01+x0*y13)
-          + x1*(x3s*y02+x0s*y23-x2s*y03)
-          + x2*(-x3s*y01-x0s*y13)
-          + x1s*(-x3*y02+x2*y03-x0*y23)
-          )/denominator;
+	  + x2s*(x3*y01+x0*y13)
+	  + x1*(x3s*y02+x0s*y23-x2s*y03)
+	  + x2*(-x3s*y01-x0s*y13)
+	  + x1s*(-x3*y02+x2*y03-x0*y23)
+	  )/denominator;
 //cout << "interpCubicNondirect(list1): " << y0 << "   " << y1 << "   " << y2 << "   " << y3 << "   "
 //				<< y01 << "   " << y02 << "   " << y03 << "   " << y12 << "   " << y13 << "   " << y23 << endl;
 //cout << "interpCubicNondirect(list2): " << x0 << "   " << x1 << "   " << x2 << "   " << x3 << "   "
 //				<< x01 << "   " << x02 << "   " << x03 << "   " << x12 << "   " << x13 << "   " << x23 << endl;
-//cout << "interpCubicNondirect(list3): " << x0s << "   " << x1s << "   " << x2s << "   " << x3s << "   " << denominator << endl;
+//cout << "interpCubicNondirect(list3): " << x0s << "	" << x1s << "	" << x2s << "	" << x3s << "	" << denominator << endl;
 //cout << "interpCubicNondirect(list4): " << C0 << "   " << C1 << "   " << C2 << "   " << C3 << endl;
     return C0 + C1*xi + C2*xi*xi + C3*xi*xi*xi;
   }
@@ -953,7 +834,7 @@ double interpBiCubicDirect(double * x, double * y, double ** z, double x0, doubl
 	// find x's integer index
 	long xidx = floor((x0-x[0])/dx);
 	long yidx = floor((y0-y[0])/dy);
-	
+
 	// check for out-of-bounds points
 	if (xidx<0 || xidx>=x_size-1 || yidx<0 || yidx>=y_size-1)
 	{
@@ -964,7 +845,7 @@ double interpBiCubicDirect(double * x, double * y, double ** z, double x0, doubl
 				<< "x0=" << x0 << ", " << "dx=" << dx << ", " << "xidx=" << xidx << endl
 				<< "y ranges from " << y[0] << " to " << y[y_size-1] << ", "
 				<< "y0=" << y0 << ", " << "dy=" << dy << ", " << "yidx=" << yidx << endl;
-    			exit(1);
+			exit(1);
 		}
 		else return (default_return_value);
 	}
@@ -997,9 +878,9 @@ double interpBiCubicDirect(double * x, double * y, double ** z, double x0, doubl
 	double deltaX = x0 - (x[0] + xidx*dx);
     //cout << A0 << "  " << A1 << "  " << A2 << "  " << A3 << endl;
     return (-A0+3.0*A1-3.0*A2+A3)/(6.0*dx*dx*dx)*deltaX*deltaX*deltaX
-            + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
-            - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
-            + A1;
+	    + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
+	    - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
+	    + A1;
   }
 }
 
@@ -1018,7 +899,7 @@ double interpTriCubicDirect(double * x, double * y, double * z, double *** f, do
 	long xidx = floor((x0-x[0])/dx);
 	long yidx = floor((y0-y[0])/dy);
 	long zidx = floor((z0-z[0])/dz);
-	
+
 	// check for out-of-bounds points
 	if (xidx<0 || xidx>=x_size-1 || yidx<0 || yidx>=y_size-1 || zidx<0 || zidx>=z_size-1)
 	{
@@ -1031,7 +912,7 @@ double interpTriCubicDirect(double * x, double * y, double * z, double *** f, do
 				<< "y0=" << y0 << ", " << "dy=" << dy << ", " << "yidx=" << yidx << endl
 				<< "z ranges from " << z[0] << " to " << z[z_size-1] << ", "
 				<< "z0=" << z0 << ", " << "dz=" << dz << ", " << "zidx=" << zidx << endl;
-    			exit(1);
+			exit(1);
 		}
 		else return (default_return_value);
 	}
@@ -1064,9 +945,9 @@ double interpTriCubicDirect(double * x, double * y, double * z, double *** f, do
 	double deltaX = x0 - (x[0] + xidx*dx);
     //cout << A0 << "  " << A1 << "  " << A2 << "  " << A3 << endl;
     return (-A0+3.0*A1-3.0*A2+A3)/(6.0*dx*dx*dx)*deltaX*deltaX*deltaX
-            + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
-            - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
-            + A1;
+	    + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
+	    - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
+	    + A1;
   }
 }
 
@@ -1122,28 +1003,28 @@ double interpBiCubicNonDirectALT(double * x, double * y, double ** f, double xi,
     long double denominator = x01*x02*x12*x03*x13*x23;
     long double C0, C1, C2, C3;
     C0 = (x0*x02*x2*x03*x23*x3*f1
-          + x1*x1s*(x0*x03*x3*f2+x2s*(-x3*f0+x0*f3)+x2*(x3s*f0-x0s*f3))
-          + x1*(x0s*x03*x3s*f2+x2*x2s*(-x3s*f0+x0s*f3)+x2s*(x3*x3s*f0-x0*x0s*f3))
-          + x1s*(x0*x3*(-x0s+x3s)*f2+x2*x2s*(x3*f0-x0*f3)+x2*(-x3*x3s*f0+x0*x0s*f3))
-          )/denominator;
+	  + x1*x1s*(x0*x03*x3*f2+x2s*(-x3*f0+x0*f3)+x2*(x3s*f0-x0s*f3))
+	  + x1*(x0s*x03*x3s*f2+x2*x2s*(-x3s*f0+x0s*f3)+x2s*(x3*x3s*f0-x0*x0s*f3))
+	  + x1s*(x0*x3*(-x0s+x3s)*f2+x2*x2s*(x3*f0-x0*f3)+x2*(-x3*x3s*f0+x0*x0s*f3))
+	  )/denominator;
     C1 = (x0s*x03*x3s*f12
-          + x2*x2s*(x3s*f01+x0s*f13)
-          + x1s*(x3*x3s*f02+x0*x0s*f23-x2*x2s*f03)
-          + x2s*(-x3*x3s*f01-x0*x0s*f13)
-          + x1*x1s*(-x3s*f02+x2s*f03-x0s*f23)
-          )/denominator;
+	  + x2*x2s*(x3s*f01+x0s*f13)
+	  + x1s*(x3*x3s*f02+x0*x0s*f23-x2*x2s*f03)
+	  + x2s*(-x3*x3s*f01-x0*x0s*f13)
+	  + x1*x1s*(-x3s*f02+x2s*f03-x0s*f23)
+	  )/denominator;
     C2 = (-x0*x3*(x0s-x3s)*f12
-          + x2*(x3*x3s*f01+x0*x0s*f13)
-          + x1*x1s*(x3*f02+x0*f23-x2*f03)
-          + x2*x2s*(-x3*f01-x0*f13)
-          + x1*(-x3*x3s*f02+x2*x2s*f03-x0*x0s*f23)
-          )/denominator;
+	  + x2*(x3*x3s*f01+x0*x0s*f13)
+	  + x1*x1s*(x3*f02+x0*f23-x2*f03)
+	  + x2*x2s*(-x3*f01-x0*f13)
+	  + x1*(-x3*x3s*f02+x2*x2s*f03-x0*x0s*f23)
+	  )/denominator;
     C3 = (x0*x03*x3*f12
-          + x2s*(x3*f01+x0*f13)
-          + x1*(x3s*f02+x0s*f23-x2s*f03)
-          + x2*(-x3s*f01-x0s*f13)
-          + x1s*(-x3*f02+x2*f03-x0*f23)
-          )/denominator;
+	  + x2s*(x3*f01+x0*f13)
+	  + x1*(x3s*f02+x0s*f23-x2s*f03)
+	  + x2*(-x3s*f01-x0s*f13)
+	  + x1s*(-x3*f02+x2*f03-x0*f23)
+	  )/denominator;
     return C0 + C1*xi + C2*xi*xi + C3*xi*xi*xi;
   }
 }
@@ -1164,7 +1045,7 @@ double interpTriCubicNonDirect(double * x, double * y, double * z, double *** t,
 	long xidx = floor((x0-x[0])/dx);
 	long yidx = floor((y0-y[0])/dy);
 	long zidx = floor((z0-z[0])/dz);
-	
+
 	// check for out-of-bounds points
 	if (xidx<0 || xidx>=x_size-1 || yidx<0 || yidx>=y_size-1 || zidx<0 || zidx>=z_size-1)
 	{
@@ -1177,7 +1058,7 @@ double interpTriCubicNonDirect(double * x, double * y, double * z, double *** t,
 				<< "y0=" << y0 << ", " << "dy=" << dy << ", " << "yidx=" << yidx << endl
 				<< "z ranges from " << z[0] << " to " << z[z_size-1] << ", "
 				<< "z0=" << z0 << ", " << "dz=" << dz << ", " << "zidx=" << zidx << endl;
-    			exit(1);
+			exit(1);
 		}
 		else return (default_return_value);
 	}
@@ -1210,9 +1091,9 @@ double interpTriCubicNonDirect(double * x, double * y, double * z, double *** t,
 	double deltaX = x0 - (x[0] + xidx*dx);
     //cout << A0 << "  " << A1 << "  " << A2 << "  " << A3 << endl;
     return (-A0+3.0*A1-3.0*A2+A3)/(6.0*dx*dx*dx)*deltaX*deltaX*deltaX
-            + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
-            - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
-            + A1;
+	    + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
+	    - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
+	    + A1;
   }
 }
 
@@ -1233,7 +1114,7 @@ double interpQuadriCubicNonDirect(double * x, double * y, double * z, double * t
 	long yidx = floor((y0-y[0])/dy);
 	long zidx = floor((z0-z[0])/dz);
 	long tidx = floor((t0-t[0])/dt);
-	
+
 	// check for out-of-bounds points
 	if (xidx<0 || xidx>=x_size-1 || yidx<0 || yidx>=y_size-1 || zidx<0 || zidx>=z_size-1|| tidx<0 || tidx>=t_size-1)
 	{
@@ -1248,7 +1129,7 @@ double interpQuadriCubicNonDirect(double * x, double * y, double * z, double * t
 				<< "z0=" << z0 << ", " << "dz=" << dz << ", " << "zidx=" << zidx << endl
 				<< "t ranges from " << t[0] << " to " << t[t_size-1] << ", "
 				<< "t0=" << t0 << ", " << "dt=" << dt << ", " << "tidx=" << tidx << endl;
-    			exit(1);
+			exit(1);
 		}
 		else return (default_return_value);
 	}
@@ -1281,35 +1162,11 @@ double interpQuadriCubicNonDirect(double * x, double * y, double * z, double * t
 	double deltaX = x0 - (x[0] + xidx*dx);
     //cout << A0 << "  " << A1 << "  " << A2 << "  " << A3 << endl;
     return (-A0+3.0*A1-3.0*A2+A3)/(6.0*dx*dx*dx)*deltaX*deltaX*deltaX
-            + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
-            - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
-            + A1;
+	    + (A0-2.0*A1+A2)/(2.0*dx*dx)*deltaX*deltaX
+	    - (2.0*A0+3.0*A1-6.0*A2+A3)/(6.0*dx)*deltaX
+	    + A1;
   }
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-//**********************************************************************
-double interpPolyDirect(double * x, double * y, double x0, long size)
-{
-	double result, error;
-	polint(x, y, size, x0, &result, &error);
-	return result;
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-
-//**********************************************************************
-double interpBiPolyDirect(double * x, double * y, double ** z, double x0, double y0, long x_size, long y_size)
-{
-	double result, error;
-	polin2(x, y, z, x_size, y_size, x0, y0, &result, &error);
-	return result;
-}
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -1344,10 +1201,7 @@ double interpolate1D(double * x, double * y, double x0, long size, int kind, boo
 		}
 		case 2:
 		{
-			if (uniform_spacing)
-				return interpPolyDirect(x, y, x0, size);
-			else
-				cerr << "Error (interpolate1D): polynomial interpolation with non-uniform spacing not supported!" << endl;
+			cerr << "Error (interpolate1D): polynomial interpolation not supported!" << endl;
 			break;
 		}
 		default:
@@ -1371,7 +1225,6 @@ double interpolate2D(double * x, double * y, double ** z, double x0, double y0, 
 	{
 		case 0:
 		{
-//debugger(__LINE__, __FILE__);
 			if (uniform_spacing)
 				return interpBiLinearDirect(x, y, z, x0, y0, x_size, y_size, returnflag, default_return_value);
 			else
@@ -1384,15 +1237,11 @@ double interpolate2D(double * x, double * y, double ** z, double x0, double y0, 
 				return interpBiCubicDirect(x, y, z, x0, y0, x_size, y_size, returnflag, default_return_value);
 			else
 				return interpBiCubicNonDirectALT(x, y, z, x0, y0, x_size, y_size, returnflag, default_return_value);
-				//cerr << "Error (interpolate2D): cubic interpolation with non-uniform spacing not supported!" << endl;
 			break;
 		}
 		case 2:
 		{
-			if (uniform_spacing)
-				return interpBiPolyDirect(x, y, z, x0, y0, x_size, y_size);
-			else
-				cerr << "Error (interpolate2D): polynomial interpolation with non-uniform spacing not supported!" << endl;
+			cerr << "Error (interpolate2D): polynomial interpolation not supported!" << endl;
 			break;
 		}
 		default:
@@ -1450,6 +1299,5 @@ double interpolate3D(double * x, double * y, double * z, double *** f, double x0
 	}
 	return default_return_value;
 }
-
 
 // End of file
