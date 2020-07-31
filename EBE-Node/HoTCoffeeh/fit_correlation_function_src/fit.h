@@ -75,10 +75,14 @@ inline double get_fit_err (int i, gsl_matrix * covariance_ptr)
 	return sqrt (gsl_matrix_get (covariance_ptr, i, i));
 }
 
-vector<double> KT_pts(n_KT_pts), Kphi_pts(n_Kphi_pts);
+/*vector<double> KT_pts(n_KT_pts), Kphi_pts(n_Kphi_pts);
 vector<double> qx_pts(nqxpts), qy_pts(nqypts), qz_pts(nqzpts);
 
-vector<vector<double> > CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts ) );
+vector<vector<double> > CFvals = vector<vector<double> >( n_KT_pts * n_Kphi_pts, vector<double> ( nqxpts * nqypts * nqzpts ) );*/
+
+vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
+
+vector<vector<double> > CFvals;
 
 
 void Get_GF_HBTradii();
