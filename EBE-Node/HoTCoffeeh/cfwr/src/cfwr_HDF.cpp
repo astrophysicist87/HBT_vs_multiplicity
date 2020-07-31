@@ -196,7 +196,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -204,7 +204,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -212,7 +212,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -327,7 +327,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -335,7 +335,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -343,7 +343,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -448,21 +448,21 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 		return_flag = -1;
 	}
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 		return_flag = -2;
 	}
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 		return_flag = -3;
 	}
@@ -524,7 +524,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -532,7 +532,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -540,7 +540,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -597,7 +597,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -605,7 +605,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -613,7 +613,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -672,21 +672,21 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 		return_flag = -1;
 	}
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 		return_flag = -2;
 	}
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 		return_flag = -3;
 	}
@@ -739,7 +739,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -747,7 +747,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -755,7 +755,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -879,7 +879,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -887,7 +887,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -895,7 +895,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;
@@ -956,7 +956,7 @@ HDF_sw.Start();
 
 	catch(FileIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "FileIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -1;
@@ -964,7 +964,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSetIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSetIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -2;
@@ -972,7 +972,7 @@ debugger(__LINE__, __FILE__);
 
 	catch(H5::DataSpaceIException error)
 	{
-		error.printError();
+		error.printErrorStack();
 		cerr << "DataSpaceIException error!" << endl;
 debugger(__LINE__, __FILE__);
 		return_flag = -3;

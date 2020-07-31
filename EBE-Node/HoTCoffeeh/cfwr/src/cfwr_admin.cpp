@@ -25,6 +25,8 @@ template <typename T> int sgn(T val)
     return (T(0) < val) - (val < T(0));
 }
 
+double cot(double x){ return 1.0/tan(x); }
+
 struct bessel_params { double beta; double gamma; };
 
 CorrelationFunction::CorrelationFunction(ParameterReader * paraRdr_in, particle_info* particle, particle_info* all_particles_in, int Nparticle_in,
@@ -1073,7 +1075,7 @@ void CorrelationFunction::Get_q_points(double q1, double q2, double q3, double p
 bool CorrelationFunction::fexists(const char *filename)
 {
   ifstream ifile(filename);
-  return ifile;
+  return ifile.good();
 }
 
 //print output to output filestream, one line at a time

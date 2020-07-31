@@ -141,6 +141,8 @@ int main(int argc, char *argv[])
 	{
 		threshold = paraRdr->getVal("CF_resonanceThreshold");
 		output << "Working with threshold = " << threshold << endl;
+		if (threshold > 1e-6)
+		{
 		get_important_resonances(particle_idx, &chosen_resonance_indices, particle, Nparticle, threshold, net_fraction_resonance_contribution, output);
 		get_all_descendants(&chosen_resonance_indices, particle, Nparticle, output);
 
@@ -152,6 +154,7 @@ int main(int argc, char *argv[])
 			output << ii << "   " << chosen_resonance_indices[ii] << "   " << particle[chosen_resonance_indices[ii]].name
 					<< "   ,   Gamma = " << particle[chosen_resonance_indices[ii]].width
 					<< "   ,   pc = " << particle[chosen_resonance_indices[ii]].percent_contribution << endl;
+		}
 	}
 	else if ((int)(paraRdr->getVal("chosenParticlesMode")) == 1)		// read chosen resonances in from file
 	{

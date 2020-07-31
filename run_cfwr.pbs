@@ -1,9 +1,18 @@
-#! /usr/bin/env bash
+#!/bin/bash
+#PBS -l walltime=16:00:00
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+#PBS -S /bin/bash
+#PBS -A PAS0254
+
+ulimit -n 1000
 #-------------------
+
+cd $PBS_O_WORKDIR
 
 # some results directory to post-process
 # assumes structure: $WD/job-1/event-1/*
-workingDirectory=$1
+#workingDirectory=$1
 
 for direc in $workingDirectory/HoTCoffeeh
 do
