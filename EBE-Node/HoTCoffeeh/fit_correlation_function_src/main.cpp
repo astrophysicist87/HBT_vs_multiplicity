@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		<< "  Ver 1.0   ----- Author: Christopher Plumberg   " << endl;
 	cout << endl << "**********************************************************" << endl << endl;
 	
-	Get_GF_HBTradii(argv[1]);
+	Get_GF_HBTradii( std::string(argv[1]) );
 
 	return 0;
 }
