@@ -464,6 +464,9 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
         double q_side_local = -qx_pts[i] * skp + qy_pts[j] * ckp;
         double q_long_local = qz_pts[k];
         double correl_local = Correl_3D[indexer_qx_qy_qz(i,j,k)]-1.0;
+		cout << "CHECK CF3D: " << qx_pts[i] << "   " << qy_pts[j] << "   " << qz_pts[k] << "   "
+			<< q_out_local << "	" << q_side_local << "	 " << q_long_local << "	  "
+			<< correl_local << endl;
         if(correl_local < 1e-15) continue;
 		//if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 		//	Correlfun3D_data.sigma[idx] = 1.e10;	//ignore central point
