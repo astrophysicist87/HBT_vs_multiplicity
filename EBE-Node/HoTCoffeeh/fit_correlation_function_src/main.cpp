@@ -1,4 +1,3 @@
-#include <omp.h>
 #include<iostream>
 #include<iomanip>
 #include<fstream>
@@ -24,13 +23,7 @@ int main(int argc, char *argv[])
 		<< "  Ver 1.0   ----- Author: Christopher Plumberg   " << endl;
 	cout << endl << "**********************************************************" << endl << endl;
 	
-	// Read-in parameters
-	/*ParameterReader * paraRdr = new ParameterReader;
-	paraRdr->readFromFile("parameters.dat");
-	paraRdr->readFromArguments(argc, argv);
-	paraRdr->echo();*/
-
-	Get_GF_HBTradii("./results/correlfunct3D_Pion_+.dat");
+	Get_GF_HBTradii(std::to_string(argv[1]));
 
 	return 0;
 }

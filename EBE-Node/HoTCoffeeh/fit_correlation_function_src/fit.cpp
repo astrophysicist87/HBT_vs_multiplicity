@@ -63,10 +63,12 @@ void Get_GF_HBTradii(string filename)
 		vector<double> CF_for_fitting = CFvals[indexer_KT_Kphi(iKT, iKphi)];
 
 		//finally, do fits, depending on what kind you want to do
-		if (USE_LAMBDA)
+		/*if (USE_LAMBDA)
 			Fit_Correlationfunction3D_withlambda( CF_for_fitting, iKT, iKphi );
 		else
-			Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );
+			Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );*/
+
+		find_minimum_chisq_correlationfunction_full( CF_for_fitting, iKT, iKphi );
 	}
 
 	for (int iKT = 0; iKT < nKT; ++iKT)
@@ -75,9 +77,10 @@ void Get_GF_HBTradii(string filename)
 	return;
 }
 
-void Read_in_correlationfunction(string filename)
+void Read_in_correlationfunction(string directory)
 {
 	ifstream iCorrFunc;
+	string filename = directory + "/correlfunct3D_Pion_+.dat";
 	iCorrFunc.open(filename.c_str());
 
 	double dummy;
@@ -806,18 +809,17 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 		R2_long_GF_C[jKT*n_order + Morder] = temp_sum_long_cos/(2.*M_PI);
 		R2_long_GF_S[jKT*n_order + Morder] = temp_sum_long_sin/(2.*M_PI);
 
-		if (Morder == 0)
-		{
-			cout << K_T[jKT] << "   " << Morder << "   "
-				<< R2_side_GF_C[jKT*n_order + Morder] << "   "
-				<< R2_side_GF_S[jKT*n_order + Morder] << "   "
-				<< R2_out_GF_C[jKT*n_order + Morder] << "   "
-				<< R2_out_GF_S[jKT*n_order + Morder] << "   "
-				<< R2_long_GF_C[jKT*n_order + Morder] << "   "
-				<< R2_long_GF_S[jKT*n_order + Morder] << "   "
-				<< R2_outside_GF_C[jKT*n_order + Morder] << "   "
-				<< R2_outside_GF_S[jKT*n_order + Morder] << endl;
-		}
+
+		cout << K_T[jKT] << "   " << Morder << "   "
+			<< R2_side_GF_C[jKT*n_order + Morder] << "   "
+			<< R2_side_GF_S[jKT*n_order + Morder] << "   "
+			<< R2_out_GF_C[jKT*n_order + Morder] << "   "
+			<< R2_out_GF_S[jKT*n_order + Morder] << "   "
+			<< R2_long_GF_C[jKT*n_order + Morder] << "   "
+			<< R2_long_GF_S[jKT*n_order + Morder] << "   "
+			<< R2_outside_GF_C[jKT*n_order + Morder] << "   "
+			<< R2_outside_GF_S[jKT*n_order + Morder] << endl;
+
 
 	}
 
