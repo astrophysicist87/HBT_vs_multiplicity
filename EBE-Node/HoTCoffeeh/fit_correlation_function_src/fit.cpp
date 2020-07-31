@@ -38,10 +38,10 @@ void Get_GF_HBTradii(string filename)
 	R2_long_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 	R2_outside_GF = vector<double>( n_KT_pts * n_Kphi_pts );
 
-	R2_side_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
-	R2_out_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
-	R2_long_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
-	R2_outside_GF_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_side_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_out_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_long_err = vector<double>( n_KT_pts * n_Kphi_pts );
+	R2_outside_err = vector<double>( n_KT_pts * n_Kphi_pts );
 
 	R2_side_GF_C = vector<double>( n_KT_pts * n_order );
 	R2_side_GF_S = vector<double>( n_KT_pts * n_order );
