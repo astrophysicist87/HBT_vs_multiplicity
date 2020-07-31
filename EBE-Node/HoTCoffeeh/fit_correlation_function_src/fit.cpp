@@ -292,6 +292,8 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 
 	int width = 7;		// setw width for output
 	cout << endl << "Best fit results:" << endl;
+	cout << "KT = " << KT_pts[iKT] << endl;
+	cout << "Kphi = " << Kphi_pts[iKphi] << endl;
 	cout << "lambda      = " << setw (width) << get_fit_results (0, solver_ptr)
 		<< " +/- " << setw (width) << get_fit_err (0, covariance_ptr) << endl;
 	cout << "R2o = " << setw (width) << get_fit_results (1, solver_ptr)
