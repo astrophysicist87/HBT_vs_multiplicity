@@ -40,8 +40,12 @@ case "$sys" in
 					superMCParameters:'ecm'=5020 \
 					superMCParameters:'finalFactor'=${ff} \
 					superMCParameters:'maxx'='10.0' \
-					superMCParameters:'maxy'='10.0' \
-					hydroParameters:'iLS'=200 \
+                                	superMCParameters:'maxy'='10.0' \
+                                	superMCParameters:'dx'='0.1' \
+                                	superMCParameters:'dy'='0.1' \
+                                	hydroParameters:'iLS'=100 \
+                                	hydroParameters:'dx'='0.1' \
+                                	hydroParameters:'dy'='0.1' \
 					HoTCoffeehControl:'runHoTCoffeeh'=False
 
 			./generateJobs_local.py 1 50000 \

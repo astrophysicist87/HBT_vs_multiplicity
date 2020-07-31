@@ -7,7 +7,7 @@ controlParameterList = {
 }
 
 initial_condition_control = {
-    'centrality': '0-100%',  # centrality bin
+    'centrality': '0-0.00025%',  # centrality bin
     'cut_type': 'total_entropy',
     # centrality cut variable: total_entropy or Npart
     'initial_condition_type': 'superMC',
@@ -28,23 +28,23 @@ superMCControl = {
 superMCParameters = {
     'model_name'                    :   'MCGlb',    # MCGlb or MCKLN
     'Aproj'                         :   1,
-    'Atarg'                         :   1,
-    'ecm'                           :   7000,
+    'Atarg'                         :   208,
+    'ecm'                           :   5020,
 	'average_from_order'				:	2,
 	'average_to_order'				:	2,
 	'ecc_from_order'				:	2,
 	'ecc_to_order'					:	2,
-    'finalFactor'                   :   81.1114,
+    'finalFactor'                   :	54.3968, 
     'alpha'                         :   0.14,      # WN/BC mixing ratio in MCGlb
     'lambda'                        :   0.288,      # saturation scale parameter in MCKLN
     'operation'                     :   3,
     'include_NN_correlation'        :   1,
     'cc_fluctuation_model'          :   6,
     'cc_fluctuation_Gamma_theta'    :   0.75,       
-    'maxx'                          :   5.0,       # grid size in x (fm)
-    'maxy'                          :   5.0,       # grid size in y (fm)
-    'dx'                            :   0.05,        # grid spacing in x (fm)
-    'dy'                            :   0.05,        # grid spacing in y (fm)
+    'maxx'                          :   20.0,       # grid size in x (fm)
+    'maxy'                          :   20.0,       # grid size in y (fm)
+    'dx'                            :   0.1,        # grid spacing in x (fm)
+    'dy'                            :   0.1,        # grid spacing in y (fm)
     'nev'                           :   1,
     'shape_of_entropy'              :   3,
     #'generate_reaction_plane_avg_profile' : 1,
@@ -69,10 +69,10 @@ hydroParameters = {
     'T0'        :   0.6,      # tau_0
     'dt'        :   0.02,     # dtau
     'Tdec'      :   0.12,
-    'iLS'       :   100,      # lattice size in transverse plane 2*iLS+1
-    'dx'        :   0.05,     # lattice spacing in x (fm) 
+    'iLS'       :   200,      # lattice size in transverse plane 2*iLS+1
+    'dx'        :   0.1,     # lattice spacing in x (fm) 
                               # need to be the same as dx in superMC
-    'dy'        :   0.05,     # lattice spacing in y (fm)
+    'dy'        :   0.1,     # lattice spacing in y (fm)
                               # need to be the same as dy in superMC
     'Edec'      :   0.048,  #
     'ndx'       :   2,

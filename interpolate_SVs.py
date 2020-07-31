@@ -3,24 +3,8 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy.interpolate
-from scipy.interpolate import RegularGridInterpolator as rgi
+#from scipy.interpolate import RegularGridInterpolator as rgi
 import sys, os
-
-
-'''
-GeVtoMeV = 1000.0
-showInsteadOfSave = False
-
-
-#====================================================
-def simple_plot(ax, filename, xCol, yCol, **kwargs):
-	dataset=np.loadtxt(filename)
-	x, y = GeVtoMeV*dataset[:,xCol], dataset[:,yCol]
-	xnew = np.linspace(np.min(x), np.max(x), 1000)
-	f = scipy.interpolate.interp1d(x, y, kind='quadratic')
-	ln, = ax.plot(xnew, f(xnew), **kwargs)
-	return ln
-'''
 
 
 
@@ -28,7 +12,7 @@ def simple_plot(ax, filename, xCol, yCol, **kwargs):
 if __name__ == "__main__":
 	# Set KT and Kphi grids
 	(KTpts, KTwts) = np.loadtxt('KT.dat').T
-	(Kphipts, Kphiwts) = np.loadtxt('Kphi.dat').T
+	(Kphipts, Kphiwts) = np.loadtxt('KPHI.dat').T
 	nKT = len(KTpts)
 	nKphi = len(Kphipts)
 	

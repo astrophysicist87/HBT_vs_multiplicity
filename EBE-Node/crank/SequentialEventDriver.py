@@ -365,7 +365,7 @@ def translate_centrality_cut():
                         + nucleus_name_dict[max(Aproj, Atrag)])
 
 
-    if Aproj == 1 and Atrag == 1:
+    if Aproj == 1 or Atrag == 1:
         shapeOfEntropy = '_SoE' + str(superMCParameters['shape_of_entropy'])
     else:
         shapeOfEntropy = ''
@@ -387,6 +387,8 @@ def translate_centrality_cut():
         print("Can not find the centrality cut table for the collision system")
         print(centrality_cut_file_name)
         exit(1)
+
+    print 'Using', centrality_cut_file_name
 
     lower_idx = (
         centrality_cut_file[:, 0].searchsorted(centrality_lower_bound+1e-30))

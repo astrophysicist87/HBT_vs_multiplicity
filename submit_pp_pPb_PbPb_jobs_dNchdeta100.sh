@@ -10,14 +10,14 @@ case "$sys" in
 			superMCParameters:'Aproj'=1 \
 			superMCParameters:'Atarg'=1 \
 			superMCParameters:'ecm'=7000 \
-			superMCParameters:'finalFactor'=3048.24 \
-			superMCParameters:'maxx'='5.0' \
-			superMCParameters:'maxy'='5.0' \
-			superMCParameters:'dx'='0.05' \
-			superMCParameters:'dy'='0.05' \
+			superMCParameters:'finalFactor'=1303.53 \
+			superMCParameters:'maxx'='10.0' \
+			superMCParameters:'maxy'='10.0' \
+			superMCParameters:'dx'='0.1' \
+			superMCParameters:'dy'='0.1' \
 			hydroParameters:'iLS'=100 \
-			hydroParameters:'dx'='0.05' \
-			hydroParameters:'dy'='0.05'
+			hydroParameters:'dx'='0.1' \
+			hydroParameters:'dy'='0.1'
 
 		./generateJobs_local.py 1 10000 \
 			PlayGround_EA_${sys}_MB_dNchdeta100 \
