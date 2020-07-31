@@ -8,12 +8,8 @@
 #include<sys/time.h>
 #include<algorithm>
 
-#include<gsl/gsl_rng.h>
-#include<gsl/gsl_randist.h>
 
-
-#include "src/ParameterReader.h"
-#include "main.h"
+#include "ParameterReader.h"
 
 using namespace std;
 

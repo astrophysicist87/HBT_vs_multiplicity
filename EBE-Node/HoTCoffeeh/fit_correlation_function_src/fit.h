@@ -1,3 +1,6 @@
+#ifndef FIT_H
+#define FIT_H
+
 #include<iostream>
 #include<sstream>
 #include<string>
@@ -7,7 +10,17 @@
 #include<vector>
 #include<stdio.h>
 
+#include <gsl/gsl_errno.h>
+#include <gsl/gsl_rng.h>	    // gsl random number generators
+#include <gsl/gsl_randist.h>	    // gsl random number distributions
+#include <gsl/gsl_vector.h>	    // gsl vector and matrix definitions
+#include <gsl/gsl_blas.h>	    // gsl linear algebra stuff
+#include <gsl/gsl_multifit_nlin.h>  // gsl multidimensional fitting
+#include <gsl/gsl_multifit.h>
+#include <gsl/gsl_linalg.h>
+#include <gsl/gsl_math.h>
 
+#include "ParameterReader.h"
 #include "Arsenal.h"
 
 
@@ -60,5 +73,6 @@ int print_fit_state_3D (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 int print_fit_state_3D_withlambda (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int iKT, int iKphi);
 
-
 // End of file
+
+#endif
