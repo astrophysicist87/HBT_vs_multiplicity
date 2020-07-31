@@ -523,13 +523,17 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     R_s = sqrt(results[2])*hbarC;
     R_l = sqrt(results[3])*hbarC;
     // the cross term is not necessary positive
-    R_os = results[4]*hbarC*hbarC;
-    //R_ol = results[5]*hbarC*hbarC;
-    //R_sl = results[6]*hbarC*hbarC;
-    cout << "lambda = " << lambda << endl;
+    double R2_os = results[4]*hbarC*hbarC;
+    /*cout << "lambda = " << lambda << endl;
     cout << "R_o = " << R_o << " fm, R_s = " << R_s << " fm, R_l = " << R_l << " fm" << endl;
-    cout << "R_os^2 = " << R_os << " fm^2." << endl;
-	//, R_ol^2 = " << R_ol << " fm^2, R_sl^2 = " << R_sl << " fm^2
+    cout << "R_os = " << R_os << " fm." << endl;*/
+
+	const int iKT_iKphi_idx 			= indexer_KT_Kphi( iKT, iKphi );
+	lambda_Correl[iKT_iKphi_idx] 		= lambda;
+	R2_out_GF[iKT_iKphi_idx] 			= R_o*R_o;
+	R2_side_GF[iKT_iKphi_idx] 			= R_s*R_s;
+	R2_long_GF[iKT_iKphi_idx] 			= R_l*R_l;
+	R2_outside_GF[iKT_iKphi_idx] 		= R2_os;
 
     double chi_sq = 0.0;
 	for (int i = 0; i < nqxpts; i++)
@@ -723,33 +727,34 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 //Fourier transform of HBT radii once they're calculated
 void R2_Fourier_transform(int jKT, double plane_psi)
 {
-	double * array_KT_pts = new double [n_KT_pts];
+	double * array_KT_pts   = new double [n_KT_pts];
 	double * array_Kphi_pts = new double [n_Kphi_pts];
-	double * K_phi = new double [nKphi];
-	double * Kphi_wts = new double [nKphi];
+	double * K_phi          = new double [nKphi];
+	double * Kphi_wts       = new double [nKphi];
 
 	gauss_quadrature(n_Kphi_pts, 1, 0.0, 0.0, 0.0, 2.0*M_PI, K_phi, Kphi_wts);
 
 	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
 		array_KT_pts[iKT] = KT_pts[iKT];
+
 	for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		array_Kphi_pts[iKphi] = Kphi_pts[iKphi];
 
-	double ** arr_R2_side_GF = new double * [n_KT_pts];
-	double ** arr_R2_out_GF = new double * [n_KT_pts];
-	double ** arr_R2_long_GF = new double * [n_KT_pts];
+	double ** arr_R2_side_GF    = new double * [n_KT_pts];
+	double ** arr_R2_out_GF     = new double * [n_KT_pts];
+	double ** arr_R2_long_GF    = new double * [n_KT_pts];
 	double ** arr_R2_outside_GF = new double * [n_KT_pts];
 	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
 	{
-		arr_R2_side_GF[iKT] = new double [n_Kphi_pts];
-		arr_R2_out_GF[iKT] = new double [n_Kphi_pts];
-		arr_R2_long_GF[iKT] = new double [n_Kphi_pts];
-		arr_R2_outside_GF[iKT] = new double [n_Kphi_pts];
+		arr_R2_side_GF[iKT]     = new double [n_Kphi_pts];
+		arr_R2_out_GF[iKT]      = new double [n_Kphi_pts];
+		arr_R2_long_GF[iKT]     = new double [n_Kphi_pts];
+		arr_R2_outside_GF[iKT]  = new double [n_Kphi_pts];
 		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		{
-			arr_R2_side_GF[iKT][iKphi] = R2_side_GF[indexer_KT_Kphi( iKT, iKphi )];
-			arr_R2_out_GF[iKT][iKphi] = R2_out_GF[indexer_KT_Kphi( iKT, iKphi )];
-			arr_R2_long_GF[iKT][iKphi] = R2_long_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_side_GF[iKT][iKphi]    = R2_side_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_out_GF[iKT][iKphi]     = R2_out_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_long_GF[iKT][iKphi]    = R2_long_GF[indexer_KT_Kphi( iKT, iKphi )];
 			arr_R2_outside_GF[iKT][iKphi] = R2_outside_GF[indexer_KT_Kphi( iKT, iKphi )];
 		}
 	}
