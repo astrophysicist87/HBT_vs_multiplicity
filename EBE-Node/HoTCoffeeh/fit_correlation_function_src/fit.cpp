@@ -19,7 +19,7 @@ void Get_GF_HBTradii()
 {
 
 	KT_pts = vector<double>(n_KT_pts);
-	Kphi_ptd = vector<double>(n_Kphi_pts);
+	Kphi_pts = vector<double>(n_Kphi_pts);
 	qx_pts = vector<double>(nqxpts);
 	qy_pts = vector<double>(nqypts);
 	qz_pts = vector<double>(nqzpts);
