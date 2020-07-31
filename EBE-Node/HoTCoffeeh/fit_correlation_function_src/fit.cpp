@@ -744,10 +744,10 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 		arr_R2_outside_GF[iKT] = new double [n_Kphi_pts];
 		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		{
-			arr_R2_side_GF[iKT][iKphi] = R2_side_GF[iKT][iKphi];
-			arr_R2_out_GF[iKT][iKphi] = R2_out_GF[iKT][iKphi];
-			arr_R2_long_GF[iKT][iKphi] = R2_long_GF[iKT][iKphi];
-			arr_R2_outside_GF[iKT][iKphi] = R2_outside_GF[iKT][iKphi];
+			arr_R2_side_GF[iKT][iKphi] = R2_side_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_out_GF[iKT][iKphi] = R2_out_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_long_GF[iKT][iKphi] = R2_long_GF[indexer_KT_Kphi( iKT, iKphi )];
+			arr_R2_outside_GF[iKT][iKphi] = R2_outside_GF[indexer_KT_Kphi( iKT, iKphi )];
 		}
 	}
 
