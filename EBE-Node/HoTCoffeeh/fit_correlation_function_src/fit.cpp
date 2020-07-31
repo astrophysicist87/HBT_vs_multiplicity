@@ -11,6 +11,10 @@
 
 using namespace std;
 
+extern vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
+extern vector<vector<double> > CFvals;
+
+
 void Get_GF_HBTradii()
 {
 
