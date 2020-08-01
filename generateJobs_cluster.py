@@ -129,7 +129,7 @@ for i in range(1, numberOfJobs+1):
 #!/usr/bin/env bash
 #PBS -N iEBE-%d
 #PBS -l walltime=%s
-#PBS -l nodes=1:ppn=1:%s
+#PBS -l nodes=1:ppn=1
 #PBS -j oe
 #PBS -S /bin/bash
 cd %s
@@ -139,7 +139,7 @@ cd %s
     cp RunRecord.txt ErrorRecord.txt ../finalResults/
 )
 mv ./finalResults %s/job-%d
-""" % (i, walltime, cluster_name, targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
+""" % (i, walltime, targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
     )
     if compressResultsFolderAnswer == "yes":
         open(path.join(targetWorkingFolder, "job-%d.pbs" % i), "a").write(
@@ -164,7 +164,7 @@ if compressResultsFolderAnswer == "yes":
 #!/usr/bin/env bash
 #PBS -N watcher
 #PBS -l walltime=%s
-#PBS -l nodes=1:ppn=1:%s
+#PBS -l nodes=1:ppn=1
 #PBS -j oe
 #PBS -S /bin/bash
 cd %s
@@ -172,7 +172,7 @@ cd %s
     python autoZippedResultsCombiner.py %s %d "job-(\d*).tar.gz" 60 1> WatcherReport.txt
     mv WatcherReport.txt %s
 )
-""" % (walltime, cluster_name, watcherDirectory, utilitiesFolder, resultsFolder, numberOfJobs, resultsFolder)
+""" % (walltime, watcherDirectory, utilitiesFolder, resultsFolder, numberOfJobs, resultsFolder)
     )
 
 from importlib import import_module
