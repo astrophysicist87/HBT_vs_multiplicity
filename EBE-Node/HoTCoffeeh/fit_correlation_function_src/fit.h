@@ -41,7 +41,7 @@ int Fittarget_correlfun3D_f_withlambda (const gsl_vector *xvec_ptr, void *params
 int Fittarget_correlfun3D_df_withlambda (const gsl_vector *xvec_ptr, void *params_ptr,	gsl_matrix *Jacobian_ptr);
 int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *params_ptr, gsl_vector* f_ptr, gsl_matrix* Jacobian_ptr);
 
-const double hbarC = 0.19733;
+const double hbarC = 0.197327053;
 
 const bool USE_LAMBDA = true;
 const bool USE_LOG_FIT = true;
