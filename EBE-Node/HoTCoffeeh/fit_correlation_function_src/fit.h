@@ -101,7 +101,7 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 int print_fit_state_3D (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 int print_fit_state_3D_withlambda (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
 void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int iKT, int iKphi);
-void R2_Fourier_transform(int jKT, double plane_psi);
+void R2_Fourier_transform(int jKT, double plane_psi, string directory);
 
 // End of file
 
