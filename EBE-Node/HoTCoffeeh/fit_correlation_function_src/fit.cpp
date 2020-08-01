@@ -22,7 +22,7 @@ vector<double> R2_side_GF_S, R2_out_GF_S, R2_long_GF_S, R2_outside_GF_S;
 vector<double> R2_side_err, R2_out_err, R2_long_err, R2_outside_err;
 
 
-void Get_GF_HBTradii(string filename)
+void Get_GF_HBTradii(string directory)
 {
 
 	KT_pts = vector<double>(n_KT_pts);
@@ -54,7 +54,7 @@ void Get_GF_HBTradii(string filename)
 	R2_outside_GF_C = vector<double>( nKT * n_order );
 	R2_outside_GF_S = vector<double>( nKT * n_order );
 
-	Read_in_correlationfunction(filename);
+	Read_in_correlationfunction(directory);
 
 
 	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
@@ -72,7 +72,7 @@ void Get_GF_HBTradii(string filename)
 	}
 
 	for (int iKT = 0; iKT < nKT; ++iKT)
-		R2_Fourier_transform(iKT, 0.0);
+		R2_Fourier_transform(iKT, 0.0, directory);
 
 	return;
 }
@@ -464,9 +464,9 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
         double q_side_local = -qx_pts[i] * skp + qy_pts[j] * ckp;
         double q_long_local = qz_pts[k];
         double correl_local = Correl_3D[indexer_qx_qy_qz(i,j,k)]-1.0;
-		cout << "CHECK CF3D: " << qx_pts[i] << "   " << qy_pts[j] << "   " << qz_pts[k] << "   "
-			<< q_out_local << "	" << q_side_local << "	 " << q_long_local << "	  "
-			<< correl_local << endl;
+		//cout << "CHECK CF3D: " << qx_pts[i] << "   " << qy_pts[j] << "   " << qz_pts[k] << "   "
+		//	<< q_out_local << "	" << q_side_local << "	 " << q_long_local << "	  "
+		//	<< correl_local << endl;
         if(correl_local < 1e-15) continue;
 		//if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 		//	Correlfun3D_data.sigma[idx] = 1.e10;	//ignore central point
@@ -728,32 +728,35 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 }
 
 //Fourier transform of HBT radii once they're calculated
-void R2_Fourier_transform(int jKT, double plane_psi)
+void R2_Fourier_transform(int jKT, double plane_psi, string directory)
 {
+	string modeString = ( USE_LOG_FIT ) ? "_fitLog" : "_fitLSQ";
+	ofstream out(directory + "/HBTradii_GF_cfs_" + modeString + ".dat");
+
 	double * array_KT_pts   = new double [n_KT_pts];
 	double * array_Kphi_pts = new double [n_Kphi_pts];
 	double * K_phi          = new double [nKphi];
 	double * Kphi_wts       = new double [nKphi];
 
-	gauss_quadrature(n_Kphi_pts, 1, 0.0, 0.0, 0.0, 2.0*M_PI, K_phi, Kphi_wts);
+	gauss_quadrature(nKphi, 1, 0.0, 0.0, 0.0, 2.0*M_PI, K_phi, Kphi_wts);
 
-	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
 		array_KT_pts[iKT] = KT_pts[iKT];
 
-	for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+	for (int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		array_Kphi_pts[iKphi] = Kphi_pts[iKphi];
 
 	double ** arr_R2_side_GF    = new double * [n_KT_pts];
 	double ** arr_R2_out_GF     = new double * [n_KT_pts];
 	double ** arr_R2_long_GF    = new double * [n_KT_pts];
 	double ** arr_R2_outside_GF = new double * [n_KT_pts];
-	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
 	{
 		arr_R2_side_GF[iKT]     = new double [n_Kphi_pts];
 		arr_R2_out_GF[iKT]      = new double [n_Kphi_pts];
 		arr_R2_long_GF[iKT]     = new double [n_Kphi_pts];
 		arr_R2_outside_GF[iKT]  = new double [n_Kphi_pts];
-		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		for (int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
 		{
 			arr_R2_side_GF[iKT][iKphi]    = R2_side_GF[indexer_KT_Kphi( iKT, iKphi )];
 			arr_R2_out_GF[iKT][iKphi]     = R2_out_GF[indexer_KT_Kphi( iKT, iKphi )];
@@ -769,12 +772,11 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 
 
 	const int interpMode = 1;
-	//int mode: 0 - GF
-	for(int Morder = 0; Morder < n_order; ++Morder)
+	for (int Morder = 0; Morder < n_order; ++Morder)
 	{
 		double cos_mKphi_pts[nKphi], sin_mKphi_pts[nKphi];
 
-		for(int iKphi = 0; iKphi < nKphi; ++iKphi)
+		for (int iKphi = 0; iKphi < nKphi; ++iKphi)
 		{
 			cos_mKphi_pts[iKphi] = cos(Morder*(K_phi[iKphi] - plane_psi));
 			sin_mKphi_pts[iKphi] = sin(Morder*(K_phi[iKphi] - plane_psi));
@@ -787,51 +789,53 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 		double temp_sum_sidelong_cos = 0.0, temp_sum_sidelong_sin = 0.0;
 		double temp_sum_outlong_cos = 0.0,  temp_sum_outlong_sin = 0.0;
 
-		for(int iKphi = 0; iKphi < n_Kphi_pts; ++iKphi)
+		for (int iKphi = 0; iKphi < nKphi; ++iKphi)
 		{
 			double local_R2s = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_side_GF,
-												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+											 K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
 			double local_R2o = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_out_GF,
-												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+											 K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
 			double local_R2os = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_outside_GF,
-												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+											 K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
 			double local_R2l = interpolate2D(array_KT_pts, array_Kphi_pts, arr_R2_long_GF,
-												K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
+											 K_T[jKT], K_phi[iKphi], n_KT_pts, n_Kphi_pts, interpMode, false, true);
 
-			temp_sum_side_cos += local_R2s*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
-			temp_sum_side_sin += local_R2s*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
-			temp_sum_out_cos += local_R2o*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
-			temp_sum_out_sin += local_R2o*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_side_cos    += local_R2s*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_side_sin    += local_R2s*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_out_cos     += local_R2o*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_out_sin     += local_R2o*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
 			temp_sum_outside_cos += local_R2os*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
 			temp_sum_outside_sin += local_R2os*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
-			temp_sum_long_cos += local_R2l*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
-			temp_sum_long_sin += local_R2l*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_long_cos    += local_R2l*cos_mKphi_pts[iKphi]*Kphi_wts[iKphi];
+			temp_sum_long_sin    += local_R2l*sin_mKphi_pts[iKphi]*Kphi_wts[iKphi];
 		}
 
-		R2_side_GF_C[jKT*n_order + Morder] = temp_sum_side_cos/(2.*M_PI);
-		R2_side_GF_S[jKT*n_order + Morder] = temp_sum_side_sin/(2.*M_PI);
-		R2_out_GF_C[jKT*n_order + Morder] = temp_sum_out_cos/(2.*M_PI);
-		R2_out_GF_S[jKT*n_order + Morder] = temp_sum_out_sin/(2.*M_PI);
+		R2_side_GF_C[jKT*n_order + Morder]    = temp_sum_side_cos/(2.*M_PI);
+		R2_side_GF_S[jKT*n_order + Morder]    = temp_sum_side_sin/(2.*M_PI);
+		R2_out_GF_C[jKT*n_order + Morder]     = temp_sum_out_cos/(2.*M_PI);
+		R2_out_GF_S[jKT*n_order + Morder]     = temp_sum_out_sin/(2.*M_PI);
 		R2_outside_GF_C[jKT*n_order + Morder] = temp_sum_outside_cos/(2.*M_PI);
 		R2_outside_GF_S[jKT*n_order + Morder] = temp_sum_outside_sin/(2.*M_PI);
-		R2_long_GF_C[jKT*n_order + Morder] = temp_sum_long_cos/(2.*M_PI);
-		R2_long_GF_S[jKT*n_order + Morder] = temp_sum_long_sin/(2.*M_PI);
+		R2_long_GF_C[jKT*n_order + Morder]    = temp_sum_long_cos/(2.*M_PI);
+		R2_long_GF_S[jKT*n_order + Morder]    = temp_sum_long_sin/(2.*M_PI);
 
 
-		cout << K_T[jKT] << "   " << Morder << "   "
+		out << K_T[jKT] << "   "
+			<< Morder << "   "
 			<< R2_side_GF_C[jKT*n_order + Morder] << "   "
 			<< R2_side_GF_S[jKT*n_order + Morder] << "   "
 			<< R2_out_GF_C[jKT*n_order + Morder] << "   "
 			<< R2_out_GF_S[jKT*n_order + Morder] << "   "
+			<< R2_outside_GF_C[jKT*n_order + Morder] << "   "
+			<< R2_outside_GF_S[jKT*n_order + Morder] << "   "
 			<< R2_long_GF_C[jKT*n_order + Morder] << "   "
 			<< R2_long_GF_S[jKT*n_order + Morder] << "   "
-			<< R2_outside_GF_C[jKT*n_order + Morder] << "   "
-			<< R2_outside_GF_S[jKT*n_order + Morder] << endl;
+			<< 0 << "   " << 0 << "   " << 0 << "   " << 0 << endl;	//R2sl==R2ol==0 for boost-invariant
 
 
 	}
 
-	for(int iKT = 0; iKT < n_KT_pts; ++iKT)
+	for (int iKT = 0; iKT < n_KT_pts; ++iKT)
 	{
 		delete [] arr_R2_side_GF[iKT];
 		delete [] arr_R2_out_GF[iKT];
@@ -850,7 +854,7 @@ void R2_Fourier_transform(int jKT, double plane_psi)
 	delete [] K_phi;
 	delete [] Kphi_wts;
 
-
+	out.close();
 
 	return;
 }
