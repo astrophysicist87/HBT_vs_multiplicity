@@ -31,13 +31,13 @@ case "$sys" in
 				hydroParameters:'dx'='0.1' \
 				hydroParameters:'dy'='0.1'
 
-			./generateJobs_local.py 1 $count \
+			./generateJobs_cluster.py 1 $count \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				03:00:00 no \
+				18:00:00 "no" \
 				ParameterDict_EA_${sys}_C${cenAlt}.py \
 
-			./submitJobs_local.py
+			./submitJobs_qsub.py
 
 			sleep 5
 		done
@@ -51,9 +51,9 @@ case "$sys" in
 				count=100
 			fi
 			if [ "$cen" == '0-0.01%' ]
-                        then
-                                count=1000
-                        fi
+			then
+				count=1000
+			fi
 			cenAlt=`echo "$cen" | tr . '_'`
 			python updateParameterDict.py ParameterDict_EA_${sys}_C${cenAlt}.py \
 				initial_condition_control:'centrality'=${cen} \
@@ -69,13 +69,13 @@ case "$sys" in
 				hydroParameters:'dx'='0.1' \
 				hydroParameters:'dy'='0.1'
 
-			./generateJobs_local.py 1 $count \
+			./generateJobs_cluster.py 1 $count \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				03:00:00 no \
+				18:00:00 "no" \
 				ParameterDict_EA_${sys}_C${cenAlt}.py
 
-			./submitJobs_local.py
+			./submitJobs_qsub.py
 
 			sleep 5
 		done
@@ -97,13 +97,13 @@ case "$sys" in
 				hydroParameters:'dx'='0.1' \
 				hydroParameters:'dy'='0.1'
 
-			./generateJobs_local.py 1 10000 \
+			./generateJobs_cluster.py 1 10000 pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				24:00:00 no \
+				24:00:00 "no" \
 				ParameterDict_EA_${sys}_C${cen}.py
 
-			./submitJobs_local.py
+			./submitJobs_qsub.py
 
 			sleep 5
 		done

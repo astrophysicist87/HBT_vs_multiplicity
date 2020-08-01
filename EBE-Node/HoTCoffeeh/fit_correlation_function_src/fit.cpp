@@ -28,6 +28,8 @@ void Get_GF_HBTradii(string directory, bool use_log_fit_in)
 {
 	USE_LOG_FIT = use_log_fit_in;
 
+	cout << "  - processing " << directory << " with log fit = " << USE_LOG_FIT << endl;
+
 	KT_pts = vector<double>(n_KT_pts);
 	Kphi_pts = vector<double>(n_Kphi_pts);
 	qx_pts = vector<double>(nqxpts);

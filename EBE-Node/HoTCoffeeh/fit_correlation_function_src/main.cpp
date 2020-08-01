@@ -16,12 +16,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	cout << "**********************************************************" << endl;
+	cout << endl << "********************************************************************************" << endl;
 	cout << endl
-		<< "            Correlation functions with resonances            " << endl
+		<< "            Correlation functions fitting            " << endl
 		<< endl
 		<< "  Ver 1.0   ----- Author: Christopher Plumberg   " << endl;
-	cout << endl << "**********************************************************" << endl << endl;
+	cout << endl << "********************************************************************************" << endl << endl;
 	
 	// use log fit
 	Get_GF_HBTradii( std::string(argv[1]), true );
