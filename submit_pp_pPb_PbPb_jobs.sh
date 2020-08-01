@@ -31,7 +31,7 @@ case "$sys" in
 				hydroParameters:'dx'='0.1' \
 				hydroParameters:'dy'='0.1'
 
-			./generateJobs_cluster.py 1 $count \
+			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
 				18:00:00 "no" \
@@ -69,7 +69,7 @@ case "$sys" in
 				hydroParameters:'dx'='0.1' \
 				hydroParameters:'dy'='0.1'
 
-			./generateJobs_cluster.py 1 $count \
+			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
 				18:00:00 "no" \
