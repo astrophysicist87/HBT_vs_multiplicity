@@ -1,0 +1,564 @@
+==24707== Memcheck, a memory error detector
+==24707== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==24707== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==24707== Command: ./cfwr.e grouping_particles=0 particle_diff_tolerance=0 use_plane_psi_order=0 ignore_long_lived_resonances=1 max_lifetime=100 include_delta_f=0 include_bulk_pi=1 n_order=4 tolerance=0 flag_negative_s=1 chosenparticlesmode=0 nkt=101 nkphi=48 ktmin=0.01 ktmax=1.01 sv_npt=15 sv_npphi=48 sv_resonancethreshold=0 cf_npt=3 cf_npphi=4 cf_npy=3 cf_resonancethreshold=0 calculate_cf_mode=0 fit_with_projected_cfvals=1 flesh_out_cf=1 qtnpts=3 qxnpts=3 qynpts=3 qznpts=3 delta_qx=0.025 delta_qy=0.025 delta_qz=0.0125 use_log_fit=1 use_lambda=1 use_extrapolation=1
+==24707== 
+==24707== Conditional jump or move depends on uninitialised value(s)
+==24707==    at 0x7F725F: __intel_proc_init_ftzdazule (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24707==    by 0x7E8BE9: __intel_new_feature_proc_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24707==    by 0x405C4B: main (main.cpp:26)
+==24707==  Uninitialised value was created by a stack allocation
+==24707==    at 0x34B6A025E2: handle_ld_preload (in /lib64/ld-2.12.so)
+==24707== 
+==24707== Conditional jump or move depends on uninitialised value(s)
+==24707==    at 0x7F7274: __intel_proc_init_ftzdazule (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24707==    by 0x7E8BE9: __intel_new_feature_proc_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24707==    by 0x405C4B: main (main.cpp:26)
+==24707==  Uninitialised value was created by a stack allocation
+==24707==    at 0x34B6A025E2: handle_ld_preload (in /lib64/ld-2.12.so)
+==24707== 
+
+            Correlation functions with resonances            
+
+  Ver 1.0   ----- Christopher Plumberg, 07/2016   
+
+**********************************************************
+:::    ::: :::::::::: ::::::::::: ::::    ::: :::::::::
+:+:    :+: :+:	       :+:     :+:+:   :+:	:+: 
++:+    +:+ +:+	       +:+     :+:+:+  +:+     +:+  
++#++:++#++ +#++:++#       +#+     +#+ +:+ +#+    +#+   
++#+    +#+ +#+	       +#+     +#+  +#+#+#   +#+    
+#+#    #+# #+#	       #+#     #+#   #+#+#  #+#	    
+###    ### ########## ########### ###    #### #########
+
+**********************************************************
+
+grouping_particles=0  particle_diff_tolerance=0  use_plane_psi_order=0  ignore_long_lived_resonances=1  max_lifetime=100  include_delta_f=0  include_bulk_pi=1  n_order=4  tolerance=0  flag_negative_s=1  chosenparticlesmode=0  nkt=101  nkphi=48  ktmin=0.01  ktmax=1.01  sv_npt=15  sv_npphi=48  sv_resonancethreshold=0  cf_npt=3  cf_npphi=4  cf_npy=3  cf_resonancethreshold=0  calculate_cf_mode=0  fit_with_projected_cfvals=1  flesh_out_cf=1  qtnpts=3  qxnpts=3  qynpts=3  qznpts=3  delta_qx=0.025  delta_qy=0.025  delta_qz=0.0125  use_log_fit=1  use_lambda=1  use_extrapolation=1  
+==24707== Conditional jump or move depends on uninitialised value(s)
+==24707==    at 0x432B5B: read_resonance(particle_info*) (readindata.cpp:197)
+==24707==    by 0x406B81: main (main.cpp:105)
+==24707==  Uninitialised value was created by a heap allocation
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x406A9B: main (main.cpp:104)
+==24707== 
+==24707== Conditional jump or move depends on uninitialised value(s)
+==24707==    at 0x432C76: read_resonance(particle_info*) (readindata.cpp:210)
+==24707==    by 0x406B81: main (main.cpp:105)
+==24707==  Uninitialised value was created by a heap allocation
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x406A9B: main (main.cpp:104)
+==24707== 
+==24707== Conditional jump or move depends on uninitialised value(s)
+==24707==    at 0x432C9C: read_resonance(particle_info*) (readindata.cpp:216)
+==24707==    by 0x406B81: main (main.cpp:105)
+==24707==  Uninitialised value was created by a heap allocation
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x406A9B: main (main.cpp:104)
+==24707== 
+0   0.159913
+1   0.882416
+2   2.41921
+0   0.436253
+1   2.07351
+2   4.20967
+3   5.84693
+0   0
+1   2.78461
+2   5.56922
+********************
+qt_pts[0] = -0.0292893
+qt_pts[1] = 0
+qt_pts[2] = 0.0292893
+********************
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Currently reflecting in qz and qt!
+Finished reflection in qz and qt!
+Currently reflecting in qz and qt!
+Finished reflection in qz and qt!
+==24707== 
+==24707== HEAP SUMMARY:
+==24707==     in use at exit: 2,154,233 bytes in 23,325 blocks
+==24707==   total heap usage: 291,362 allocs, 268,037 frees, 49,240,272 bytes allocated
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 1 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E31D: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:127)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 2 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x4530F0: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:269)
+==24707==    by 0x409431: main (main.cpp:235)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 3 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x453182: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:277)
+==24707==    by 0x409431: main (main.cpp:235)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 4 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x452260: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:394)
+==24707==    by 0x40943E: main (main.cpp:236)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 5 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x4522F2: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:401)
+==24707==    by 0x40943E: main (main.cpp:236)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 6 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44CE9F: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:115)
+==24707==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24707==    by 0x40944B: main (main.cpp:237)
+==24707== 
+==24707== 16 bytes in 1 blocks are definitely lost in loss record 7 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44CF2D: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:122)
+==24707==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24707==    by 0x40944B: main (main.cpp:237)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 10 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F988: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:319)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 11 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F99C: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:320)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 12 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45FBA7: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:337)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 13 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x46078E: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:393)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 14 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4607A2: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:394)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 15 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x461320: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:486)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 16 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x453082: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24707==    by 0x409431: main (main.cpp:235)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 17 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x45311C: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:271)
+==24707==    by 0x409431: main (main.cpp:235)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 18 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x4521F2: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:389)
+==24707==    by 0x40943E: main (main.cpp:236)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 19 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x45228C: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:396)
+==24707==    by 0x40943E: main (main.cpp:236)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 20 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44CE32: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24707==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24707==    by 0x40944B: main (main.cpp:237)
+==24707== 
+==24707== 24 bytes in 1 blocks are definitely lost in loss record 21 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44CECA: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:117)
+==24707==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24707==    by 0x40944B: main (main.cpp:237)
+==24707== 
+==24707== 32 bytes in 1 blocks are definitely lost in loss record 22 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F9B0: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:321)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 32 bytes in 1 blocks are definitely lost in loss record 23 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F9C4: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:322)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 32 bytes in 1 blocks are definitely lost in loss record 24 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F9D8: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:323)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 32 bytes in 1 blocks are definitely lost in loss record 25 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F9EC: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:324)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 32 bytes in 1 blocks are definitely lost in loss record 26 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x460C9B: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:420)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 29 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C4B7: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:166)
+==24707==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24707==    by 0x4094EE: main (main.cpp:247)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 30 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C559: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:169)
+==24707==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24707==    by 0x4094EE: main (main.cpp:247)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 31 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C6F0: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:147)
+==24707==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 32 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C792: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:150)
+==24707==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 33 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44F7B9: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:302)
+==24707==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 64 bytes in 4 blocks are definitely lost in loss record 34 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44F85B: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:305)
+==24707==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 72 bytes in 1 blocks are definitely lost in loss record 37 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x460117: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:373)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 1 blocks are definitely lost in loss record 54 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F8DB: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:308)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 1 blocks are definitely lost in loss record 55 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F8EC: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:309)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 1 blocks are definitely lost in loss record 56 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F8FD: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:310)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 1 blocks are definitely lost in loss record 57 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F90E: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:311)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 58 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E124: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:883)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 59 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C4E2: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:167)
+==24707==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24707==    by 0x4094EE: main (main.cpp:247)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 60 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C52A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:168)
+==24707==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24707==    by 0x4094EE: main (main.cpp:247)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 61 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C71B: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:148)
+==24707==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 62 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44C763: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:149)
+==24707==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 63 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44F7E4: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:303)
+==24707==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 96 bytes in 4 blocks are definitely lost in loss record 64 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x44F82C: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:304)
+==24707==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24707==    by 0x409501: main (main.cpp:249)
+==24707== 
+==24707== 120 (24 direct, 96 indirect) bytes in 1 blocks are definitely lost in loss record 65 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x461348: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:489)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 152 (112 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 66 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E39E: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:141)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 248 bytes in 1 blocks are definitely lost in loss record 69 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45FD4B: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:353)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 248 bytes in 1 blocks are definitely lost in loss record 70 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45FD5C: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:354)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 248 bytes in 1 blocks are definitely lost in loss record 71 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45FD9A: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:356)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 248 bytes in 1 blocks are definitely lost in loss record 72 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45FDAB: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:357)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 312 (24 direct, 288 indirect) bytes in 1 blocks are definitely lost in loss record 82 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x459072: CorrelationFunction::Set_correlation_function_q_pts() (cfwr_admin.cpp:865)
+==24707==    by 0x48F5F9: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:69)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 312 (24 direct, 288 indirect) bytes in 1 blocks are definitely lost in loss record 83 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x459072: CorrelationFunction::Set_correlation_function_q_pts() (cfwr_admin.cpp:865)
+==24707==    by 0x48F5F9: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:69)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 360 (72 direct, 288 indirect) bytes in 1 blocks are definitely lost in loss record 84 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45ED02: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:256)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 408 bytes in 1 blocks are definitely lost in loss record 85 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x46009C: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:364)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 408 bytes in 1 blocks are definitely lost in loss record 86 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4600AD: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:365)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 720 (144 direct, 576 indirect) bytes in 6 blocks are definitely lost in loss record 89 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4612A7: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:458)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 99 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x4900D7: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:229)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 100 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x49010C: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:230)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 101 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x490141: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:231)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 102 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x490179: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:232)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 103 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x4900D7: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:229)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 104 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x49010C: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:230)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 105 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x490141: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:231)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 1,296 bytes in 324 blocks are definitely lost in loss record 106 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24707==    by 0x490179: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:232)
+==24707==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 2,377 (16 direct, 2,361 indirect) bytes in 1 blocks are definitely lost in loss record 107 of 175
+==24707==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24707==    by 0x405D37: main (main.cpp:36)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 141 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFA7: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 142 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFBD: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 143 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFD3: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 144 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFE9: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075A2: main (main.cpp:271)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 145 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFA7: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 146 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFBD: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 147 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFD3: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 148 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45AFE9: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24707==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24707==    by 0x4075B4: main (main.cpp:272)
+==24707== 
+==24707== 10,368 bytes in 1 blocks are definitely lost in loss record 157 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E417: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:237)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 10,368 bytes in 1 blocks are definitely lost in loss record 158 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E426: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:238)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 10,656 (288 direct, 10,368 indirect) bytes in 1 blocks are definitely lost in loss record 159 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F2E7: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:264)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 10,656 (288 direct, 10,368 indirect) bytes in 1 blocks are definitely lost in loss record 160 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F305: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:265)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 10,656 (288 direct, 10,368 indirect) bytes in 1 blocks are definitely lost in loss record 161 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F323: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:266)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 31,104 bytes in 1 blocks are definitely lost in loss record 165 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E87C: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:245)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 31,104 bytes in 1 blocks are definitely lost in loss record 166 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45E88B: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:246)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 48,480 (9,696 direct, 38,784 indirect) bytes in 12 blocks are definitely lost in loss record 167 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x46125D: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:444)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 48,480 (9,696 direct, 38,784 indirect) bytes in 12 blocks are definitely lost in loss record 168 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4612F1: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:472)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 122,880 (7,680 direct, 115,200 indirect) bytes in 3 blocks are definitely lost in loss record 169 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45F554: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:281)
+==24707==    by 0x40741A: main (main.cpp:191)
+==24707== 
+==24707== 264,448 (252,808 direct, 11,640 indirect) bytes in 1 blocks are definitely lost in loss record 170 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x406A9B: main (main.cpp:104)
+==24707== 
+==24707== 341,880 (48,840 direct, 293,040 indirect) bytes in 1 blocks are definitely lost in loss record 173 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x4582F6: CorrelationFunction::Set_FOsurf_ptr(FO_surf*, int) (cfwr_admin.cpp:624)
+==24707==    by 0x407484: main (main.cpp:196)
+==24707== 
+==24707== 341,880 (48,840 direct, 293,040 indirect) bytes in 1 blocks are definitely lost in loss record 174 of 175
+==24707==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24707==    by 0x45830D: CorrelationFunction::Set_FOsurf_ptr(FO_surf*, int) (cfwr_admin.cpp:625)
+==24707==    by 0x407484: main (main.cpp:196)
+==24707== 
+==24707== LEAK SUMMARY:
+==24707==    definitely lost: 476,224 bytes in 2,736 blocks
+==24707==    indirectly lost: 856,249 bytes in 20,268 blocks
+==24707==      possibly lost: 0 bytes in 0 blocks
+==24707==    still reachable: 821,760 bytes in 321 blocks
+==24707==         suppressed: 0 bytes in 0 blocks
+==24707== Reachable blocks (those to which a pointer was found) are not shown.
+==24707== To see them, rerun with: --leak-check=full --show-reachable=yes
+==24707== 
+==24707== For counts of detected and suppressed errors, rerun with: -v
+==24707== ERROR SUMMARY: 89 errors from 89 contexts (suppressed: 8 from 6)

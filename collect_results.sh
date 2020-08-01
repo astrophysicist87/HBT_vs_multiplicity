@@ -11,7 +11,7 @@ do
 	./get_SurfaceX_and_SurfaceY.sh $direc
 done
 
-zip -r all_results_moreKT.zip \
+zip -r all_results_noSA.zip \
        RESULTS_EA_*_dNchdeta100/job-1/event-1/Surface[XY].dat \
        RESULTS_EA_*_dNchdeta100/job-1/event-1/HBT*.dat \
        RESULTS_EA_*_dNchdeta100/job-1/event-1/emission*dat \

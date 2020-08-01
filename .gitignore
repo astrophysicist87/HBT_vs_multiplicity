@@ -1,2 +1,5 @@
 *.e
 *.o
+*.out
+*.dump
+*.xml

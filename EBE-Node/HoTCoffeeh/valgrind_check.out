@@ -1,0 +1,1327 @@
+==24132== Memcheck, a memory error detector
+==24132== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==24132== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==24132== Command: ./cfwr.e grouping_particles=0 particle_diff_tolerance=0 use_plane_psi_order=0 ignore_long_lived_resonances=1 max_lifetime=100 include_delta_f=0 include_bulk_pi=1 n_order=4 tolerance=0 flag_negative_s=1 chosenparticlesmode=0 nkt=101 nkphi=48 ktmin=0.01 ktmax=1.01 sv_npt=15 sv_npphi=48 sv_resonancethreshold=0 cf_npt=3 cf_npphi=4 cf_npy=3 cf_resonancethreshold=0 calculate_cf_mode=0 fit_with_projected_cfvals=1 flesh_out_cf=1 qtnpts=3 qxnpts=3 qynpts=3 qznpts=3 delta_qx=0.025 delta_qy=0.025 delta_qz=0.0125 use_log_fit=1 use_lambda=1 use_extrapolation=1
+==24132== 
+==24132== Conditional jump or move depends on uninitialised value(s)
+==24132==    at 0x7F725F: __intel_proc_init_ftzdazule (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7E8BE9: __intel_new_feature_proc_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x405C4B: main (main.cpp:26)
+==24132==  Uninitialised value was created by a stack allocation
+==24132==    at 0x34B6A025E2: handle_ld_preload (in /lib64/ld-2.12.so)
+==24132== 
+==24132== Conditional jump or move depends on uninitialised value(s)
+==24132==    at 0x7F7274: __intel_proc_init_ftzdazule (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7E8BE9: __intel_new_feature_proc_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x405C4B: main (main.cpp:26)
+==24132==  Uninitialised value was created by a stack allocation
+==24132==    at 0x34B6A025E2: handle_ld_preload (in /lib64/ld-2.12.so)
+==24132== 
+
+            Correlation functions with resonances            
+
+  Ver 1.0   ----- Christopher Plumberg, 07/2016   
+
+**********************************************************
+:::    ::: :::::::::: ::::::::::: ::::    ::: :::::::::
+:+:    :+: :+:	       :+:     :+:+:   :+:	:+: 
++:+    +:+ +:+	       +:+     :+:+:+  +:+     +:+  
++#++:++#++ +#++:++#       +#+     +#+ +:+ +#+    +#+   
++#+    +#+ +#+	       +#+     +#+  +#+#+#   +#+    
+#+#    #+# #+#	       #+#     #+#   #+#+#  #+#	    
+###    ### ########## ########### ###    #### #########
+
+**********************************************************
+
+grouping_particles=0  particle_diff_tolerance=0  use_plane_psi_order=0  ignore_long_lived_resonances=1  max_lifetime=100  include_delta_f=0  include_bulk_pi=1  n_order=4  tolerance=0  flag_negative_s=1  chosenparticlesmode=0  nkt=101  nkphi=48  ktmin=0.01  ktmax=1.01  sv_npt=15  sv_npphi=48  sv_resonancethreshold=0  cf_npt=3  cf_npphi=4  cf_npy=3  cf_resonancethreshold=0  calculate_cf_mode=0  fit_with_projected_cfvals=1  flesh_out_cf=1  qtnpts=3  qxnpts=3  qynpts=3  qznpts=3  delta_qx=0.025  delta_qy=0.025  delta_qz=0.0125  use_log_fit=1  use_lambda=1  use_extrapolation=1  
+==24132== Conditional jump or move depends on uninitialised value(s)
+==24132==    at 0x432B5B: read_resonance(particle_info*) (readindata.cpp:197)
+==24132==    by 0x406B81: main (main.cpp:105)
+==24132==  Uninitialised value was created by a heap allocation
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x406A9B: main (main.cpp:104)
+==24132== 
+==24132== Conditional jump or move depends on uninitialised value(s)
+==24132==    at 0x432C76: read_resonance(particle_info*) (readindata.cpp:210)
+==24132==    by 0x406B81: main (main.cpp:105)
+==24132==  Uninitialised value was created by a heap allocation
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x406A9B: main (main.cpp:104)
+==24132== 
+==24132== Conditional jump or move depends on uninitialised value(s)
+==24132==    at 0x432C9C: read_resonance(particle_info*) (readindata.cpp:216)
+==24132==    by 0x406B81: main (main.cpp:105)
+==24132==  Uninitialised value was created by a heap allocation
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x406A9B: main (main.cpp:104)
+==24132== 
+0   0.159913
+1   0.882416
+2   2.41921
+0   0.436253
+1   2.07351
+2   4.20967
+3   5.84693
+0   0
+1   2.78461
+2   5.56922
+********************
+qt_pts[0] = -0.0292893
+qt_pts[1] = 0
+qt_pts[2] = 0.0292893
+********************
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Setting thermal target moments...
+Setting full target moments...
+done.
+Currently reflecting in qz and qt!
+Finished reflection in qz and qt!
+Currently reflecting in qz and qt!
+Finished reflection in qz and qt!
+==24132== 
+==24132== HEAP SUMMARY:
+==24132==     in use at exit: 30,248,175 bytes in 56,776 blocks
+==24132==   total heap usage: 290,868 allocs, 234,092 frees, 49,050,551 bytes allocated
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 111 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F66: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4530B9: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 112 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F7A: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4530B9: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 113 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F66: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452229: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:389)
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 114 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F7A: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452229: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:389)
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 115 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F66: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44CE69: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24132== 
+==24132== 10 bytes in 1 blocks are possibly lost in loss record 116 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621E9E: H5RS_xstrdup (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x621F62: H5RS_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F7A: H5G_name_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A3A0: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44CE69: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24132== 
+==24132== 16 bytes in 1 blocks are definitely lost in loss record 271 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x4530F0: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:269)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 16 bytes in 1 blocks are definitely lost in loss record 272 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x453182: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:277)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 16 bytes in 1 blocks are definitely lost in loss record 273 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44CE9F: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:115)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 16 bytes in 1 blocks are definitely lost in loss record 274 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44CF2D: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:122)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 538 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x45310A: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:269)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 539 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x45319C: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:277)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 540 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x798DD3: H5D_create_chunk_file_map_hyper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x797C31: H5D_chunk_io_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5222AF: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4532F6: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:292)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 541 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x45230C: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:401)
+==24132==    by 0x40943E: main (main.cpp:236)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 542 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x798DD3: H5D_create_chunk_file_map_hyper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x797C31: H5D_chunk_io_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5222AF: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452466: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:416)
+==24132==    by 0x40943E: main (main.cpp:236)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 543 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44CF47: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:122)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 544 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x798DD3: H5D_create_chunk_file_map_hyper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x797C31: H5D_chunk_io_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5222AF: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44D02A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:140)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 545 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44C573: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:169)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132==    by 0x4094EE: main (main.cpp:247)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 546 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x798DD3: H5D_create_chunk_file_map_hyper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x797C31: H5D_chunk_io_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5222AF: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44C67D: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:184)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 547 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44C7AC: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:150)
+==24132==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 24 bytes in 1 blocks are possibly lost in loss record 548 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44F7D3: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:302)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 24 bytes in 3 blocks are possibly lost in loss record 549 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C7458: H5O_touch_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BFBA: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B7767: H5L_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 24 bytes in 1 blocks are definitely lost in loss record 550 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x453082: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 24 bytes in 1 blocks are definitely lost in loss record 551 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x45311C: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:271)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 24 bytes in 1 blocks are definitely lost in loss record 552 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44CE32: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 24 bytes in 1 blocks are definitely lost in loss record 553 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44CECA: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:117)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 29 bytes in 1 blocks are possibly lost in loss record 578 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x44ABF2: __sti__$E (cfwr.cpp:39)
+==24132==    by 0x7F73C5: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x404F12: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 29 bytes in 1 blocks are possibly lost in loss record 579 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x44AC1A: __sti__$E (cfwr.cpp:40)
+==24132==    by 0x7F73C5: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x404F12: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 29 bytes in 1 blocks are possibly lost in loss record 580 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x40BDF6: __sti__$E (generate_processing_record.h:14)
+==24132==    by 0x7F73C5: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x404F12: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 30 bytes in 1 blocks are possibly lost in loss record 583 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x40BE1E: __sti__$E (generate_processing_record.h:15)
+==24132==    by 0x7F73C5: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x404F12: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 31 bytes in 1 blocks are possibly lost in loss record 587 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9DDA9: std::string::_M_mutate(unsigned long, unsigned long, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9DF6B: std::string::_M_replace_safe(unsigned long, unsigned long, char const*, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x45E2EF: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (basic_string.h:975)
+==24132==    by 0x40741A: main (main.cpp:191)
+==24132== 
+==24132== 34 bytes in 1 blocks are possibly lost in loss record 1,023 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x405E73: main (main.cpp:57)
+==24132== 
+==24132== 36 bytes in 1 blocks are possibly lost in loss record 1,031 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D28B: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x4AE1FD: ParameterReader::setVal(std::string, double) (new_allocator.h:105)
+==24132==    by 0x4B1054: ParameterReader::phraseEquationWithoutComments(std::string) (ParameterReader.cpp:56)
+==24132==    by 0x4AEEFD: ParameterReader::readFromArguments(long, char**, std::string, long) (ParameterReader.cpp:79)
+==24132==    by 0x405E01: main (main.cpp:38)
+==24132== 
+==24132== 38 bytes in 3 blocks are possibly lost in loss record 1,036 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570DDA: H5G_build_fullpath (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F3E: H5G_build_fullpath_refstr_str (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570FF2: H5G_name_set (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B7062: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B7767: H5L_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6BB8: H5L_link_object (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51AD07: H5D_create_named (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 38 bytes in 3 blocks are possibly lost in loss record 1,037 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570DDA: H5G_build_fullpath (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F3E: H5G_build_fullpath_refstr_str (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x571089: H5G_name_set (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B7062: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B7767: H5L_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6BB8: H5L_link_object (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51AD07: H5D_create_named (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 40 bytes in 1 blocks are possibly lost in loss record 1,050 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45E3CA: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:142)
+==24132==    by 0x40741A: main (main.cpp:191)
+==24132== 
+==24132== 48 bytes in 3 blocks are possibly lost in loss record 1,069 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F8B1B: H5O_stab_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE136: H5O_msg_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A978: H5G_stab_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x576C14: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 57 bytes in 1 blocks are possibly lost in loss record 1,104 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CDE4: ??? (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9CF32: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x4B8477: global constructors keyed to H5::Exception::DEFAULT_MSG (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7F73C5: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x404F12: ??? (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,120 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C4B7: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:166)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132==    by 0x4094EE: main (main.cpp:247)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,121 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C559: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:169)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132==    by 0x4094EE: main (main.cpp:247)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,122 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C6F0: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:147)
+==24132==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,123 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C792: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:150)
+==24132==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,124 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44F7B9: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:302)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 64 bytes in 4 blocks are definitely lost in loss record 1,125 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44F85B: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:305)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,138 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51B5C4: H5D_init_space (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51C560: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,139 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F6F75: H5O_sdspace_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6246C4: H5S_append (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BCBB: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,140 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44C70A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:147)
+==24132==    by 0x43D42D: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:238)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,141 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44C7AC: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:150)
+==24132==    by 0x43D42D: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:238)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,142 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44F7D3: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:302)
+==24132==    by 0x43D43A: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:239)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,143 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44F875: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:305)
+==24132==    by 0x43D43A: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:239)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 72 bytes in 3 blocks are possibly lost in loss record 1,144 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x62355F: H5S_extent_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6237F6: H5S_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x798DD3: H5D_create_chunk_file_map_hyper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x797C31: H5D_chunk_io_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x521954: H5D_read (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x520D14: H5Dread (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6E6F: H5::DataSet::read(void*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44D406: CorrelationFunction::Access_resonance_in_HDF_array(int, int, int, int, double*, bool) (cfwr_HDF.cpp:513)
+==24132==    by 0x43D467: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:242)
+==24132== 
+==24132== 77 bytes in 2 blocks are possibly lost in loss record 1,146 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D28B: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x4AE34E: ParameterReader::setVal(std::string, double) (new_allocator.h:105)
+==24132==    by 0x4B1054: ParameterReader::phraseEquationWithoutComments(std::string) (ParameterReader.cpp:56)
+==24132==    by 0x4AEEFD: ParameterReader::readFromArguments(long, char**, std::string, long) (ParameterReader.cpp:79)
+==24132==    by 0x405E01: main (main.cpp:38)
+==24132== 
+==24132== 96 bytes in 4 blocks are possibly lost in loss record 1,694 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561307: H5FL_arr_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625157: H5S_set_extent_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625A07: H5S_create_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x625783: H5Screate_simple (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C0EE0: H5::DataSpace::DataSpace(int, unsigned long long const*, unsigned long long const*) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44F875: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:305)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,699 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C4E2: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:167)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132==    by 0x4094EE: main (main.cpp:247)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,700 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C52A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:168)
+==24132==    by 0x44C026: CorrelationFunction::Reset_HDF_resonance_array() (cfwr_HDF.cpp:49)
+==24132==    by 0x4094EE: main (main.cpp:247)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,701 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C71B: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:148)
+==24132==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,702 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44C763: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:149)
+==24132==    by 0x43CA91: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:197)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,703 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44F7E4: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:303)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 96 bytes in 4 blocks are definitely lost in loss record 1,704 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x44F82C: CorrelationFunction::Administrate_target_thermal_HDF_array(int) (cfwr_HDF.cpp:304)
+==24132==    by 0x43CA9E: CorrelationFunction::Fourier_transform_emission_function(int, int) (cfwr.cpp:198)
+==24132==    by 0x409501: main (main.cpp:249)
+==24132== 
+==24132== 112 bytes in 1 blocks are possibly lost in loss record 1,709 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45E39E: CorrelationFunction::CorrelationFunction(ParameterReader*, particle_info*, particle_info*, int, std::vector<int, std::allocator<int> >, int, std::basic_ofstream<char, std::char_traits<char> >&) (cfwr_admin.cpp:141)
+==24132==    by 0x40741A: main (main.cpp:191)
+==24132== 
+==24132== 120 bytes in 3 blocks are possibly lost in loss record 1,710 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C4FB5: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5769C5: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 120 bytes in 3 blocks are possibly lost in loss record 1,711 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C4FB5: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BBC4: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 144 bytes in 3 blocks are possibly lost in loss record 1,848 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C5087: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5769C5: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 148 bytes in 12 blocks are possibly lost in loss record 1,849 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570DDA: H5G_build_fullpath (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F3E: H5G_build_fullpath_refstr_str (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570FF2: H5G_name_set (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56E464: H5G_link_to_loc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57EB94: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56FCBC: H5G_loc_find (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5146E9: H5Dopen2 (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C7F2E: H5::CommonFG::openDataSet(char const*) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 148 bytes in 12 blocks are possibly lost in loss record 1,850 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570DDA: H5G_build_fullpath (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x570F3E: H5G_build_fullpath_refstr_str (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x571089: H5G_name_set (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56E464: H5G_link_to_loc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57EB94: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56FCBC: H5G_loc_find (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5146E9: H5Dopen2 (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C7F2E: H5::CommonFG::openDataSet(char const*) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 240 bytes in 3 blocks are possibly lost in loss record 1,873 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F6EF9: H5O_sdspace_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x6246C4: H5S_append (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BCBB: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 264 bytes in 3 blocks are possibly lost in loss record 1,878 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5E7D1D: H5O_fill_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BDD5: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 272 bytes in 1 blocks are possibly lost in loss record 1,880 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791AD7: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4530B9: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24132== 
+==24132== 272 bytes in 1 blocks are possibly lost in loss record 1,881 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791AD7: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452229: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:389)
+==24132== 
+==24132== 272 bytes in 1 blocks are possibly lost in loss record 1,882 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791AD7: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44CE69: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24132== 
+==24132== 288 bytes in 3 blocks are possibly lost in loss record 1,894 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5A75FE: H5HL_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A615: H5G_stab_create_components (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A8F2: H5G_stab_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x576C14: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 288 bytes in 3 blocks are possibly lost in loss record 1,895 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x667BAB: H5T_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5E1F7C: H5O_dtype_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BD48: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 312 (24 direct, 288 indirect) bytes in 1 blocks are definitely lost in loss record 2,332 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x459072: CorrelationFunction::Set_correlation_function_q_pts() (cfwr_admin.cpp:865)
+==24132==    by 0x48F5F9: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:69)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 520 bytes in 1 blocks are possibly lost in loss record 2,389 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF4D: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4532F6: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:292)
+==24132== 
+==24132== 520 bytes in 1 blocks are possibly lost in loss record 2,390 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF4D: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452466: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:416)
+==24132== 
+==24132== 520 bytes in 1 blocks are possibly lost in loss record 2,391 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF4D: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44D02A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:140)
+==24132== 
+==24132== 537 bytes in 1 blocks are possibly lost in loss record 2,394 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D5EB: std::string::reserve(unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA978F0: std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::overflow(int) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9BAB4: std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA92934: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x40601B: main (main.cpp:62)
+==24132== 
+==24132== 537 bytes in 1 blocks are possibly lost in loss record 2,395 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D5EB: std::string::reserve(unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA978F0: std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::overflow(int) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9BAB4: std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA92934: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x4063FB: main (main.cpp:76)
+==24132== 
+==24132== 552 bytes in 1 blocks are possibly lost in loss record 2,397 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791A1D: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4530B9: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:262)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 552 bytes in 1 blocks are possibly lost in loss record 2,398 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791A1D: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452229: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:389)
+==24132==    by 0x40943E: main (main.cpp:236)
+==24132== 
+==24132== 552 bytes in 1 blocks are possibly lost in loss record 2,399 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791A1D: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5752E2: H5G_node_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579BE4: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CCAF7: H5::H5File::H5File(std::string const&, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44CE69: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:110)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132== 
+==24132== 792 bytes in 3 blocks are possibly lost in loss record 2,407 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF4D: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A599: H5G_stab_create_components (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A8F2: H5G_stab_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x576C14: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 816 bytes in 3 blocks are possibly lost in loss record 2,409 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF16: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A599: H5G_stab_create_components (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57A8F2: H5G_stab_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x576C14: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 840 bytes in 3 blocks are possibly lost in loss record 2,410 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C5087: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BBC4: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57FB36: H5G_traverse (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 936 bytes in 3 blocks are possibly lost in loss record 2,425 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x667C1A: H5T_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5E1F7C: H5O_dtype_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BD48: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 984 bytes in 3 blocks are possibly lost in loss record 2,426 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561AFB: H5FL_seq_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x572F85: H5G_node_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78E02D: H5B_insert_helper (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78CEF2: H5B_insert (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57AADD: H5G_stab_insert_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57AC6D: H5G_stab_insert (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x577A6E: H5G_obj_insert (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6FAE: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 1,176 bytes in 32 blocks are possibly lost in loss record 2,442 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D533: std::string::assign(std::string const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x4ADF25: ParameterReader::setVal(std::string, double) (basic_string.h:511)
+==24132==    by 0x4B1054: ParameterReader::phraseEquationWithoutComments(std::string) (ParameterReader.cpp:56)
+==24132==    by 0x4AEEFD: ParameterReader::readFromArguments(long, char**, std::string, long) (ParameterReader.cpp:79)
+==24132==    by 0x405E01: main (main.cpp:38)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,444 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x4900D7: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:229)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,445 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x49010C: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:230)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,446 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x490141: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:231)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,447 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x490179: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:232)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,448 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x4900D7: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:229)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075B4: main (main.cpp:272)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,449 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x49010C: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:230)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075B4: main (main.cpp:272)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,450 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x490141: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:231)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075B4: main (main.cpp:272)
+==24132== 
+==24132== 1,296 bytes in 324 blocks are definitely lost in loss record 2,451 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x4B26A8: Chebyshev::Chebyshev(double*, int*, int*, double*, double*, int) (chebyshev.cpp:14)
+==24132==    by 0x490179: CorrelationFunction::Compute_correlationfunction(double*, double*, double*, double*, int, int, int, int, int, double, int, bool) (cfwr_GFroutines.cpp:232)
+==24132==    by 0x48F823: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:88)
+==24132==    by 0x4075B4: main (main.cpp:272)
+==24132== 
+==24132== 1,368 bytes in 3 blocks are possibly lost in loss record 2,454 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561AFB: H5FL_seq_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C5156: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5769C5: H5G_obj_create_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57662E: H5G_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x579DDA: H5G_mkroot (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x539B3F: H5F_open (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53A43E: H5Fcreate (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4CC8E2: H5::H5File::p_get_file(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&) (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 1,368 bytes in 3 blocks are possibly lost in loss record 2,455 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561AFB: H5FL_seq_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C5156: H5O_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BBC4: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x57ED71: H5G_traverse_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 1,584 bytes in 3 blocks are possibly lost in loss record 2,465 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561A38: H5FL_seq_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791AD7: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7950E6: H5D_btree_shared_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x795215: H5D_btree_idx_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7972C8: H5D_chunk_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52308C: H5D_layout_oh_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BF33: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 2,208 bytes in 3 blocks are possibly lost in loss record 2,478 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x55FC00: H5FL_reg_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EA895: H5O_layout_copy (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5F14F1: H5O_copy_mesg (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE3D3: H5O_msg_append_real (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5EE27B: H5O_msg_append_oh (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52361D: H5D_layout_oh_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BF33: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 2,513 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45AFA7: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24132==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 2,514 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45AFBD: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24132==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 2,515 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45AFD3: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24132==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 3,864 (24 direct, 3,840 indirect) bytes in 1 blocks are definitely lost in loss record 2,516 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x45AFE9: CorrelationFunction::Allocate_CFvals() (cfwr_admin.cpp:710)
+==24132==    by 0x48F601: CorrelationFunction::Cal_correlationfunction(bool) (cfwr_GFroutines.cpp:70)
+==24132==    by 0x4075A2: main (main.cpp:271)
+==24132== 
+==24132== 4,111 bytes in 103 blocks are possibly lost in loss record 2,518 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x433114: read_resonance(particle_info*) (basic_string.tcc:139)
+==24132==    by 0x406B81: main (main.cpp:105)
+==24132== 
+==24132== 7,529 bytes in 217 blocks are possibly lost in loss record 2,520 of 2,570
+==24132==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==24132==    by 0x34BDA9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D5EB: std::string::reserve(unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA9D867: std::string::append(char const*, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x34BDA7AF8D: std::basic_istream<char, std::char_traits<char> >& std::operator>><char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&) (in /usr/lib64/libstdc++.so.6.0.13)
+==24132==    by 0x432A87: read_resonance(particle_info*) (readindata.cpp:186)
+==24132==    by 0x406B81: main (main.cpp:105)
+==24132== 
+==24132== 7,872 bytes in 3 blocks are possibly lost in loss record 2,525 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x791A1D: H5B_shared_new (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7950E6: H5D_btree_shared_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x795215: H5D_btree_idx_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7972C8: H5D_chunk_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52308C: H5D_layout_oh_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BF33: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 8,208 bytes in 2 blocks are possibly lost in loss record 2,528 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5609BC: H5FL_blk_realloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53EFB5: H5F_accum_adjust (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53F2CB: H5F_accum_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x54090F: H5F_block_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7932D8: H5B_flush (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x512DBC: H5C_flush_single_entry (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x508F0E: H5C_flush_cache (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4EFFAF: H5AC_flush (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x53B15A: H5F_flush (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 10,376 bytes in 1 blocks are possibly lost in loss record 2,538 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79868C: H5D_chunk_alloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79D08B: H5D_chunk_lock (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79B516: H5D_chunk_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x522358: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44D02A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:140)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132==    by 0x40944B: main (main.cpp:237)
+==24132== 
+==24132== 12,528 bytes in 3 blocks are possibly lost in loss record 2,539 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x56067B: H5FL_blk_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x561AFB: H5FL_seq_calloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7971A0: H5D_chunk_init (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52308C: H5D_layout_oh_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51BF33: H5D_update_oh_info (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51CDD5: H5D_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7AB99E: H5O_dset_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5C9820: H5O_obj_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x5B6D70: H5L_link_cb (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132== 
+==24132== 18,208 bytes in 1 blocks are possibly lost in loss record 2,540 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF16: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4532F6: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:292)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 18,208 bytes in 1 blocks are possibly lost in loss record 2,541 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF16: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452466: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:416)
+==24132==    by 0x40943E: main (main.cpp:236)
+==24132== 
+==24132== 18,208 bytes in 1 blocks are possibly lost in loss record 2,542 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x78BF16: H5B_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x7952E1: H5D_btree_idx_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79BF4C: H5D_chunk_create (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x51ED24: H5D_alloc_storage (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52214D: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x44D02A: CorrelationFunction::Administrate_resonance_HDF_array(int) (cfwr_HDF.cpp:140)
+==24132==    by 0x453B83: CorrelationFunction::Initialize_HDF_resonance_array() (cfwr_HDF.cpp:28)
+==24132== 
+==24132== 41,504 bytes in 4 blocks are possibly lost in loss record 2,553 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79868C: H5D_chunk_alloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79D08B: H5D_chunk_lock (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79B516: H5D_chunk_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x522358: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4532F6: CorrelationFunction::Initialize_HDF_target_thermal_array() (cfwr_HDF.cpp:292)
+==24132==    by 0x409431: main (main.cpp:235)
+==24132== 
+==24132== 41,504 bytes in 4 blocks are possibly lost in loss record 2,554 of 2,570
+==24132==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==24132==    by 0x55F751: H5FL_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x560537: H5FL_blk_malloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79868C: H5D_chunk_alloc (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79D08B: H5D_chunk_lock (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x79B516: H5D_chunk_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x522358: H5D_write (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x52122E: H5Dwrite (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x4C6B1F: H5::DataSet::write(void const*, H5::DataType const&, H5::DataSpace const&, H5::DataSpace const&, H5::DSetMemXferPropList const&) const (in /home1/plumberg.1/iEBE_test_pA/iEBE-Plumberg/EBE-Node/HoTCoffeeh/cfwr.e)
+==24132==    by 0x452466: CorrelationFunction::Initialize_HDF_target_full_array() (cfwr_HDF.cpp:416)
+==24132==    by 0x40943E: main (main.cpp:236)
+==24132== 
+==24132== 252,808 bytes in 1 blocks are possibly lost in loss record 2,557 of 2,570
+==24132==    at 0x4A07192: operator new[](unsigned long) (vg_replace_malloc.c:363)
+==24132==    by 0x406A9B: main (main.cpp:104)
+==24132== 
+==24132== LEAK SUMMARY:
+==24132==    definitely lost: 11,608 bytes in 2,653 blocks
+==24132==    indirectly lost: 15,648 bytes in 648 blocks
+==24132==      possibly lost: 461,578 bytes in 522 blocks
+==24132==    still reachable: 29,759,341 bytes in 52,953 blocks
+==24132==         suppressed: 0 bytes in 0 blocks
+==24132== Reachable blocks (those to which a pointer was found) are not shown.
+==24132== To see them, rerun with: --leak-check=full --show-reachable=yes
+==24132== 
+==24132== For counts of detected and suppressed errors, rerun with: -v
+==24132== ERROR SUMMARY: 120 errors from 120 contexts (suppressed: 8 from 6)
