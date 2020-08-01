@@ -280,7 +280,7 @@ void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, i
 		//Correlfun3D_data.sigma[idx] = Correl_3D_err[i][j][k];
 		Correlfun3D_data.sigma[idx] = 1e-3;
 if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
-	Correlfun3D_data.sigma[idx] = 1.e10;	//ignore central point
+	Correlfun3D_data.sigma[idx] = 1e10;	//ignore central point
 		idx++;
 	}
 	double para_init[n_para] = { 1.0, 1.0, 1.0, 1.0, 1.0 };  // initial guesses of parameters
@@ -730,8 +730,8 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 //Fourier transform of HBT radii once they're calculated
 void R2_Fourier_transform(int jKT, double plane_psi, string directory)
 {
-	string modeString = ( USE_LOG_FIT ) ? "_fitLog" : "_fitLSQ";
-	ofstream out(directory + "/HBTradii_GF_cfs_" + modeString + ".dat");
+	string modeString = ( USE_LOG_FIT ) ? "Log" : "LSQ";
+	ofstream out(directory + "/HBTradii_GF_cfs_fit" + modeString + ".dat" ios::app);
 
 	double * array_KT_pts   = new double [n_KT_pts];
 	double * array_Kphi_pts = new double [n_Kphi_pts];
