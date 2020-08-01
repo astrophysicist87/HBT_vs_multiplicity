@@ -11,6 +11,8 @@
 
 using namespace std;
 
+bool USE_LOG_FIT;
+
 vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
 vector<vector<double> > CFvals;
 
@@ -22,8 +24,9 @@ vector<double> R2_side_GF_S, R2_out_GF_S, R2_long_GF_S, R2_outside_GF_S;
 vector<double> R2_side_err, R2_out_err, R2_long_err, R2_outside_err;
 
 
-void Get_GF_HBTradii(string directory)
+void Get_GF_HBTradii(string directory, bool use_log_fit_in)
 {
+	USE_LOG_FIT = use_log_fit_in;
 
 	KT_pts = vector<double>(n_KT_pts);
 	Kphi_pts = vector<double>(n_Kphi_pts);
@@ -54,6 +57,7 @@ void Get_GF_HBTradii(string directory)
 	R2_outside_GF_C = vector<double>( nKT * n_order );
 	R2_outside_GF_S = vector<double>( nKT * n_order );
 
+
 	Read_in_correlationfunction(directory);
 
 
@@ -62,17 +66,49 @@ void Get_GF_HBTradii(string directory)
 	{
 		vector<double> CF_for_fitting = CFvals[indexer_KT_Kphi(iKT, iKphi)];
 
-		//finally, do fits, depending on what kind you want to do
-		/*if (USE_LAMBDA)
-			Fit_Correlationfunction3D_withlambda( CF_for_fitting, iKT, iKphi );
+		if ( USE_LOG_FIT )
+			find_minimum_chisq_correlationfunction_full( CF_for_fitting, iKT, iKphi );
 		else
-			Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );*/
-
-		find_minimum_chisq_correlationfunction_full( CF_for_fitting, iKT, iKphi );
+		{
+			//finally, do fits, depending on what kind you want to do
+			if (USE_LAMBDA)
+				Fit_Correlationfunction3D_withlambda( CF_for_fitting, iKT, iKphi );
+			else
+				Fit_Correlationfunction3D( CF_for_fitting, iKT, iKphi );
+		}
 	}
 
 	for (int iKT = 0; iKT < nKT; ++iKT)
 		R2_Fourier_transform(iKT, 0.0, directory);
+
+	KT_pts.clear();
+	Kphi_pts.clear();
+	qx_pts.clear();
+	qy_pts.clear();
+	qz_pts.clear();
+
+	CFvals.clear();
+
+	lambda_Correl.clear();
+	R2_side_GF.clear();
+	R2_out_GF.clear();
+	R2_long_GF.clear();
+	R2_outside_GF.clear();
+
+	lambda_Correl_err.clear();
+	R2_side_err.clear();
+	R2_out_err.clear();
+	R2_long_err.clear();
+	R2_outside_err.clear();
+
+	R2_side_GF_C.clear();
+	R2_side_GF_S.clear();
+	R2_out_GF_C.clear();
+	R2_out_GF_S.clear();
+	R2_long_GF_C.clear();
+	R2_long_GF_S.clear();
+	R2_outside_GF_C.clear();
+	R2_outside_GF_S.clear();
 
 	return;
 }

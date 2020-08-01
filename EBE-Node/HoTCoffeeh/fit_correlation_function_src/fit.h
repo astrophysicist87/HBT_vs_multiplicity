@@ -44,7 +44,8 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 const double hbarC = 0.197327053;
 
 const bool USE_LAMBDA = true;
-const bool USE_LOG_FIT = true;
+//const bool USE_LOG_FIT = true;
+extern bool USE_LOG_FIT;
 const int VERBOSE = 0;
 
 const int n_KT_pts = 15;
@@ -94,7 +95,7 @@ extern vector<double> KT_pts, Kphi_pts, qx_pts, qy_pts, qz_pts;
 extern vector<vector<double> > CFvals;
 
 
-void Get_GF_HBTradii(string filename);
+void Get_GF_HBTradii(string filename, bool use_log_fit_in=true);
 void Read_in_correlationfunction(string filename);
 void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi);
 void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, int iKphi);
