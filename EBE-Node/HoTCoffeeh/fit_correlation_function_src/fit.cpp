@@ -731,7 +731,8 @@ int Fittarget_correlfun3D_fdf_withlambda (const gsl_vector* xvec_ptr, void *para
 void R2_Fourier_transform(int jKT, double plane_psi, string directory)
 {
 	string modeString = ( USE_LOG_FIT ) ? "Log" : "LSQ";
-	ofstream out(directory + "/HBTradii_GF_cfs_fit" + modeString + ".dat", ios::app);
+	string outfilename = directory + "/HBTradii_GF_cfs_fit" + modeString + ".dat";
+	ofstream out(outfilename.c_str(), ios::app);
 
 	double * array_KT_pts   = new double [n_KT_pts];
 	double * array_Kphi_pts = new double [n_Kphi_pts];
