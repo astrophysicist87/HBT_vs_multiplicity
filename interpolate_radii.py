@@ -24,6 +24,8 @@ if __name__ == "__main__":
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
 	interpR2ij = np.array(f(newKTpts))
 
+        interpR2ij[2]
+
 	nMax = 3	
         #R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
 	R2ijCos = np.array([np.dot( interpR2ij * np.cos(n*Kphipts), Kphiwts )
@@ -31,10 +33,10 @@ if __name__ == "__main__":
 	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
 	                    / (2.0*np.pi) for n in range(nMax+1)])
 	
-	print R2ijCos.shape
-	print R2ijSin.shape
+	#print R2ijCos.shape
+	#print R2ijSin.shape
 	
-	print R2ijSin[2,2]
+	#print R2ijSin[2,2]
 	
 	# form other (zero-indexed) columns explicitly
 	col0 = np.repeat(newKTpts,nMax+1)
@@ -52,9 +54,9 @@ if __name__ == "__main__":
 	#	
         results = np.c_[ col0, col1, R2sCos, R2sSin, R2oCos, R2oSin, R2osCos, R2osSin, \
 	                             R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
-	outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
-	print('Saving to', outfilename)
-	np.savetxt( outfilename, results, fmt='%1.6f' )
+	#outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
+	#print('Saving to', outfilename)
+	#np.savetxt( outfilename, results, fmt='%1.6f' )
 	
 	
 	
