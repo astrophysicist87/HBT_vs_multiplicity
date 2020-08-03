@@ -238,7 +238,7 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 
 			//if (*thermalresult < 0.0 || *resonanceresult < 0.0 )
 			//{
-				cerr << "WARNING(OKAY): " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
+				cerr << "WARNING(OKAY): " << setprecision(16) << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
 						<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
 				for (int iqtidx = iqt_i; iqtidx <= iqt_f; ++iqtidx)
 				{
@@ -247,9 +247,10 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 					Ct_at_q[iqtidx-shift] = tmpCt;
 					Cct_at_q[iqtidx-shift] = tmpCct;
 					Cr_at_q[iqtidx-shift] = tmpCr;
-					cerr << "Check CF terms: " << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
+					cerr << "Check CF terms: " << setprecision(16) << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
 							<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
 				}
+if (1) exit (8);
 			//}
 
 		}
@@ -499,6 +500,11 @@ void CorrelationFunction::get_CF_terms(double * totalresult, double * thermalres
 	nonFTd_spectra = nonFTd_tspectra + NT_spectra;
 	cos_transf_spectra = cos_transf_tspectra + cosNT_spectra;
 	sin_transf_spectra = sin_transf_tspectra + sinNT_spectra;
+
+	cerr << "Check CF terms2: " << setprecision(16) << qt_pts[iqtidx] << "   "
+			<< ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
+			<< nonFTd_tspectra << "   " << cos_transf_tspectra << "	  " << sin_transf_tspectra << "   "
+			<< nonFTd_spectra << "   " << cos_transf_spectra << "   " << sin_transf_spectra << endl;
 
 																								//thermal term
 	double num = cos_transf_tspectra*cos_transf_tspectra + sin_transf_tspectra*sin_transf_tspectra;
