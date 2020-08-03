@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 	cout << endl << "********************************************************************************" << endl << endl;
 	
 	// use log fit
-	Get_GF_HBTradii( std::string(argv[1]), true );
+	fitCF::Get_GF_HBTradii( std::string(argv[1]), true );
 
 	// use non-linear chi^2-minimization GSL fit
-	Get_GF_HBTradii( std::string(argv[1]), false );
+	fitCF::Get_GF_HBTradii( std::string(argv[1]), false );
 
 	return 0;
 }
