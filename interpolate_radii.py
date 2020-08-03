@@ -26,20 +26,20 @@ if __name__ == "__main__":
 
 	newKTpts = np.linspace(0.01, 1.01, 101)
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
-	print f(newKTpts).shape
-	R2ij = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
-	R2ijCos = [np.dot( f(newKTpts) * cosnKphi, Kphiwts ) / (2.0*np.pi)
-	           for cosnKphi in cosnKphis]
-	R2ijSin = [np.dot( f(newKTpts) * sinnKphi, Kphiwts ) / (2.0*np.pi)
-	           for sinnKphi in sinnKphis]
+	interpR2ij = np.array(f(newKTpts))
+	R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
+	R2ijCos = np.array([np.dot( interpR2ij * np.cos(n*Kphipts), Kphiwts )
+	                    / (2.0*np.pi) for n in range(4)])
+	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
+	                    / (2.0*np.pi) for n in range(4)])
+	
+	print R2ij.shape, R2ijCos.shape, R2ijSin.shape
 	
 	# split it back up to save
 	[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
-	
-	print R2s
-	print R2ijCos
-	print R2ijSin
-	
+	[ R2sCos, R2oCos, R2osCos, R2lCos, R2slCos, R2olCos ] = R2ijCos
+	[ R2sSin, R2oSin, R2osSin, R2lSin, R2slSin, R2olSin ] = R2ijSin
+		
 	#outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
 	#print('Saving to', outfilename)
 	#np.savetxt( outfilename, np.c_[ newKTpts, 0, R2s, R2o, R2os, R2l, R2sl, R2ol ], fmt='%1.6f' )
