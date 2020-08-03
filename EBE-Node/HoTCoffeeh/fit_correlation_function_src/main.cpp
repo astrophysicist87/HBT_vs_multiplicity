@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
 	cout << endl << "********************************************************************************" << endl << endl;
 	
 	// Loop over multiple directories at once
-	for ( int i = 1; i < argc; i++)
+	for ( int iArg = 1; iArg < argc; iArg++)
 	{
 		// use non-linear chi^2-minimization GSL fit
-		fitCF::Get_GF_HBTradii( std::string(argv[1]), false );
+		fitCF::Get_GF_HBTradii( std::string(argv[iArg]), false );
 	
 		// use log fit
-		fitCF::Get_GF_HBTradii( std::string(argv[1]), true );
+		fitCF::Get_GF_HBTradii( std::string(argv[iArg]), true );
 	}
 
 	return 0;
