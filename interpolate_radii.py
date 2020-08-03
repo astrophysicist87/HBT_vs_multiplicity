@@ -37,8 +37,8 @@ if __name__ == "__main__":
 	# form other (zero-indexed) columns explicitly
 	col0 = np.repeat(newKTpts,nMax+1)
 	col1 = np.tile(range(nMax+1), len(newKTpts))
-	R2ijCos = (R2ijCos.transpose((1,0,2))).reshape([6, (nMax+1)*len(newKTpts)])
-        R2ijSin = (R2ijSin.transpose((1,0,2))).reshape([6, (nMax+1)*len(newKTpts)])
+	R2ijCos = (R2ijCos.transpose((1,2,0))).reshape([6, (nMax+1)*len(newKTpts)])
+        R2ijSin = (R2ijSin.transpose((1,2,0))).reshape([6, (nMax+1)*len(newKTpts)])
 	
 	# split it back up to save
 	#[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
