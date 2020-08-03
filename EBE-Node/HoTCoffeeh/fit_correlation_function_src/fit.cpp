@@ -213,7 +213,7 @@ namespace fitCF
 		gsl_multifit_fdfsolver_set (solver_ptr, &target_func, &xvec_ptr.vector);
 	
 		size_t iteration = 0;         // initialize iteration counter
-		print_fit_state_3D (iteration, solver_ptr);
+		if (VERBOSE > 2) print_fit_state_3D (iteration, solver_ptr);
 		int status;  		// return value from gsl function calls (e.g., error)
 		do
 		{
@@ -359,7 +359,7 @@ namespace fitCF
 		gsl_multifit_fdfsolver_set (solver_ptr, &target_func, &xvec_ptr.vector);
 	
 		size_t iteration = 0;         // initialize iteration counter
-		print_fit_state_3D (iteration, solver_ptr);
+		if (VERBOSE > 2) print_fit_state_3D (iteration, solver_ptr);
 		int status;  		// return value from gsl function calls (e.g., error)
 		do
 		{
