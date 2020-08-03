@@ -25,7 +25,7 @@ if __name__ == "__main__":
 	interpR2ij = np.array(f(newKTpts))
 
 	nMax = 3	
-        R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
+        #R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
 	R2ijCos = np.array([np.dot( interpR2ij * np.cos(n*Kphipts), Kphiwts )
 	                    / (2.0*np.pi) for n in range(nMax+1)])
 	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
@@ -38,16 +38,18 @@ if __name__ == "__main__":
         R2ijSin = (R2ijSin.transpose((1,0,2))).reshape([6, (nMax+1)*len(newKTpts)])
 	
 	# split it back up to save
-	[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
+	#[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
 	[ R2sCos, R2oCos, R2osCos, R2lCos, R2slCos, R2olCos ] = R2ijCos
 	[ R2sSin, R2oSin, R2osSin, R2lSin, R2slSin, R2olSin ] = R2ijSin
 	
-	print np.c_[ col0, col1, R2sCos, R2sSin, R2oCos, R2oSin, R2osCos, R2osSin, \
-	                         R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
-		
-	#outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
-	#print('Saving to', outfilename)
-	#np.savetxt( outfilename, np.c_[ newKTpts, 0, R2s, R2o, R2os, R2l, R2sl, R2ol ], fmt='%1.6f' )
+	#print np.c_[ col0, col1, R2sCos, R2sSin, R2oCos, R2oSin, R2osCos, R2osSin, \
+	#                         R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
+	#	
+        results = np.c_[ col0, col1, R2sCos, R2sSin, R2oCos, R2oSin, R2osCos, R2osSin, \
+	                             R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
+	outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
+	print('Saving to', outfilename)
+	np.savetxt( outfilename, results, fmt='%1.6f' )
 	
 	
 	
