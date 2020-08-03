@@ -38,7 +38,7 @@ using namespace std;
 											// so use this to output q-slices only (MUCH) smaller
 #define USE_SMOOTHNESS_ASSUMPTION	false
 
-#define RUN_TRUNCATED_CALCULATION		0
+#define RUN_TRUNCATED_CALCULATION		1
 
 #ifndef H5_NO_NAMESPACE
     using namespace H5;

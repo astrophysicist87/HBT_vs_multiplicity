@@ -238,8 +238,8 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 
 			//if (*thermalresult < 0.0 || *resonanceresult < 0.0 )
 			//{
-				//cerr << "WARNING(OKAY): " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
-				//		<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
+				cerr << "WARNING(OKAY): " << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
+						<< *totalresult << "   " << *thermalresult << "	  " << *CTresult << "	" << *resonanceresult << endl;
 				for (int iqtidx = iqt_i; iqtidx <= iqt_f; ++iqtidx)
 				{
 					get_CF_terms(&tmpC, &tmpCt, &tmpCct, &tmpCr, ipt, ipphi, iqtidx, iqx, iqy, iqz, project_CF && !thermal_pions_only);
@@ -247,8 +247,8 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 					Ct_at_q[iqtidx-shift] = tmpCt;
 					Cct_at_q[iqtidx-shift] = tmpCct;
 					Cr_at_q[iqtidx-shift] = tmpCr;
-					//cerr << "Check CF terms: " << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
-					//		<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
+					cerr << "Check CF terms: " << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
+							<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
 				}
 			//}
 
