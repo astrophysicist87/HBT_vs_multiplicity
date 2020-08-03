@@ -29,9 +29,9 @@ if __name__ == "__main__":
 	interpR2ij = np.array(f(newKTpts))
 	R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
 	R2ijCos = np.array([np.dot( interpR2ij * np.cos(n*Kphipts), Kphiwts )
-	                    / (2.0*np.pi) for n in range(4)])
+	                    / (2.0*np.pi) for n in range(4)]).transpose((1,0,2))
 	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
-	                    / (2.0*np.pi) for n in range(4)])
+	                    / (2.0*np.pi) for n in range(4)]).transpose((1,0,2))
 	
 	print R2ij.shape, R2ijCos.shape, R2ijSin.shape
 	
