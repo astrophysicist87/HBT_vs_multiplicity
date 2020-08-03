@@ -98,8 +98,8 @@ namespace fitCF
 	extern vector<vector<double> > CFvals;
 	
 	
-	void Get_GF_HBTradii(string filename, bool use_log_fit_in=true);
-	void Read_in_correlationfunction(string filename);
+	void Get_GF_HBTradii(string directory_in, bool use_log_fit_in=true);
+	void Read_in_correlationfunction();
 	void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi);
 	void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, int iKphi);
 	int print_fit_state_3D (size_t iteration, gsl_multifit_fdfsolver * solver_ptr);
