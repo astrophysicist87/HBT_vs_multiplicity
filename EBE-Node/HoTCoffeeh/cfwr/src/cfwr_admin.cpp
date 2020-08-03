@@ -1057,6 +1057,8 @@ void CorrelationFunction::Set_sorted_q_pts_list()
 // weighted spectra grid thus needs to be interpolated at point returned in qgridpts
 void CorrelationFunction::Get_q_points(double q1, double q2, double q3, double pT, double pphi, double * qgridpts)
 {
+	cerr << "In Get_q_points(): " << q1 << "   " << q2 << "   " << q3 << "   " << pT << "   " << pphi << endl;
+
 	double mtarget = all_particles[target_particle_id].mass;
 	double xi2 = mtarget*mtarget + pT*pT + 0.25*(q1*q1 + q2*q2 + q3*q3);
 	double ckp = cos(pphi), skp = sin(pphi);
@@ -1068,6 +1070,8 @@ void CorrelationFunction::Get_q_points(double q1, double q2, double q3, double p
 	qgridpts[1] = q1;										//set qx component
 	qgridpts[2] = q2;										//set qy component
 	qgridpts[3] = q3;										//set qz component, since qz = ql
+
+	cerr << "In Get_q_points2(): " << qgridpts[0] << "   " << qgridpts[1] << "   " << qgridpts[2] << "   " << qgridpts[3] << endl;
 
 	return;
 }

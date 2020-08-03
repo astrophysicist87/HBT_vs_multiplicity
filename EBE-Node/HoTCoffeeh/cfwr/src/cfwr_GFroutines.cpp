@@ -83,6 +83,9 @@ void CorrelationFunction::Cal_correlationfunction(bool project_CF /*==true*/)
 	{
 //if (ipt > 0 || ipphi > 0) continue;
 		Get_q_points(qx_pts[iqx], qy_pts[iqy], qz_pts[iqz], SP_pT[ipt], SP_pphi[ipphi], q_interp);
+		cerr << "Check at line = " << __LINE__ << ": " << qx_pts[iqx] << "   " << qy_pts[iqy] << "   " << qz_pts[iqz] << "   "
+			<< SP_pT[ipt] << "   " << SP_pphi[ipphi] << "   "
+			<< q_interp[0] << "   " << q_interp[1] << "   " << q_interp[2] << "   " << q_interp[3] << endl;
 		//returns only projected value automatically if appropriate options are specified!
 		double tmp1 = 0.0, tmp2 = 0.0, tmp2a = 0.0, tmp3 = 0.0;
 		Compute_correlationfunction(&tmp1, &tmp2, &tmp2a, &tmp3, ipt, ipphi, iqx, iqy, iqz, q_interp[0], 0, project_CF);
