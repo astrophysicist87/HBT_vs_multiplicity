@@ -37,7 +37,7 @@ if __name__ == "__main__":
 	
 	print SVs.shape
 
-	outfilename = os.path.dirname(filename) + '/SV_cfs.dat'
+	outfilename = os.path.dirname(filename) + '/SV_cfs_new.dat'
 	print('Saving to', outfilename)
 	np.savetxt( outfilename, np.c_[ newKTpts, SVs[0], SVs[1], SVs[2], SVs[3], SVs[4] ], fmt='%1.6f' )
 	
