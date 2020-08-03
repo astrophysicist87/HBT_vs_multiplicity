@@ -9,6 +9,7 @@ resultsDirectory=HBT_vs_dNchdeta_results
 
 gauss_quadrature n=15 kind=5 alpha=0 beta=0 a=0 b=13 > KT.dat
 gauss_quadrature n=48 kind=1 alpha=0 beta=0 a=0 b=6.2831853071795864769252867665 > KPHI.dat
+gauss_quadrature n=36 kind=1 alpha=0 beta=0 a=0 b=6.2831853071795864769252867665 > KPHI36.dat
 
 for sys in pp pPb PbPb
 do
@@ -26,17 +27,22 @@ do
 		python interpolate_SVs.py $direc/job-1/event-1/Sourcefunction_variances_WR_no_df.dat
 		for KT in 50 100 150 200 250 300 350 400 450 500 750 1000
 		do
-			awk 'NR==1 {print $2}' $direc/job-1/event-1/Charged_eta_integrated_vndata.dat >> $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
-			awk -v ktval=$KT '1000*$1==ktval && $2==0 {print $3, $5, $9}' $direc/job-1/event-1/${HBTGFFileToUse} >> $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat
-			awk -v ktval=$KT '1000*$1==ktval' $direc/job-1/event-1/SV_cfs.dat >> $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat
+			awk 'NR==1 {print $2}' $direc/job-1/event-1/Charged_eta_integrated_vndata.dat \
+                >> $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
+			awk -v ktval=$KT '1000*$1==ktval && $2==0 {print $3, $5, $9}' $direc/job-1/event-1/${HBTGFFileToUse} \
+                >> $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat
+			awk -v ktval=$KT '1000*$1==ktval' $direc/job-1/event-1/SV_cfs.dat \
+                >> $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat
 		done
 	done
         for KT in 50 100 150 200 250 300 350 400 450 500 750 1000
         do
 	        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
-	              $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat | tac > $resultsDirectory/HBTradii_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
+	              $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat | tac \
+                > $resultsDirectory/HBTradii_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
 	        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
-	              $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat | tac > $resultsDirectory/SV_cfs_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
+	              $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat | tac \
+                > $resultsDirectory/SV_cfs_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
 	done
 done
 
