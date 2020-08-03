@@ -151,6 +151,8 @@ void Read_in_correlationfunction(string directory)
 
 void Fit_Correlationfunction3D(vector<double> & Correl_3D, int iKT, int iKphi)
 {
+	string outfilename = directory + "/HBTradii_GF_grid0_fitLSQ.dat";
+	ofstream out(outfilename.c_str(), ios::app);
 
 	const size_t data_length = nqxpts*nqypts*nqzpts;  // # of points
 	const size_t n_para = 4;  // # of parameters
@@ -274,17 +276,30 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	R2_long_err[iKT_iKphi_idx] 			= c*get_fit_err(2, covariance_ptr)*hbarC*hbarC;
 	R2_outside_err[iKT_iKphi_idx] 		= c*get_fit_err(3, covariance_ptr)*hbarC*hbarC;
 
+	out << KT_pts[iKT] << "   "
+		<< Kphi_pts[iKphi] << "   "
+		<< R2_side_GF[iKT_iKphi_idx] << "   "
+		<< R2_out_GF[iKT_iKphi_idx] << "   "
+		<< R2_outside_GF[iKT_iKphi_idx] << "   "
+		<< R2_long_GF[iKT_iKphi_idx] << "   "
+		<< 0 << "   " << 0 << endl;
+
 	//clean up
 	gsl_matrix_free (covariance_ptr);
 	gsl_rng_free (rng_ptr);
 
 	gsl_multifit_fdfsolver_free (solver_ptr);  // free up the solver
 
+	out.close();
+
 	return;
 }
 
 void Fit_Correlationfunction3D_withlambda(vector<double> & Correl_3D, int iKT, int iKphi)
 {
+	string outfilename = directory + "/HBTradii_GF_grid0_fitLSQ.dat";
+	ofstream out(outfilename.c_str(), ios::app);
+
 	const size_t data_length = nqxpts*nqypts*nqzpts;  // # of points
 	const size_t n_para = 5;  // # of parameters
 
@@ -419,11 +434,21 @@ if (i==(nqxpts-1)/2 && j==(nqypts-1)/2 && k==(nqzpts-1)/2)
 	R2_long_err[iKT_iKphi_idx] 			= c*get_fit_err(3, covariance_ptr)*hbarC*hbarC;
 	R2_outside_err[iKT_iKphi_idx] 		= c*get_fit_err(4, covariance_ptr)*hbarC*hbarC;
 
+	out << KT_pts[iKT] << "   "
+		<< Kphi_pts[iKphi] << "   "
+		<< R2_side_GF[iKT_iKphi_idx] << "   "
+		<< R2_out_GF[iKT_iKphi_idx] << "   "
+		<< R2_outside_GF[iKT_iKphi_idx] << "   "
+		<< R2_long_GF[iKT_iKphi_idx] << "   "
+		<< 0 << "   " << 0 << endl;
+
 	//clean up
 	gsl_matrix_free (covariance_ptr);
 	gsl_rng_free (rng_ptr);
 
 	gsl_multifit_fdfsolver_free (solver_ptr);  // free up the solver
+
+	out.close();
 
 	return;
 }
@@ -471,6 +496,9 @@ int print_fit_state_3D_withlambda (size_t iteration, gsl_multifit_fdfsolver * so
 
 void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int iKT, int iKphi)
 {
+	string outfilename = directory + "/HBTradii_GF_grid0_fitLog.dat";
+	ofstream out(outfilename.c_str(), ios::app);
+
 	const size_t data_length = nqxpts*nqypts*nqzpts;  // # of points
 
     double lambda, R_o, R_s, R_l, R_os;
@@ -576,6 +604,14 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
 	R2_long_GF[iKT_iKphi_idx] 			= R_l*R_l;
 	R2_outside_GF[iKT_iKphi_idx] 		= R2_os;
 
+	out << KT_pts[iKT] << "   "
+		<< Kphi_pts[iKphi] << "   "
+		<< R2_side_GF[iKT_iKphi_idx] << "   "
+		<< R2_out_GF[iKT_iKphi_idx] << "   "
+		<< R2_outside_GF[iKT_iKphi_idx] << "   "
+		<< R2_long_GF[iKT_iKphi_idx] << "   "
+		<< 0 << "   " << 0 << endl;
+
     double chi_sq = 0.0;
 	for (int i = 0; i < nqxpts; i++)
 	for (int j = 0; j < nqypts; j++)
@@ -613,6 +649,8 @@ void find_minimum_chisq_correlationfunction_full(vector<double> & Correl_3D, int
     delete [] T;
     delete [] T_inverse;
     delete [] results;
+
+	out.close();
 }
 
 //*********************************************************************
