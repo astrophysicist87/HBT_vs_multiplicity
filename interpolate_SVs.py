@@ -24,18 +24,22 @@ if __name__ == "__main__":
 
 	SVs = np.asarray(SVs) / S
 
-	newKTpts = np.linspace(0.01, 1.01, 101)
-	f = scipy.interpolate.interp1d(KTpts, SVs, kind='cubic', axis=1)
-	SVs = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
-
 	# split back up into individual source variances
 	[ S, xs, xo, xl, t, \
 		xs_t, xo_t, xl_t, xo_xs, xl_xs, xo_xl, \
 		xs2, xo2, xl2, t2 ] = SVs
 
+        SVs = [ xs2 - xs**2, xo2 - xo**2, xo_t - xo*t, t2 - t**2, xl2 - xl**2 ]
+
+	newKTpts = np.linspace(0.01, 1.01, 101)
+	f = scipy.interpolate.interp1d(KTpts, SVs, kind='cubic', axis=1)
+	SVs = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
+	
+	print SVs.shape
+
 	outfilename = os.path.dirname(filename) + '/SV_cfs.dat'
 	print('Saving to', outfilename)
-	np.savetxt( outfilename, np.c_[ newKTpts, xs2 - xs**2, xo2 - xo**2, xo_t - xo*t, t2 - t**2, xl2 - xl**2 ], fmt='%1.6f' )
+	np.savetxt( outfilename, np.c_[ newKTpts, SVs[0], SVs[1], SVs[2], SVs[3], SVs[4] ], fmt='%1.6f' )
 	
 	
 	
