@@ -24,7 +24,7 @@ if __name__ == "__main__":
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
 	interpR2ij = np.array(f(newKTpts))
 
-        print interpR2ij[2]
+        print interpR2ij.shape
 
 	nMax = 3	
         #R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
