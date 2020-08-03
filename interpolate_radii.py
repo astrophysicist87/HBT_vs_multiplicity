@@ -16,12 +16,19 @@ if __name__ == "__main__":
 	nKT = len(KTpts)
 	nKphi = len(Kphipts)
 	
+	nMax = 3
+	cosnKphi = [np.cos(n*Kphipts) for n in range(4)]
+	sinnKphi = [np.sin(n*Kphipts) for n in range(4)]
+	
 	filename = sys.argv[1]
 	R2ij = [ R2s, R2o, R2os, R2l, R2sl, R2ol ] \
 		= [ radsq.reshape([nKT, nKphi]) for radsq in np.loadtxt(filename)[:,2:].T ]
 
+        print R2ij.shape
+
 	newKTpts = np.linspace(0.01, 1.01, 101)
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
+	print f(newKTpts).shape
 	R2ij = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
 	
 	# split it back up to save
