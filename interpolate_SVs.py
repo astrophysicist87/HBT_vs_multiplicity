@@ -22,6 +22,7 @@ if __name__ == "__main__":
 			xs2, xo2, xl2, t2 ] \
 		= [ SV.reshape([nKT, nKphi]) for SV in np.loadtxt(filename)[:,2:].T ]
 
+        # normalize
 	SVs = np.asarray(SVs) / S
 
 	# split back up into individual source variances
@@ -35,9 +36,7 @@ if __name__ == "__main__":
 	f = scipy.interpolate.interp1d(KTpts, SVs, kind='cubic', axis=1)
 	SVs = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
 	
-	print SVs.shape
-
-	outfilename = os.path.dirname(filename) + '/SV_cfs_new.dat'
+	outfilename = os.path.dirname(filename) + '/SV_cfs.dat'
 	print('Saving to', outfilename)
 	np.savetxt( outfilename, np.c_[ newKTpts, SVs[0], SVs[1], SVs[2], SVs[3], SVs[4] ], fmt='%1.6f' )
 	
