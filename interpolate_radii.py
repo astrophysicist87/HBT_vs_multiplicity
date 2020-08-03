@@ -54,9 +54,9 @@ if __name__ == "__main__":
 	#	
         results = np.c_[ col0, col1, R2sCos, R2sSin, R2oCos, R2oSin, R2osCos, R2osSin, \
 	                             R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
-	#outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
-	#print('Saving to', outfilename)
-	#np.savetxt( outfilename, results, fmt='%1.6f' )
+	outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
+	print('Saving to', outfilename)
+	np.savetxt( outfilename, results, fmt='%1.2f %d'+(' %1.2f'*12) )
 	
 	
 	

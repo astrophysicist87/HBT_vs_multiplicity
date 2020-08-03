@@ -3,7 +3,8 @@ echo 'Starting generate_dNchdeta_radii_comparisons.sh'
 rm *.dat
 
 #HBTGFFileToUse=HBTradii_GF_cfs_no_df.dat
-HBTGFFileToUse=HBTradii_GF_cfs_fitLSQ.dat
+#HBTGFFileToUse=HBTradii_GF_cfs_fitLSQ.dat
+HBTGFFileToUse=R2ij_GF_cfs.dat
 
 resultsDirectory=HBT_vs_dNchdeta_results
 
@@ -21,10 +22,16 @@ do
 			continue
 		fi
 		echo '  - processing' $direc
-		#unzip -o $direc/job-1.zip job-1/event-1/Charged_eta_integrated_vndata.dat -d $direc
-		#unzip -o $direc/job-1.zip job-1/event-1/HBTradii_GF_cfs_no_df.dat -d $direc
+
+		echo '    --> obtain x and y slices of freeze-out surface'
 		./get_SurfaceX_and_SurfaceY.sh $direc
+
+		echo '    --> Fourier transform source variances'
 		python interpolate_SVs.py $direc/job-1/event-1/Sourcefunction_variances_WR_no_df.dat
+
+		echo '    --> Fourier transform least-squares fit radii'
+		python interpolate_radii.py $direc/job-1/event-1/HBTradii_GF_grid0_fitLSQ.dat
+
 		for KT in 50 100 150 200 250 300 350 400 450 500 750 1000
 		do
 			awk 'NR==1 {print $2}' $direc/job-1/event-1/Charged_eta_integrated_vndata.dat \
@@ -35,14 +42,15 @@ do
                 >> $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat
 		done
 	done
-        for KT in 50 100 150 200 250 300 350 400 450 500 750 1000
-        do
-	        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
-	              $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat | tac \
-                > $resultsDirectory/HBTradii_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
-	        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
-	              $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat | tac \
-                > $resultsDirectory/SV_cfs_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
+	echo '  - collect all centrality and kt information for' $sys
+    for KT in 50 100 150 200 250 300 350 400 450 500 750 1000
+    do
+        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
+              $resultsDirectory/HBTradii_`echo $sys`_kt`echo $KT`MeV.dat | tac \
+            > $resultsDirectory/HBTradii_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
+        paste $resultsDirectory/dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat \
+              $resultsDirectory/SV_cfs_`echo $sys`_kt`echo $KT`MeV.dat | tac \
+            > $resultsDirectory/SV_cfs_vs_dNchdeta_`echo $sys`_kt`echo $KT`MeV.dat
 	done
 done
 
