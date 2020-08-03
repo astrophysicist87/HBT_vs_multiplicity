@@ -83,9 +83,9 @@ void CorrelationFunction::Cal_correlationfunction(bool project_CF /*==true*/)
 	{
 //if (ipt > 0 || ipphi > 0) continue;
 		Get_q_points(qx_pts[iqx], qy_pts[iqy], qz_pts[iqz], SP_pT[ipt], SP_pphi[ipphi], q_interp);
-		cerr << "Check at line = " << __LINE__ << ": " << qx_pts[iqx] << "   " << qy_pts[iqy] << "   " << qz_pts[iqz] << "   "
-			<< SP_pT[ipt] << "   " << SP_pphi[ipphi] << "   "
-			<< q_interp[0] << "   " << q_interp[1] << "   " << q_interp[2] << "   " << q_interp[3] << endl;
+		//cerr << "Check at line = " << __LINE__ << ": " << qx_pts[iqx] << "   " << qy_pts[iqy] << "   " << qz_pts[iqz] << "   "
+		//	<< SP_pT[ipt] << "   " << SP_pphi[ipphi] << "   "
+		//	<< q_interp[0] << "   " << q_interp[1] << "   " << q_interp[2] << "   " << q_interp[3] << endl;
 		//returns only projected value automatically if appropriate options are specified!
 		double tmp1 = 0.0, tmp2 = 0.0, tmp2a = 0.0, tmp3 = 0.0;
 		Compute_correlationfunction(&tmp1, &tmp2, &tmp2a, &tmp3, ipt, ipphi, iqx, iqy, iqz, q_interp[0], 0, project_CF);
@@ -238,7 +238,7 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 			*CTresult = cfct.eval(point);
 			*resonanceresult = cfr.eval(point);
 
-
+			/*
 			//if (*thermalresult < 0.0 || *resonanceresult < 0.0 )
 			//{
 				cerr << "WARNING(OKAY): " << setprecision(16) << qt_interp << "	" << ipt << "	" << ipphi << "	  " << iqx << "	  " << iqy << "	  " << iqz << "	  "
@@ -253,8 +253,8 @@ void CorrelationFunction::Compute_correlationfunction(double * totalresult, doub
 					cerr << "Check CF terms: " << setprecision(16) << qt_pts[iqtidx] << "   " << ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
 							<< tmpC << "   " << tmpCt << "	 " << tmpCct << "   " << tmpCr << endl;
 				}
-if (1) exit (8);
 			//}
+			*/
 
 		}
 		else	//if not using Chebyshev nodes in qt-direction, just use straight-up linear(0) or cubic(1) interpolation
@@ -504,10 +504,10 @@ void CorrelationFunction::get_CF_terms(double * totalresult, double * thermalres
 	cos_transf_spectra = cos_transf_tspectra + cosNT_spectra;
 	sin_transf_spectra = sin_transf_tspectra + sinNT_spectra;
 
-	cerr << "Check CF terms2: " << setprecision(16) << qt_pts[iqt] << "   "
+	/*cerr << "Check CF terms2: " << setprecision(16) << qt_pts[iqt] << "   "
 			<< ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
 			<< nonFTd_tspectra << "   " << cos_transf_tspectra << "	  " << sin_transf_tspectra << "   "
-			<< nonFTd_spectra << "   " << cos_transf_spectra << "   " << sin_transf_spectra << endl;
+			<< nonFTd_spectra << "   " << cos_transf_spectra << "   " << sin_transf_spectra << endl;*/
 
 																								//thermal term
 	double num = cos_transf_tspectra*cos_transf_tspectra + sin_transf_tspectra*sin_transf_tspectra;
