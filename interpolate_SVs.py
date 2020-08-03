@@ -34,7 +34,7 @@ if __name__ == "__main__":
 		xs2, xo2, xl2, t2 ] = SVs
 
 	outfilename = os.path.dirname(filename) + '/SV_cfs.dat'
-	print 'Saving to', outfilename
+	print('Saving to', outfilename)
 	np.savetxt( outfilename, np.c_[ newKTpts, xs2 - xs**2, xo2 - xo**2, xo_t - xo*t, t2 - t**2, xl2 - xl**2 ], fmt='%1.6f' )
 	
 	

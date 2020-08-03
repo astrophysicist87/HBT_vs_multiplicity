@@ -7,7 +7,7 @@ controlParameterList = {
 }
 
 initial_condition_control = {
-    'centrality': '0-0.00025%',  # centrality bin
+    'centrality': '0-5%',  # centrality bin
     'cut_type': 'total_entropy',
     # centrality cut variable: total_entropy or Npart
     'initial_condition_type': 'superMC',

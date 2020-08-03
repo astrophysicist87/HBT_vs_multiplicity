@@ -12,7 +12,7 @@
 
 CC := $(shell ../../crank/configure_compiler_C++.sh)
 CFLAGS := $(shell ../../crank/configure_compiler_C++_Flags.sh)
-CFLAGS += -lgsl -lgslcblas -g
+CFLAGS += -std=c++0x -lgsl -lgslcblas -g
 
 #CC := g++
 #CFLAGS := -lgsl -lgslcblas -g
