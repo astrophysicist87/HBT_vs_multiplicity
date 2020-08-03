@@ -34,6 +34,8 @@ if __name__ == "__main__":
 	print R2ijCos.shape
 	print R2ijSin.shape
 	
+	print R2ijSin[2,2]
+	
 	# form other (zero-indexed) columns explicitly
 	col0 = np.repeat(newKTpts,nMax+1)
 	col1 = np.tile(range(nMax+1), len(newKTpts))
