@@ -31,6 +31,9 @@ if __name__ == "__main__":
 	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
 	                    / (2.0*np.pi) for n in range(nMax+1)])
 	
+	print R2ijCos.shape
+	print R2ijSin.shape
+	
 	# form other (zero-indexed) columns explicitly
 	col0 = np.repeat(newKTpts,nMax+1)
 	col1 = np.tile(range(nMax+1), len(newKTpts))
