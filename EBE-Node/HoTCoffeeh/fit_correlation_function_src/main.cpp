@@ -23,11 +23,11 @@ int main(int argc, char *argv[])
 		<< "  Ver 1.0   ----- Author: Christopher Plumberg   " << endl;
 	cout << endl << "********************************************************************************" << endl << endl;
 	
-	// use log fit
-	fitCF::Get_GF_HBTradii( std::string(argv[1]), true );
-
 	// use non-linear chi^2-minimization GSL fit
 	fitCF::Get_GF_HBTradii( std::string(argv[1]), false );
+
+	// use log fit
+	fitCF::Get_GF_HBTradii( std::string(argv[1]), true );
 
 	return 0;
 }
