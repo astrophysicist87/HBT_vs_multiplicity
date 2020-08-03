@@ -17,8 +17,8 @@ if __name__ == "__main__":
 	nKphi = len(Kphipts)
 	
 	nMax = 3
-	cosnKphi = [np.cos(n*Kphipts) for n in range(4)]
-	sinnKphi = [np.sin(n*Kphipts) for n in range(4)]
+	cosnKphis = [np.cos(n*Kphipts) for n in range(4)]
+	sinnKphis = [np.sin(n*Kphipts) for n in range(4)]
 	
 	filename = sys.argv[1]
 	R2ij = [ R2s, R2o, R2os, R2l, R2sl, R2ol ] \
@@ -28,11 +28,17 @@ if __name__ == "__main__":
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
 	print f(newKTpts).shape
 	R2ij = np.dot( f(newKTpts), Kphiwts ) / (2.0*np.pi)
+	R2ijCos = [np.dot( f(newKTpts) * cosnKphi, Kphiwts ) / (2.0*np.pi)
+	           for cosnKphi in cosnKphis]
+	R2ijSin = [np.dot( f(newKTpts) * sinnKphi, Kphiwts ) / (2.0*np.pi)
+	           for sinnKphi in sinnKphis]
 	
 	# split it back up to save
 	[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
 	
 	print R2s
+	print R2ijCos
+	print R2ijSin
 	
 	#outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
 	#print('Saving to', outfilename)
