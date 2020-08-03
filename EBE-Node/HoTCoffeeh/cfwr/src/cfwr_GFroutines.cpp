@@ -501,7 +501,7 @@ void CorrelationFunction::get_CF_terms(double * totalresult, double * thermalres
 	cos_transf_spectra = cos_transf_tspectra + cosNT_spectra;
 	sin_transf_spectra = sin_transf_tspectra + sinNT_spectra;
 
-	cerr << "Check CF terms2: " << setprecision(16) << qt_pts[iqtidx] << "   "
+	cerr << "Check CF terms2: " << setprecision(16) << qt_pts[iqt] << "   "
 			<< ipt << "   " << ipphi << "	" << iqx << "	" << iqy << "	" << iqz << "	"
 			<< nonFTd_tspectra << "   " << cos_transf_tspectra << "	  " << sin_transf_tspectra << "   "
 			<< nonFTd_spectra << "   " << cos_transf_spectra << "   " << sin_transf_spectra << endl;
