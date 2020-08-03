@@ -56,7 +56,7 @@ if __name__ == "__main__":
 	                             R2lCos, R2lSin, R2slCos, R2slSin, R2olCos, R2olSin ]
 	outfilename = os.path.dirname(filename) + '/R2ij_GF_cfs.dat'
 	print('Saving to', outfilename)
-	np.savetxt( outfilename, results, fmt='%1.2f %d'+(' %1.2f'*12) )
+	np.savetxt( outfilename, results, fmt='%1.2f %d'+(' %1.6f'*12) )
 	
 	
 	
