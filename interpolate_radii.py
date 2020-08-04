@@ -24,10 +24,7 @@ if __name__ == "__main__":
 	f = scipy.interpolate.interp1d(KTpts, R2ij, kind='cubic', axis=1)
 	interpR2ij = np.array(f(newKTpts))
 
-        #print interpR2ij[2,41]
-
 	nMax = 3	
-        #R2ij = np.dot( interpR2ij, Kphiwts ) / (2.0*np.pi)
 	R2ijCos = np.array([np.dot( interpR2ij * np.cos(n*Kphipts), Kphiwts )
 	                    / (2.0*np.pi) for n in range(nMax+1)])
 	R2ijSin = np.array([np.dot( interpR2ij * np.sin(n*Kphipts), Kphiwts )
@@ -35,9 +32,7 @@ if __name__ == "__main__":
 	
 	#print R2ijCos.shape
 	#print R2ijSin.shape
-	
-	#print R2ijSin[2,2]
-	
+		
 	# form other (zero-indexed) columns explicitly
 	col0 = np.repeat(newKTpts,nMax+1)
 	col1 = np.tile(range(nMax+1), len(newKTpts))
@@ -45,7 +40,6 @@ if __name__ == "__main__":
         R2ijSin = (R2ijSin.transpose((1,2,0))).reshape([6, (nMax+1)*len(newKTpts)])
 	
 	# split it back up to save
-	#[ R2s, R2o, R2os, R2l, R2sl, R2ol ] = R2ij
 	[ R2sCos, R2oCos, R2osCos, R2lCos, R2slCos, R2olCos ] = R2ijCos
 	[ R2sSin, R2oSin, R2osSin, R2lSin, R2slSin, R2olSin ] = R2ijSin
 	
