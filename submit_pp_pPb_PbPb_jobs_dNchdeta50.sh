@@ -26,7 +26,7 @@ case "$sys" in
 			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				18:00:00 "no" \
+				36:00:00 "no" \
 				ParameterDict_EA_${sys}_C${cenAlt}.py \
 
 			./submitJobs_qsub.py
