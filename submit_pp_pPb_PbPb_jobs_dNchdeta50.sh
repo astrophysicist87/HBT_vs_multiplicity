@@ -7,7 +7,7 @@ case "$sys" in
 	pp)
 		for cen in '0-0.000533%'
 		do
-			count=100
+			count=1000
 			cenAlt=`echo "$cen" | tr . '_'`
 			python updateParameterDict.py ParameterDict_EA_${sys}_C${cenAlt}.py \
 				initial_condition_control:'centrality'=${cen} \
