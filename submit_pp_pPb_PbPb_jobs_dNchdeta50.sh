@@ -24,8 +24,8 @@ case "$sys" in
 				hydroParameters:'dy'='0.025'
 
 			./generateJobs_cluster.py 1 $count pitzer \
-				PlayGround_EA_${sys}_C${cen} \
-				RESULTS_EA_${sys}_C${cen} \
+				PlayGround_EA_${sys}_C${cen}_dense \
+				RESULTS_EA_${sys}_C${cen}_dense \
 				36:00:00 "no" \
 				ParameterDict_EA_${sys}_C${cenAlt}.py \
 
