@@ -17,11 +17,11 @@ case "$sys" in
 				superMCParameters:'finalFactor'=80.377 \
 				superMCParameters:'maxx'='10.0' \
 				superMCParameters:'maxy'='10.0' \
-				superMCParameters:'dx'='0.1' \
-				superMCParameters:'dy'='0.1' \
-				hydroParameters:'iLS'=100 \
-				hydroParameters:'dx'='0.1' \
-				hydroParameters:'dy'='0.1'
+				superMCParameters:'dx'='0.025' \
+				superMCParameters:'dy'='0.025' \
+				hydroParameters:'iLS'=400 \
+				hydroParameters:'dx'='0.025' \
+				hydroParameters:'dy'='0.025'
 
 			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
