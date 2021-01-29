@@ -1898,7 +1898,8 @@ void MakeDensity::generateEccTable(int nevent)
 
   // entropy profile:
   const char * file1 = (resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
-cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
+cout << __FILE__ << ":" << __LINE__ << ": " << file1 << endl;
+if (1) exit (8);
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
