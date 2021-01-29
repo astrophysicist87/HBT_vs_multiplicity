@@ -1994,7 +1994,7 @@ void MakeDensity::generateEccTable(int nevent)
 //----------------------------------------------------------------------
 
 //********************************************************************
-void MakeDensity::dumpEccentricities(char* base_filename, double*** density, const int iy, int from_order, int to_order, double Npart_current, double Nbin_current, double b)
+void MakeDensity::dumpEccentricities(const char* base_filename, double*** density, const int iy, int from_order, int to_order, double Npart_current, double Nbin_current, double b)
 // calculate and output eccentricities
 {
     int max_order = 10;
