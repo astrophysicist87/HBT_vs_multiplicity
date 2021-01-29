@@ -331,12 +331,12 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
         dumpEccentricities(buffer, dens2, iy, from_order, to_order, Npart, binary, b);
         if (use_4col)
           {
-            sprintf(buffer,file2_4col,event);
+            sprintf(buffer,file2_4col.c_str(),event);
             dumpDensity4Col(buffer, dens2, iy);
           }
         if (use_block)
           {
-            sprintf(buffer,file2_block,event);
+            sprintf(buffer,file2_block.c_str(),event);
             dumpDensityBlock(buffer, dens2, iy);
           }
       }
@@ -349,12 +349,12 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
                rho_binary_sd[iy][i][j] = mc->get_rho_binary(i,j);
          if (use_4col)
          {
-             sprintf(buffer,file_rho_binary_4col,event);
+             sprintf(buffer,file_rho_binary_4col.c_str(),event);
              dumpDensity4Col(buffer, rho_binary_sd, iy);
          }
          if (use_block)
          {
-           sprintf(buffer,file_rho_binary_block,event);
+           sprintf(buffer,file_rho_binary_block.c_str(),event);
            dumpDensityBlock(buffer, rho_binary_sd, iy);
          }
       }
@@ -369,16 +369,16 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
             }
          if (use_4col)
          {
-             sprintf(buffer,file_TA_4col,event);
+             sprintf(buffer,file_TA_4col.c_str(),event);
              dumpDensity4Col(buffer, nuclear_TA_sd, iy);
-             sprintf(buffer,file_TB_4col,event);
+             sprintf(buffer,file_TB_4col.c_str(),event);
              dumpDensity4Col(buffer, nuclear_TB_sd, iy);
          }
          if (use_block)
          {
-           sprintf(buffer,file_TA_block,event);
+           sprintf(buffer,file_TA_block.c_str(),event);
            dumpDensityBlock(buffer, nuclear_TA_sd, iy);
-           sprintf(buffer,file_TB_block,event);
+           sprintf(buffer,file_TB_block.c_str(),event);
            dumpDensityBlock(buffer, nuclear_TB_sd, iy);
          }
       }
@@ -392,12 +392,12 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
             }
          if (use_4col)
          {
-             sprintf(buffer, file_rhob_4col, event);
+             sprintf(buffer, file_rhob_4col.c_str(), event);
              dumpDensity4Col(buffer, rhob_sd, iy);
          }
          if (use_block)
          {
-           sprintf(buffer, file_rhob_block, event);
+           sprintf(buffer, file_rhob_block.c_str(), event);
            dumpDensityBlock(buffer, rhob_sd, iy);
          }
       }
@@ -568,12 +568,12 @@ void MakeDensity::generate_profile_ebe(int nevent)
           setSd(dens1, iy); // includes factor multiplication
           if (use_4col)
             {
-              sprintf(buffer,file1_4col,event);
+              sprintf(buffer,file1_4col.c_str(),event);
               dumpDensity4Col(buffer, dens1, iy);
             }
           if (use_block)
             {
-              sprintf(buffer,file1_block,event);
+              sprintf(buffer,file1_block.c_str(),event);
               dumpDensityBlock(buffer, dens1, iy);
             }
         }
@@ -583,12 +583,12 @@ void MakeDensity::generate_profile_ebe(int nevent)
           setEd(dens2, iy); // includes factor multiplication
           if (use_4col)
             {
-              sprintf(buffer,file2_4col,event);
+              sprintf(buffer,file2_4col.c_str(),event);
               dumpDensity4Col(buffer, dens2, iy);
             }
           if (use_block)
             {
-              sprintf(buffer,file2_block,event);
+              sprintf(buffer,file2_block.c_str(),event);
               dumpDensityBlock(buffer, dens2, iy);
             }
         }
@@ -607,12 +607,12 @@ void MakeDensity::generate_profile_ebe(int nevent)
           setSd(dens1pt, iy); // includes factor multiplication
           if (use_5col)
           {
-            sprintf(buffer,file1_5col,event);
+            sprintf(buffer,file1_5col.c_str(),event);
             dumpDensity5Col(buffer, dens1pt, iy);
           }
           if (use_ptCol)     // jia test
           {
-            sprintf(buffer,file1_ptCol,event);
+            sprintf(buffer,file1_ptCol.c_str(),event);
             dumpDesityptCol(buffer, dens1pt, iy);
           }
         }
@@ -621,12 +621,12 @@ void MakeDensity::generate_profile_ebe(int nevent)
           setEd(dens2pt, iy); // includes factor multiplication
           if (use_5col)
           {
-            sprintf(buffer,file2_5col,event);
+            sprintf(buffer,file2_5col.c_str(),event);
             dumpDensity5Col(buffer, dens2pt, iy);
           }
           if (use_ptCol)     // jia test
           {
-            sprintf(buffer,file2_ptCol,event);
+            sprintf(buffer,file2_ptCol.c_str(),event);
             dumpDesityptCol(buffer, dens2pt, iy);
           }
 
@@ -1432,30 +1432,30 @@ void MakeDensity::generate_profile_average(int nevent)
         {
             if (use_4col)
             {
-              sprintf(buffer, file1_4col, order);
+              sprintf(buffer, file1_4col.c_str(), order);
               dumpDensity4Col(buffer, dens1[iorder], iy);
             }
             if (use_block)
             {
-              sprintf(buffer, file1_block, order);
+              sprintf(buffer, file1_block.c_str(), order);
               dumpDensityBlock(buffer, dens1[iorder], iy);
             }
             if (generate_RP_profile == 1)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file1_4col_RP, order);
+                  sprintf(buffer, file1_4col_RP.c_str(), order);
                   dumpDensity4Col(buffer, dens1_RP[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file1_block_RP, order);
+                  sprintf(buffer, file1_block_RP.c_str(), order);
                   dumpDensityBlock(buffer, dens1_RP[iorder], iy);
                 }
             }
             if (PTinte < 0 && use_5col)
             {
-              sprintf(buffer, file1_5col, order);
+              sprintf(buffer, file1_5col.c_str(), order);
               dumpDensity5Col(buffer, dens1pt[iorder], iy);
             }
         }
@@ -1463,30 +1463,30 @@ void MakeDensity::generate_profile_average(int nevent)
         if (use_ed) {
             if (use_4col)
             {
-              sprintf(buffer, file2_4col, order);
+              sprintf(buffer, file2_4col.c_str(), order);
               dumpDensity4Col(buffer, dens2[iorder], iy);
             }
             if (use_block)
             {
-              sprintf(buffer, file2_block, order);
+              sprintf(buffer, file2_block.c_str(), order);
               dumpDensityBlock(buffer, dens2[iorder], iy);
             }
             if (generate_RP_profile == 1)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file2_4col_RP, order);
+                  sprintf(buffer, file2_4col_RP.c_str(), order);
                   dumpDensity4Col(buffer, dens2_RP[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file2_block_RP, order);
+                  sprintf(buffer, file2_block_RP.c_str(), order);
                   dumpDensityBlock(buffer, dens2_RP[iorder], iy);
                 }
             }
             if (PTinte < 0 && use_5col)
              {
-               sprintf(buffer, file2_5col, order);
+               sprintf(buffer, file2_5col.c_str(), order);
                dumpDensity5Col(buffer, dens2pt[iorder], iy);
              }   
         }
@@ -1498,12 +1498,12 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_TATB_Sd_4col, order);
+                  sprintf(buffer, file_TATB_Sd_4col.c_str(), order);
                   dumpDensity4Col(buffer, TATB_Sd[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_TATB_Sd_block, order);
+                  sprintf(buffer, file_TATB_Sd_block.c_str(), order);
                   dumpDensityBlock(buffer, TATB_Sd[iorder], iy);
                 }
             }
@@ -1512,12 +1512,12 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_TATB_Ed_4col, order);
+                  sprintf(buffer, file_TATB_Ed_4col.c_str(), order);
                   dumpDensity4Col(buffer, TATB_Ed[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_TATB_Ed_block, order);
+                  sprintf(buffer, file_TATB_Ed_block.c_str(), order);
                   dumpDensityBlock(buffer, TATB_Ed[iorder], iy);
                 }
             }
@@ -1528,12 +1528,12 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_TATB_Sd_RP_4col, order);
+                      sprintf(buffer, file_TATB_Sd_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, TATB_Sd_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_TATB_Sd_RP_block, order);
+                      sprintf(buffer, file_TATB_Sd_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, TATB_Sd_RP[iorder], iy);
                     }
                 }
@@ -1542,12 +1542,12 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_TATB_Ed_RP_4col, order);
+                      sprintf(buffer, file_TATB_Ed_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, TATB_Ed_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_TATB_Ed_RP_block, order);
+                      sprintf(buffer, file_TATB_Ed_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, TATB_Ed_RP[iorder], iy);
                     }
                 }
@@ -1561,12 +1561,12 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_rho_binary_sd_4col, order);
+                  sprintf(buffer, file_rho_binary_sd_4col.c_str(), order);
                   dumpDensity4Col(buffer, rho_binary_sd[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_rho_binary_sd_block, order);
+                  sprintf(buffer, file_rho_binary_sd_block.c_str(), order);
                   dumpDensityBlock(buffer, rho_binary_sd[iorder], iy);
                 }
             }
@@ -1575,12 +1575,12 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_rho_binary_ed_4col, order);
+                  sprintf(buffer, file_rho_binary_ed_4col.c_str(), order);
                   dumpDensity4Col(buffer, rho_binary_ed[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_rho_binary_ed_block, order);
+                  sprintf(buffer, file_rho_binary_ed_block.c_str(), order);
                   dumpDensityBlock(buffer, rho_binary_ed[iorder], iy);
                 }
             }
@@ -1591,12 +1591,12 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_rho_binary_sd_RP_4col, order);
+                      sprintf(buffer, file_rho_binary_sd_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, rho_binary_sd_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_rho_binary_sd_RP_block, order);
+                      sprintf(buffer, file_rho_binary_sd_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, rho_binary_sd_RP[iorder], iy);
                     }
                 }
@@ -1605,12 +1605,12 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_rho_binary_ed_RP_4col, order);
+                      sprintf(buffer, file_rho_binary_ed_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, rho_binary_ed_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_rho_binary_ed_RP_block, order);
+                      sprintf(buffer, file_rho_binary_ed_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, rho_binary_ed_RP[iorder], iy);
                     }
                 }
@@ -1624,16 +1624,16 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_TA_sd_4col, order);
+                  sprintf(buffer, file_TA_sd_4col.c_str(), order);
                   dumpDensity4Col(buffer, nuclear_TA_sd[iorder], iy);
-                  sprintf(buffer, file_TB_sd_4col, order);
+                  sprintf(buffer, file_TB_sd_4col.c_str(), order);
                   dumpDensity4Col(buffer, nuclear_TB_sd[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_TA_sd_block, order);
+                  sprintf(buffer, file_TA_sd_block.c_str(), order);
                   dumpDensityBlock(buffer, nuclear_TA_sd[iorder], iy);
-                  sprintf(buffer, file_TB_sd_block, order);
+                  sprintf(buffer, file_TB_sd_block.c_str(), order);
                   dumpDensityBlock(buffer, nuclear_TB_sd[iorder], iy);
                 }
             }
@@ -1642,16 +1642,16 @@ void MakeDensity::generate_profile_average(int nevent)
             {
                 if (use_4col)
                 {
-                  sprintf(buffer, file_TA_ed_4col, order);
+                  sprintf(buffer, file_TA_ed_4col.c_str(), order);
                   dumpDensity4Col(buffer, nuclear_TA_ed[iorder], iy);
-                  sprintf(buffer, file_TB_ed_4col, order);
+                  sprintf(buffer, file_TB_ed_4col.c_str(), order);
                   dumpDensity4Col(buffer, nuclear_TB_ed[iorder], iy);
                 }
                 if (use_block)
                 {
-                  sprintf(buffer, file_TA_ed_block, order);
+                  sprintf(buffer, file_TA_ed_block.c_str(), order);
                   dumpDensityBlock(buffer, nuclear_TA_ed[iorder], iy);
-                  sprintf(buffer, file_TB_ed_block, order);
+                  sprintf(buffer, file_TB_ed_block.c_str(), order);
                   dumpDensityBlock(buffer, nuclear_TB_ed[iorder], iy);
                 }
             }
@@ -1662,16 +1662,16 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_TA_sd_RP_4col, order);
+                      sprintf(buffer, file_TA_sd_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, nuclear_TA_sd_RP[iorder], iy);
-                      sprintf(buffer, file_TB_sd_RP_4col, order);
+                      sprintf(buffer, file_TB_sd_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, nuclear_TB_sd_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_TA_sd_RP_block, order);
+                      sprintf(buffer, file_TA_sd_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, nuclear_TA_sd_RP[iorder], iy);
-                      sprintf(buffer, file_TB_sd_RP_block, order);
+                      sprintf(buffer, file_TB_sd_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, nuclear_TB_sd_RP[iorder], iy);
                     }
                 }
@@ -1680,16 +1680,16 @@ void MakeDensity::generate_profile_average(int nevent)
                 {
                     if (use_4col)
                     {
-                      sprintf(buffer, file_TA_ed_RP_4col, order);
+                      sprintf(buffer, file_TA_ed_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, nuclear_TA_ed_RP[iorder], iy);
-                      sprintf(buffer, file_TB_ed_RP_4col, order);
+                      sprintf(buffer, file_TB_ed_RP_4col.c_str(), order);
                       dumpDensity4Col(buffer, nuclear_TB_ed_RP[iorder], iy);
                     }
                     if (use_block)
                     {
-                      sprintf(buffer, file_TA_ed_RP_block, order);
+                      sprintf(buffer, file_TA_ed_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, nuclear_TA_ed_RP[iorder], iy);
-                      sprintf(buffer, file_TB_ed_RP_block, order);
+                      sprintf(buffer, file_TB_ed_RP_block.c_str(), order);
                       dumpDensityBlock(buffer, nuclear_TB_ed_RP[iorder], iy);
                     }
                 }
@@ -1966,7 +1966,7 @@ void MakeDensity::generateEccTable(int nevent)
       if (paraRdr->getVal("use_ed"))
       {
         setEd(dens2, iy);
-        dumpEccentricities(file2, dens2, iy, from_order, to_order, Npart, Nbin, b);
+        dumpEccentricities(file2.c_str(), dens2, iy, from_order, to_order, Npart, Nbin, b);
       }
     }
 
