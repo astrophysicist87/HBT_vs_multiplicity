@@ -11,7 +11,8 @@
 
 #include "ParameterReader.h"
 
-extern string resultsPath;
+extern std::string resultsPath;
+extern char * CesultsPath;
 
 class MakeDensity
 {

@@ -20,7 +20,7 @@
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 
-extern string resultsPath;
+extern std::string resultsPath;
 
 // subroutines to generate and handle MC configurations of colliding nuclei
 class MCnucl
