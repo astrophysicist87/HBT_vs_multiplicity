@@ -1898,7 +1898,8 @@ void MakeDensity::generateEccTable(int nevent)
 
   // entropy profile:
   //const char * file1 = (resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
-  char * file1 = &(resultsPath + "/sn_ecc_eccp_%d.dat")[0];
+  //char * file1 = &(resultsPath + "/sn_ecc_eccp_%d.dat")[0];
+  char * file1 = "data/sn_ecc_eccp_%d.dat";
 cout << __FILE__ << ":" << __LINE__ << ": " << file1 << endl;
 if (1) exit (8);
   double *** dens1  = new double** [binRapidity];
