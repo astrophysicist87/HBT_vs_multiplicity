@@ -1965,6 +1965,8 @@ void MakeDensity::generateEccTable(int nevent)
   //const char * file1 = (get_path(resultsPath, "/sn_ecc_eccp_%d.dat")).c_str();
   std::string CPPresultsPath(resultsPath + "/sn_ecc_eccp_%d.dat");
   const char * file1 = CPPresultsPath.c_str();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
+if (1) exit(8);
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
