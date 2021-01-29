@@ -1165,7 +1165,7 @@ void MCnucl::makeTable(double ptmin, double dpt, int iPtmax)
   cout << "MCnucl::makeTable(double, double, int): done" << endl;
 }
 
-void MCnucl::dumpdNdyTable4Col(char filename[], double *** dNdyTable, const int iy)
+void MCnucl::dumpdNdyTable4Col(const char filename[], double *** dNdyTable, const int iy)
 {
   ofstream of;
   of.open(filename, std::ios_base::app);

@@ -128,7 +128,7 @@ public:
     void rotateGrid(int iy, int n=2);
     void makeTable();
     void makeTable(double, double, int);
-    void dumpdNdyTable4Col(char filename[], double *** dNdyTable, const int iy);
+    void dumpdNdyTable4Col(const char filename[], double *** dNdyTable, const int iy);
     void dumpdNdydptTable5Col(char filename[], double **** dNdydptTable, const int iy);    
     double getSigEff();
     int hit(double r);
