@@ -12,7 +12,7 @@
 
 #CC := $(shell ../../crank/configure_compiler_C++.sh)
 #CFLAGS= $(shell ../../crank/configure_compiler_C++_Flags.sh) $(shell gsl-config --cflags)
-CC := g++
+CC := /opt/bin/g++
 CFLAGS= -O3 -Wall --std=c++11
 CFLAGS+= $(shell gsl-config --cflags)
 
