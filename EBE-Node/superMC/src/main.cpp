@@ -17,6 +17,7 @@ using namespace std;
 //###########################################################################
 
 std::string resultsPath = "data";
+char * CresultsPath;
 
 int main(int argc, char *argv[]) {
 
