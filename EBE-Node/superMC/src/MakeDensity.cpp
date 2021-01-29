@@ -159,7 +159,7 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
   // binary profile:
   std::string CPPresultsPath = resultsPath + "/BinaryCollisionTable_event_%d.dat";
   const char * file_binary = CPPresultsPath.c_str();
-  CPPresultsPath(resultsPath + "/ParticipantTable_event_%d.dat";
+  CPPresultsPath = resultsPath + "/ParticipantTable_event_%d.dat";
   const char * file_participant = CPPresultsPath.c_str();
 
   // entropy profile:
@@ -466,7 +466,7 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
 void MakeDensity::generate_profile_ebe(int nevent)
 {
   // entropy profile:
-  CPPresultsPath = resultsPath + "/sd_event_%d_4col.dat";
+  std::string CPPresultsPath = resultsPath + "/sd_event_%d_4col.dat";
   const char * file1_4col = CPPresultsPath.c_str();
   CPPresultsPath = resultsPath + "/sd_event_%d_block.dat";
   const char * file1_block = CPPresultsPath.c_str();
@@ -723,7 +723,7 @@ void MakeDensity::generate_profile_average(int nevent)
   int output_TA = paraRdr->getVal("output_TA");
 
   // entropy profile:
-  CPPresultsPath = resultsPath + "/sdAvg_order_%d_4col.dat";
+  std::string CPPresultsPath = resultsPath + "/sdAvg_order_%d_4col.dat";
   const char * file1_4col = CPPresultsPath.c_str();
   CPPresultsPath = resultsPath + "/sdAvg_order_%d_block.dat";
   const char * file1_block = CPPresultsPath.c_str();
@@ -1042,7 +1042,7 @@ void MakeDensity::generate_profile_average(int nevent)
   CPPresultsPath = resultsPath + "/nuclear_thickness_TA_fromSd_RP_order_%d_block.dat";
   const char * file_TA_sd_RP_block = CPPresultsPath.c_str();
   CPPresultsPath = resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_4col.dat";
-  const char * file_TA_sd_RP_block = CPPresultsPath.c_str();
+  const char * file_TA_ed_RP_4col = CPPresultsPath.c_str();
   CPPresultsPath = resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_block.dat";
   const char * file_TA_ed_RP_block = CPPresultsPath.c_str();
   CPPresultsPath = resultsPath + "/nuclear_thickness_TB_fromSd_RP_order_%d_4col.dat";
@@ -1977,7 +1977,7 @@ if (1) exit(8);
   }
 
   // energy profile:
-  std::string CPPresultsPath = resultsPath + "/en_ecc_eccp_%d.dat";
+  CPPresultsPath = resultsPath + "/en_ecc_eccp_%d.dat";
   const char * file2 = CPPresultsPath.c_str();
   double *** dens2  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
