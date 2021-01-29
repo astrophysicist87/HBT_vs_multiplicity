@@ -1097,7 +1097,9 @@ int progress_counter = 0, progress_percent = 0, last_update = 0;
   //===========================================================================
   cout << "MCnucl::makeTable(): done" << endl << endl;
 
-  dumpdNdyTable4Col("data/dNdyTable.dat", dndyTable, 0);
+  std::string local_filename = resultsPath + "/dNdyTable.dat";
+  //dumpdNdyTable4Col("data/dNdyTable.dat", dndyTable, 0);
+  dumpdNdyTable4Col(local_filename.c_str(), dndyTable, 0);
 }
 
 
@@ -1377,7 +1379,8 @@ void MCnucl::dumpSpectatorsTable(int event)
   double x, y, rap;
   ostringstream of_stream; 
   ofstream of;
-  of_stream << "data/Spectators_event_" << event << ".dat";
+  //of_stream << "data/Spectators_event_" << event << ".dat";
+  of_stream << resultsPath << "/Spectators_event_" << event << ".dat";
   
   of.open(of_stream.str().c_str());
   for (int idx=0; idx<spectators.size(); idx++)
