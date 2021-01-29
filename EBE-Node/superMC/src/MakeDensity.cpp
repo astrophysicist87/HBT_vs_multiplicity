@@ -164,6 +164,10 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
   const char * file1_ecc = (resultsPath + "/sn_ecc_eccp_%%d_event_%d.dat").c_str();
   const char * file1_4col = (resultsPath + "/sd_event_%d_4col.dat").c_str();
   const char * file1_block = (resultsPath + "/sd_event_%d_block.dat").c_str();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1_ecc) << endl;
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1_4col) << endl;
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1_block) << endl;
+
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
@@ -1892,6 +1896,7 @@ void MakeDensity::generateEccTable(int nevent)
 
   // entropy profile:
   const char * file1 = (resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
@@ -1903,6 +1908,7 @@ void MakeDensity::generateEccTable(int nevent)
 
   // energy profile:
   const char * file2 = (resultsPath + "/en_ecc_eccp_%d.dat").c_str();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
   double *** dens2  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens2[iy] =  new double* [Maxx]();
@@ -1997,6 +2003,8 @@ void MakeDensity::generateEccTable(int nevent)
 void MakeDensity::dumpEccentricities(const char* base_filename, double*** density, const int iy, int from_order, int to_order, double Npart_current, double Nbin_current, double b)
 // calculate and output eccentricities
 {
+cout << __FILE__ << ":" << __LINE__ << ":" << string(base_filename) << endl;
+
     int max_order = 10;
     double eps = 1e-15;
     bool deformedFlag = false;
