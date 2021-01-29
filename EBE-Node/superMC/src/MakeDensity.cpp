@@ -282,11 +282,11 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
       }
     }
     Npart = mc->getNpart1()+mc->getNpart2();
-    sprintf(buffer, file_participant, event);
+    sprintf(buffer, file_participant.c_str(), event);
     mc->dumpparticipantTable(buffer); // for collision profile
     int Spectator = mc->getSpectators();
     mc->dumpSpectatorsTable(event);
-    sprintf(buffer, file_binary, event);
+    sprintf(buffer, file_binary.c_str(), event);
     mc->dumpBinaryTable(buffer); // for collision profile
 
     // is event-by-event calculation; no need to rotate
@@ -310,16 +310,16 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
       if (use_sd)
       {
         setSd(dens1, iy); // includes factor multiplication
-        sprintf(buffer, file1_ecc, event);
+        sprintf(buffer, file1_ecc.c_str(), event);
         dumpEccentricities(buffer, dens1, iy, from_order, to_order, Npart, binary, b);
         if (use_4col)
           {
-            sprintf(buffer,file1_4col,event);
+            sprintf(buffer,file1_4col.c_str(),event);
             dumpDensity4Col(buffer, dens1, iy);
           }
         if (use_block)
           {
-            sprintf(buffer,file1_block,event);
+            sprintf(buffer,file1_block.c_str(),event);
             dumpDensityBlock(buffer, dens1, iy);
           }
       }
@@ -327,7 +327,7 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
       if (use_ed)
       {
         setEd(dens2, iy); // includes factor multiplication
-        sprintf(buffer,file2_ecc,event);
+        sprintf(buffer,file2_ecc.c_str(),event);
         dumpEccentricities(buffer, dens2, iy, from_order, to_order, Npart, binary, b);
         if (use_4col)
           {
