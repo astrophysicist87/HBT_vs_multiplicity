@@ -1934,8 +1934,11 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
     {
 cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       b = sqrt((bmax*bmax - bmin*bmin)*drand48()+bmin*bmin);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       mc->generateNucleus(b,proj,targ);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       binary = mc->getBinaryCollision();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       if(binary==0 || mc->CentralityCut()==0) mc->deleteNucleus();
       tries++;
       if (tries>NTRIES)
@@ -1946,6 +1949,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
           //exit(-1); // no more tries: something must be wrong.
           tries=0;
       }
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
     }
 cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
     Npart = mc->getNpart1()+mc->getNpart2();
