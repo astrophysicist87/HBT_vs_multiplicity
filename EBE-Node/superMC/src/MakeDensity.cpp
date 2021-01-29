@@ -1960,7 +1960,7 @@ void MakeDensity::generateEccTable(int nevent)
       if (paraRdr->getVal("use_sd"))
       {
         setSd(dens1, iy);
-        dumpEccentricities(file1, dens1, iy, from_order, to_order, Npart, Nbin, b);
+        dumpEccentricities(file1.c_str(), dens1, iy, from_order, to_order, Npart, Nbin, b);
       }
       // energy second
       if (paraRdr->getVal("use_ed"))
