@@ -12,7 +12,6 @@
 #include "ParameterReader.h"
 
 extern std::string resultsPath;
-extern char * CesultsPath;
 
 class MakeDensity
 {
@@ -61,7 +60,7 @@ protected:
   void generate_profile_ebe(int nevent);
   void generate_profile_average(int nevent);
   void generateEccTable(int nevent);
-  void dumpEccentricities(const char* base_filename, double*** density, const int iy, int from_order, int to_order, double Npart_current, double Nbin_current, double b);
+  void dumpEccentricities(char* base_filename, double*** density, const int iy, int from_order, int to_order, double Npart_current, double Nbin_current, double b);
   void setSd(double*** data, int iy);
   void setEd(double*** data, int iy);
   void setSd(double**** data, int iy);

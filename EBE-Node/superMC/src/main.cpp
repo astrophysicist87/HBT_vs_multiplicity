@@ -17,7 +17,6 @@ using namespace std;
 //###########################################################################
 
 std::string resultsPath = "data";
-char * CresultsPath;
 
 int main(int argc, char *argv[]) {
 
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
   paraRdr.echo();
 
   resultsPath = std::string(argv[1]);
-  CresultsPath = argv[1];
+  //CresultsPath = argv[1];
 
   cout << "Using " << resultsPath << " to store results" << endl;
 
