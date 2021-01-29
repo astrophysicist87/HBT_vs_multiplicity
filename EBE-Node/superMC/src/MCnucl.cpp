@@ -1097,7 +1097,7 @@ int progress_counter = 0, progress_percent = 0, last_update = 0;
   //===========================================================================
   cout << "MCnucl::makeTable(): done" << endl << endl;
 
-   dumpdNdyTable4Col("data/dNdyTable.dat", dndyTable, 0);
+  dumpdNdyTable4Col("data/dNdyTable.dat", dndyTable, 0);
 }
 
 
@@ -1165,7 +1165,7 @@ void MCnucl::makeTable(double ptmin, double dpt, int iPtmax)
   cout << "MCnucl::makeTable(double, double, int): done" << endl;
 }
 
-void MCnucl::dumpdNdyTable4Col(const char filename[], double *** dNdyTable, const int iy)
+void MCnucl::dumpdNdyTable4Col(char filename[], double *** dNdyTable, const int iy)
 {
   ofstream of;
   of.open(filename, std::ios_base::app);
