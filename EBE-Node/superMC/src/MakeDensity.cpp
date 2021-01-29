@@ -315,6 +315,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file1_block) << endl;
       {
         setSd(dens1, iy); // includes factor multiplication
         sprintf(buffer, file1_ecc, event);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(buffer) << endl;
         dumpEccentricities(buffer, dens1, iy, from_order, to_order, Npart, binary, b);
         if (use_4col)
           {
@@ -332,6 +333,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file1_block) << endl;
       {
         setEd(dens2, iy); // includes factor multiplication
         sprintf(buffer,file2_ecc,event);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(buffer) << endl;
         dumpEccentricities(buffer, dens2, iy, from_order, to_order, Npart, binary, b);
         if (use_4col)
           {
@@ -1965,12 +1967,14 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
       if (paraRdr->getVal("use_sd"))
       {
         setSd(dens1, iy);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
         dumpEccentricities(file1, dens1, iy, from_order, to_order, Npart, Nbin, b);
       }
       // energy second
       if (paraRdr->getVal("use_ed"))
       {
         setEd(dens2, iy);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
         dumpEccentricities(file2, dens2, iy, from_order, to_order, Npart, Nbin, b);
       }
     }
