@@ -1891,7 +1891,8 @@ void MakeDensity::generateEccTable(int nevent)
   int from_order=paraRdr->getVal("ecc_from_order"), to_order=paraRdr->getVal("ecc_to_order");
 
   // entropy profile:
-  char file1[] = "data/sn_ecc_eccp_%d.dat";
+  //char file1[] = "data/sn_ecc_eccp_%d.dat";
+  std::string file1 = "data/sn_ecc_eccp_%d.dat";
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
