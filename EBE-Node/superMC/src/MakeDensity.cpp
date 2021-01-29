@@ -1888,6 +1888,12 @@ void MakeDensity::generate_profile_average(int nevent)
 }
 //----------------------------------------------------------------------
 
+const char * get_path( std::string resultsPath_in, std::string filename_in )
+{
+	std::string outPath( resultsPath_in );
+	outPath += filename_in;
+	return ( outPath.c_str() );
+}
 
 //**********************************************************************
 void MakeDensity::generateEccTable(int nevent)
@@ -1897,10 +1903,11 @@ void MakeDensity::generateEccTable(int nevent)
   int from_order=paraRdr->getVal("ecc_from_order"), to_order=paraRdr->getVal("ecc_to_order");
 
   // entropy profile:
-  const char * file1 = std::string(resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
+  //const char * file1 = std::string(resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
   /*string CPPresultsPath(resultsPath);
   CPPresultsPath += "/sn_ecc_eccp_%d.dat";
   const char * file1 = CPPresultsPath.c_str();*/
+  const char * file1 = get_path( resultsPath, "/sn_ecc_eccp_%d.dat" );
 cout << __FILE__ << ":" << __LINE__ << ": " << file1 << endl;
 if (1) exit (8);
   double *** dens1  = new double** [binRapidity];
