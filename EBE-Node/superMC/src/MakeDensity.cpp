@@ -1901,7 +1901,7 @@ void MakeDensity::generateEccTable(int nevent)
   int from_order=paraRdr->getVal("ecc_from_order"), to_order=paraRdr->getVal("ecc_to_order");
 
   // entropy profile:
-  const char * file1 = get_path(resultsPath, "/sn_ecc_eccp_%d.dat")).c_str();
+  const char * file1 = (get_path(resultsPath, "/sn_ecc_eccp_%d.dat")).c_str();
   //std::string CPPresultsPath(resultsPath + "/sn_ecc_eccp_%d.dat");
   //const char * file1 = CPPresultsPath.c_str();
 cout << __FILE__ << ":" << __LINE__ << ": " << file1 << endl;
