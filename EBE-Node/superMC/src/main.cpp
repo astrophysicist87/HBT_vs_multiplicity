@@ -16,13 +16,17 @@ using namespace std;
 
 //###########################################################################
 
+string resultsPath = "data";
+
 int main(int argc, char *argv[]) {
 
   // Read-in parameters
   ParameterReader paraRdr;
   paraRdr.readFromFile("parameters.dat");
-  paraRdr.readFromArguments(argc, argv);
+  paraRdr.readFromArguments(argc, argv, "#", 2);
   paraRdr.echo();
+
+  resultsPath = string(argv[1]);
 
   // init random seed from system time
   timeval a;

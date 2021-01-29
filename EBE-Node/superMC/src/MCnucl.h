@@ -2,6 +2,7 @@
 #define MCnucl_h
 #include <vector>
 #include <fstream>
+#include <string>
 #include "Particle.h"
 #include "OverLap.h"
 #include "KLNModel.h"
@@ -18,6 +19,8 @@
 
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
+
+extern string 
 
 // subroutines to generate and handle MC configurations of colliding nuclei
 class MCnucl

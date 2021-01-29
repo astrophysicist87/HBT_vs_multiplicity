@@ -500,8 +500,6 @@ def generateSuperMCInitialConditions(numberOfEvents):
     checkExistenceOfExecutable(path.join(superMCDirectory, superMCExecutable))
 
     # set "nev=#" in superMCParameters
-    
-    #if superMCParameters['operation']!=3:
     superMCParameters[superMCControl['numberOfEventsParameterName']] = (
                                                                 numberOfEvents)
     # form assignment string
@@ -515,7 +513,6 @@ def generateSuperMCInitialConditions(numberOfEvents):
     # yield initial conditions
     file_list = glob(path.join(superMCDataDirectory, 
                                superMCControl['initialFiles']))
-    #print superMCControl['initialFiles']
     for aFile in file_list:
         # then yield it
         yield path.join(superMCDataDirectory, aFile)

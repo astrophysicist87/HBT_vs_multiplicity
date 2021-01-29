@@ -1097,7 +1097,7 @@ int progress_counter = 0, progress_percent = 0, last_update = 0;
   //===========================================================================
   cout << "MCnucl::makeTable(): done" << endl << endl;
 
-  dumpdNdyTable4Col("data/dNdyTable.dat", dndyTable, 0);
+  dumpdNdyTable4Col((resultsPath + "/dNdyTable.dat").c_str(), dndyTable, 0);
 }
 
 
@@ -1293,7 +1293,7 @@ void MCnucl::dumpBinaryTable(char filename[])
   of.close();
   
   /* for debug
-  of.open("data/wounded.data");
+  of.open((resultsPath + "/wounded.data").c_str());
   for (int idx=0; idx<participant.size(); idx++)
   {
     x = participant[idx]->getX();
@@ -1304,7 +1304,7 @@ void MCnucl::dumpBinaryTable(char filename[])
   }
   of.close();
 
-  of.open("data/nucl1.data");
+  of.open((resultsPath + "/nucl1.data").c_str());
   for (int idx=0; idx<nucl1.size(); idx++)
   {
     x = nucl1[idx]->getX();
@@ -1315,7 +1315,7 @@ void MCnucl::dumpBinaryTable(char filename[])
   }
   of.close();
 
-  of.open("data/nucl2.data");
+  of.open((resultsPath + "/nucl2.data").c_str());
   for (int idx=0; idx<nucl2.size(); idx++)
   {
     x = nucl2[idx]->getX();
@@ -1377,7 +1377,7 @@ void MCnucl::dumpSpectatorsTable(int event)
   double x, y, rap;
   ostringstream of_stream; 
   ofstream of;
-  of_stream << "data/Spectators_event_" << event << ".dat";
+  of_stream << resultsPath + "/Spectators_event_" << event << ".dat";
   
   of.open(of_stream.str().c_str());
   for (int idx=0; idx<spectators.size(); idx++)

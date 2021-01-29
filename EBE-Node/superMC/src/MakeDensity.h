@@ -1,6 +1,7 @@
 #ifndef MAKEDENSITY_h
 #define MAKEDENSITY_h
 #include <fstream>
+#include <string>
 #include "OverLap.h"
 #include "KLNModel.h"
 #include "OverLap.h"
@@ -9,6 +10,8 @@
 #include "EOS.h"
 
 #include "ParameterReader.h"
+
+extern string resultsPath;
 
 class MakeDensity
 {
