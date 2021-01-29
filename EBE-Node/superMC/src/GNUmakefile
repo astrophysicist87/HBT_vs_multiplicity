@@ -13,7 +13,7 @@
 #CC := $(shell ../../crank/configure_compiler_C++.sh)
 #CFLAGS= $(shell ../../crank/configure_compiler_C++_Flags.sh) $(shell gsl-config --cflags)
 CC := g++
-CFLAGS= -O3 -Wall -std=c++11
+CFLAGS= -O3 -Wall --std=c++11
 CFLAGS+= $(shell gsl-config --cflags)
 
 RM		=	rm -f
