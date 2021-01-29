@@ -1902,7 +1902,7 @@ void MakeDensity::generateEccTable(int nevent)
   //char * file1 = "data/sn_ecc_eccp_%d.dat";
   string CPPresultsPath(resultsPath);
   CPPresultsPath += "/sn_ecc_eccp_%d.dat";
-  char * file1 = CPPresultsPath.c_str();
+  const char * file1 = CPPresultsPath.c_str();
 cout << __FILE__ << ":" << __LINE__ << ": " << file1 << endl;
 if (1) exit (8);
   double *** dens1  = new double** [binRapidity];
