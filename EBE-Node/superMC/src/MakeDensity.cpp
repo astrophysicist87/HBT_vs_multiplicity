@@ -158,12 +158,12 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
 {
   // binary profile:
   const char * file_binary = (resultsPath + "/BinaryCollisionTable_event_%d.dat").c_str();
-  char file_participant[] = (resultsPath + "/ParticipantTable_event_%d.dat").c_str();
+  const char * file_participant = (resultsPath + "/ParticipantTable_event_%d.dat").c_str();
 
   // entropy profile:
-  char file1_ecc[] = (resultsPath + "/sn_ecc_eccp_%%d_event_%d.dat").c_str();
-  char file1_4col[] = (resultsPath + "/sd_event_%d_4col.dat").c_str();
-  char file1_block[] = (resultsPath + "/sd_event_%d_block.dat").c_str();
+  const char * file1_ecc = (resultsPath + "/sn_ecc_eccp_%%d_event_%d.dat").c_str();
+  const char * file1_4col = (resultsPath + "/sd_event_%d_4col.dat").c_str();
+  const char * file1_block = (resultsPath + "/sd_event_%d_block.dat").c_str();
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
@@ -174,9 +174,9 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
   }
 
   // energy profile:
-  char file2_ecc[] = (resultsPath + "/en_ecc_eccp_%%d_event_%d.dat").c_str();
-  char file2_4col[] = (resultsPath + "/ed_event_%d_4col.dat").c_str();
-  char file2_block[] = (resultsPath + "/ed_event_%d_block.dat").c_str();
+  const char * file2_ecc = (resultsPath + "/en_ecc_eccp_%%d_event_%d.dat").c_str();
+  const char * file2_4col = (resultsPath + "/ed_event_%d_4col.dat").c_str();
+  const char * file2_block = (resultsPath + "/ed_event_%d_block.dat").c_str();
   double *** dens2  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens2[iy] =  new double* [Maxx]();
@@ -199,8 +199,8 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
   int output_rhob = paraRdr->getVal("output_rhob");
 
   // binary density profile (rotated using entropy density):
-  char file_rho_binary_4col[] = (resultsPath + "/rho_binary_event_%d_4col.dat").c_str();
-  char file_rho_binary_block[] = (resultsPath + "/rho_binary_event_%d_block.dat").c_str();
+  const char * file_rho_binary_4col = (resultsPath + "/rho_binary_event_%d_4col.dat").c_str();
+  const char * file_rho_binary_block = (resultsPath + "/rho_binary_event_%d_block.dat").c_str();
   double ***rho_binary_sd = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++)
   {
@@ -213,8 +213,8 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
     }
   }
   // nuclear thickness function profile
-  char file_TA_4col[] = (resultsPath + "/nuclear_thickness_TA_event_%d_4col.dat").c_str();
-  char file_TA_block[] = (resultsPath + "/nuclear_thickness_TA_event_%d_block.dat").c_str();
+  const char * file_TA_4col = (resultsPath + "/nuclear_thickness_TA_event_%d_4col.dat").c_str();
+  const char * file_TA_block = (resultsPath + "/nuclear_thickness_TA_event_%d_block.dat").c_str();
   double ***nuclear_TA_sd = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++)
   {
@@ -226,8 +226,8 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
            nuclear_TA_sd[iy][i][j]=0;
     }
   }
-  char file_TB_4col[] = (resultsPath + "/nuclear_thickness_TB_event_%d_4col.dat").c_str();
-  char file_TB_block[] = (resultsPath + "/nuclear_thickness_TB_event_%d_block.dat").c_str();
+  const char * file_TB_4col = (resultsPath + "/nuclear_thickness_TB_event_%d_4col.dat").c_str();
+  const char * file_TB_block = (resultsPath + "/nuclear_thickness_TB_event_%d_block.dat").c_str();
   double ***nuclear_TB_sd = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++)
   {
@@ -240,8 +240,8 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
     }
   }
   // net baryon density profile = TA+TB
-  char file_rhob_4col[] = (resultsPath + "/rhob_event_%d_4col.dat").c_str();
-  char file_rhob_block[] = (resultsPath + "/rhob_event_%d_block.dat").c_str();
+  const char * file_rhob_4col = (resultsPath + "/rhob_event_%d_4col.dat").c_str();
+  const char * file_rhob_block = (resultsPath + "/rhob_event_%d_block.dat").c_str();
   double ***rhob_sd = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++)
   {
@@ -449,10 +449,10 @@ void MakeDensity::generate_profile_ebe_Jet(int nevent)
 void MakeDensity::generate_profile_ebe(int nevent)
 {
   // entropy profile:
-  char file1_4col[] = (resultsPath + "/sd_event_%d_4col.dat").c_str();
-  char file1_block[] = (resultsPath + "/sd_event_%d_block.dat").c_str();
-  char file1_5col[] = (resultsPath + "/sd_event_%d_5col.dat").c_str();
-  char file1_ptCol[] = (resultsPath + "/sd_event_%d_ptCol.dat").c_str();
+  const char * file1_4col = (resultsPath + "/sd_event_%d_4col.dat").c_str();
+  const char * file1_block = (resultsPath + "/sd_event_%d_block.dat").c_str();
+  const char * file1_5col = (resultsPath + "/sd_event_%d_5col.dat").c_str();
+  const char * file1_ptCol = (resultsPath + "/sd_event_%d_ptCol.dat").c_str();
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
@@ -475,10 +475,10 @@ void MakeDensity::generate_profile_ebe(int nevent)
   }
 
   // energy profile:
-  char file2_4col[] = (resultsPath + "/ed_event_%d_4col.dat").c_str();
-  char file2_block[] = (resultsPath + "/ed_event_%d_block.dat").c_str();
-  char file2_5col[] = (resultsPath + "/ed_event_%d_5col.dat").c_str();
-  char file2_ptCol[] = (resultsPath + "/ed_event_%d_ptCol.dat").c_str();
+  const char * file2_4col = (resultsPath + "/ed_event_%d_4col.dat").c_str();
+  const char * file2_block = (resultsPath + "/ed_event_%d_block.dat").c_str();
+  const char * file2_5col = (resultsPath + "/ed_event_%d_5col.dat").c_str();
+  const char * file2_ptCol = (resultsPath + "/ed_event_%d_ptCol.dat").c_str();
   double *** dens2  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens2[iy] =  new double* [Maxx]();
@@ -698,8 +698,8 @@ void MakeDensity::generate_profile_average(int nevent)
   int output_TA = paraRdr->getVal("output_TA");
 
   // entropy profile:
-  char file1_4col[] = (resultsPath + "/sdAvg_order_%d_4col.dat").c_str();
-  char file1_block[] = (resultsPath + "/sdAvg_order_%d_block.dat").c_str();
+  const char * file1_4col = (resultsPath + "/sdAvg_order_%d_4col.dat").c_str();
+  const char * file1_block = (resultsPath + "/sdAvg_order_%d_block.dat").c_str();
   double **** dens1  = new double*** [number_of_orders];
   for(int iorder=0; iorder<number_of_orders; iorder++) // iorder starts from 0
   {
@@ -714,8 +714,8 @@ void MakeDensity::generate_profile_average(int nevent)
   }
   
   // energy profile:
-  char file2_4col[] = (resultsPath + "/edAvg_order_%d_4col.dat").c_str();
-  char file2_block[] = (resultsPath + "/edAvg_order_%d_block.dat").c_str();
+  const char * file2_4col = (resultsPath + "/edAvg_order_%d_4col.dat").c_str();
+  const char * file2_block = (resultsPath + "/edAvg_order_%d_block.dat").c_str();
   double **** dens2  = new double*** [number_of_orders];
   for(int iorder=0; iorder<number_of_orders; iorder++) // iorder starts from 0
   {
@@ -729,10 +729,10 @@ void MakeDensity::generate_profile_average(int nevent)
     }
   }
 
-  char file1_4col_RP[] = (resultsPath + "/sdAvg_RP_order_%d_4col.dat").c_str();
-  char file1_block_RP[] = (resultsPath + "/sdAvg_RP_order_%d_block.dat").c_str();
-  char file2_4col_RP[] = (resultsPath + "/edAvg_RP_order_%d_4col.dat").c_str();
-  char file2_block_RP[] = (resultsPath + "/edAvg_RP_order_%d_block.dat").c_str();
+  const char * file1_4col_RP = (resultsPath + "/sdAvg_RP_order_%d_4col.dat").c_str();
+  const char * file1_block_RP = (resultsPath + "/sdAvg_RP_order_%d_block.dat").c_str();
+  const char * file2_4col_RP = (resultsPath + "/edAvg_RP_order_%d_4col.dat").c_str();
+  const char * file2_block_RP = (resultsPath + "/edAvg_RP_order_%d_block.dat").c_str();
   double ****dens1_RP, ****dens2_RP;
   if(generate_RP_profile)
   {
@@ -764,8 +764,8 @@ void MakeDensity::generate_profile_average(int nevent)
       }
   }
 
-  char file1_5col[] = (resultsPath + "/sdAvg_order_%d_5col.dat").c_str();
-  char file2_5col[] = (resultsPath + "/edAvg_order_%d_5col.dat").c_str();
+  const char * file1_5col = (resultsPath + "/sdAvg_order_%d_5col.dat").c_str();
+  const char * file2_5col = (resultsPath + "/edAvg_order_%d_5col.dat").c_str();
   double *****dens1pt, *****dens2pt, ****dens_tmp_pt;
   if(PTinte < 0)
   {
@@ -830,14 +830,14 @@ void MakeDensity::generate_profile_average(int nevent)
   }
 
 
-  char file_TATB_Sd_4col[] = (resultsPath + "/TATB_fromSd_order_%d_4col.dat").c_str();
-  char file_TATB_Sd_block[] = (resultsPath + "/TATB_fromSd_order_%d_block.dat").c_str();
-  char file_TATB_Ed_4col[] = (resultsPath + "/TATB_fromEd_order_%d_4col.dat").c_str();
-  char file_TATB_Ed_block[] = (resultsPath + "/TATB_fromEd_order_%d_block.dat").c_str();
-  char file_TATB_Sd_RP_4col[] = (resultsPath + "/TATB_fromSd_RP_order_%d_4col.dat").c_str();
-  char file_TATB_Sd_RP_block[] = (resultsPath + "/TATB_fromSd_RP_order_%d_block.dat").c_str();
-  char file_TATB_Ed_RP_4col[] = (resultsPath + "/TATB_fromEd_RP_order_%d_4col.dat").c_str();
-  char file_TATB_Ed_RP_block[] = (resultsPath + "/TATB_fromEd_RP_order_%d_block.dat").c_str();
+  const char * file_TATB_Sd_4col = (resultsPath + "/TATB_fromSd_order_%d_4col.dat").c_str();
+  const char * file_TATB_Sd_block = (resultsPath + "/TATB_fromSd_order_%d_block.dat").c_str();
+  const char * file_TATB_Ed_4col = (resultsPath + "/TATB_fromEd_order_%d_4col.dat").c_str();
+  const char * file_TATB_Ed_block = (resultsPath + "/TATB_fromEd_order_%d_block.dat").c_str();
+  const char * file_TATB_Sd_RP_4col = (resultsPath + "/TATB_fromSd_RP_order_%d_4col.dat").c_str();
+  const char * file_TATB_Sd_RP_block = (resultsPath + "/TATB_fromSd_RP_order_%d_block.dat").c_str();
+  const char * file_TATB_Ed_RP_4col = (resultsPath + "/TATB_fromEd_RP_order_%d_4col.dat").c_str();
+  const char * file_TATB_Ed_RP_block = (resultsPath + "/TATB_fromEd_RP_order_%d_block.dat").c_str();
   double ****TATB_Sd, ****TATB_Ed, ****TATB_Sd_RP, ****TATB_Ed_RP;
   if (output_TATB == 1) 
   {
@@ -900,14 +900,14 @@ void MakeDensity::generate_profile_average(int nevent)
       }
   }
   
-  char file_rho_binary_sd_4col[] = (resultsPath + "/rho_binary_fromSd_order_%d_4col.dat").c_str();
-  char file_rho_binary_sd_block[] = (resultsPath + "/rho_binary_fromSd_order_%d_block.dat").c_str();
-  char file_rho_binary_ed_4col[] = (resultsPath + "/rho_binary_fromEd_order_%d_4col.dat").c_str();
-  char file_rho_binary_ed_block[] = (resultsPath + "/rho_binary_fromEd_order_%d_block.dat").c_str();
-  char file_rho_binary_sd_RP_4col[] = (resultsPath + "/rho_binary_fromSd_RP_order_%d_4col.dat").c_str();
-  char file_rho_binary_sd_RP_block[] = (resultsPath + "/rho_binary_fromSd_RP_order_%d_block.dat").c_str();
-  char file_rho_binary_ed_RP_4col[] = (resultsPath + "/rho_binary_fromEd_RP_order_%d_4col.dat").c_str();
-  char file_rho_binary_ed_RP_block[] = (resultsPath + "/rho_binary_fromEd_RP_order_%d_block.dat").c_str();
+  const char * file_rho_binary_sd_4col = (resultsPath + "/rho_binary_fromSd_order_%d_4col.dat").c_str();
+  const char * file_rho_binary_sd_block = (resultsPath + "/rho_binary_fromSd_order_%d_block.dat").c_str();
+  const char * file_rho_binary_ed_4col = (resultsPath + "/rho_binary_fromEd_order_%d_4col.dat").c_str();
+  const char * file_rho_binary_ed_block = (resultsPath + "/rho_binary_fromEd_order_%d_block.dat").c_str();
+  const char * file_rho_binary_sd_RP_4col = (resultsPath + "/rho_binary_fromSd_RP_order_%d_4col.dat").c_str();
+  const char * file_rho_binary_sd_RP_block = (resultsPath + "/rho_binary_fromSd_RP_order_%d_block.dat").c_str();
+  const char * file_rho_binary_ed_RP_4col = (resultsPath + "/rho_binary_fromEd_RP_order_%d_4col.dat").c_str();
+  const char * file_rho_binary_ed_RP_block = (resultsPath + "/rho_binary_fromEd_RP_order_%d_block.dat").c_str();
   double ****rho_binary_sd, ****rho_binary_ed, ****rho_binary_sd_RP, ****rho_binary_ed_RP;
   if (output_rho_binary == 1)
   {
@@ -970,22 +970,22 @@ void MakeDensity::generate_profile_average(int nevent)
       }
   }
   
-  char file_TA_sd_4col[] = (resultsPath + "/nuclear_thickness_TA_fromSd_order_%d_4col.dat").c_str();
-  char file_TA_sd_block[] = (resultsPath + "/nuclear_thickness_TA_fromSd_order_%d_block.dat").c_str();
-  char file_TA_ed_4col[] = (resultsPath + "/nuclear_thickness_TA_fromEd_order_%d_4col.dat").c_str();
-  char file_TA_ed_block[] = (resultsPath + "/nuclear_thickness_TA_fromEd_order_%d_block.dat").c_str();
-  char file_TB_sd_4col[] = (resultsPath + "/nuclear_thickness_TB_fromSd_order_%d_4col.dat").c_str();
-  char file_TB_sd_block[] = (resultsPath + "/nuclear_thickness_TB_fromSd_order_%d_block.dat").c_str();
-  char file_TB_ed_4col[] = (resultsPath + "/nuclear_thickness_TB_fromEd_order_%d_4col.dat").c_str();
-  char file_TB_ed_block[] = (resultsPath + "/nuclear_thickness_TB_fromEd_order_%d_block.dat").c_str();
-  char file_TA_sd_RP_4col[] = (resultsPath + "/nuclear_thickness_TA_fromSd_RP_order_%d_4col.dat").c_str();
-  char file_TA_sd_RP_block[] = (resultsPath + "/nuclear_thickness_TA_fromSd_RP_order_%d_block.dat").c_str();
-  char file_TA_ed_RP_4col[] = (resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_4col.dat").c_str();
-  char file_TA_ed_RP_block[] = (resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_block.dat").c_str();
-  char file_TB_sd_RP_4col[] = (resultsPath + "/nuclear_thickness_TB_fromSd_RP_order_%d_4col.dat").c_str();
-  char file_TB_sd_RP_block[] = (resultsPath + "/nuclear_thickness_TB_fromSd_RP_order_%d_block.dat").c_str();
-  char file_TB_ed_RP_4col[] = (resultsPath + "/nuclear_thickness_TB_fromEd_RP_order_%d_4col.dat").c_str();
-  char file_TB_ed_RP_block[] = (resultsPath + "/nuclear_thickness_TB_fromEd_RP_order_%d_block.dat").c_str();
+  const char * file_TA_sd_4col = (resultsPath + "/nuclear_thickness_TA_fromSd_order_%d_4col.dat").c_str();
+  const char * file_TA_sd_block = (resultsPath + "/nuclear_thickness_TA_fromSd_order_%d_block.dat").c_str();
+  const char * file_TA_ed_4col = (resultsPath + "/nuclear_thickness_TA_fromEd_order_%d_4col.dat").c_str();
+  const char * file_TA_ed_block = (resultsPath + "/nuclear_thickness_TA_fromEd_order_%d_block.dat").c_str();
+  const char * file_TB_sd_4col = (resultsPath + "/nuclear_thickness_TB_fromSd_order_%d_4col.dat").c_str();
+  const char * file_TB_sd_block = (resultsPath + "/nuclear_thickness_TB_fromSd_order_%d_block.dat").c_str();
+  const char * file_TB_ed_4col = (resultsPath + "/nuclear_thickness_TB_fromEd_order_%d_4col.dat").c_str();
+  const char * file_TB_ed_block = (resultsPath + "/nuclear_thickness_TB_fromEd_order_%d_block.dat").c_str();
+  const char * file_TA_sd_RP_4col = (resultsPath + "/nuclear_thickness_TA_fromSd_RP_order_%d_4col.dat").c_str();
+  const char * file_TA_sd_RP_block = (resultsPath + "/nuclear_thickness_TA_fromSd_RP_order_%d_block.dat").c_str();
+  const char * file_TA_ed_RP_4col = (resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_4col.dat").c_str();
+  const char * file_TA_ed_RP_block = (resultsPath + "/nuclear_thickness_TA_fromEd_RP_order_%d_block.dat").c_str();
+  const char * file_TB_sd_RP_4col = (resultsPath + "/nuclear_thickness_TB_fromSd_RP_order_%d_4col.dat").c_str();
+  const char * file_TB_sd_RP_block = (resultsPath + "/nuclear_thickness_TB_fromSd_RP_order_%d_block.dat").c_str();
+  const char * file_TB_ed_RP_4col = (resultsPath + "/nuclear_thickness_TB_fromEd_RP_order_%d_4col.dat").c_str();
+  const char * file_TB_ed_RP_block = (resultsPath + "/nuclear_thickness_TB_fromEd_RP_order_%d_block.dat").c_str();
   double ****nuclear_TA_sd, ****nuclear_TB_sd, ****nuclear_TA_ed, ****nuclear_TB_ed;
   double ****nuclear_TA_sd_RP, ****nuclear_TB_sd_RP, ****nuclear_TA_ed_RP, ****nuclear_TB_ed_RP;
   if (output_TA == 1)
@@ -1891,7 +1891,7 @@ void MakeDensity::generateEccTable(int nevent)
   int from_order=paraRdr->getVal("ecc_from_order"), to_order=paraRdr->getVal("ecc_to_order");
 
   // entropy profile:
-  char file1[] = (resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
+  const char * file1 = (resultsPath + "/sn_ecc_eccp_%d.dat").c_str();
   double *** dens1  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens1[iy] =  new double* [Maxx]();
@@ -1902,7 +1902,7 @@ void MakeDensity::generateEccTable(int nevent)
   }
 
   // energy profile:
-  char file2[] = (resultsPath + "/en_ecc_eccp_%d.dat").c_str();
+  const char * file2 = (resultsPath + "/en_ecc_eccp_%d.dat").c_str();
   double *** dens2  = new double** [binRapidity];
   for(int iy=0;iy<binRapidity;iy++) {
     dens2[iy] =  new double* [Maxx]();
