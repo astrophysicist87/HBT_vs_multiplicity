@@ -28,6 +28,8 @@ int main(int argc, char *argv[]) {
 
   resultsPath = string(argv[1]);
 
+  cout << "Using " << resultsPath << " to store results" << endl;
+
   // init random seed from system time
   timeval a;
   gettimeofday(&a, 0);
