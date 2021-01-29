@@ -1908,6 +1908,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
     }
   }
 
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
   // energy profile:
   const char * file2 = (resultsPath + "/en_ecc_eccp_%d.dat").c_str();
 cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
@@ -1921,6 +1922,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
   }
 
   double b;
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
 
   // event start.
   int event=1;
@@ -1930,6 +1932,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
     int binary = 0;
     while (binary==0 || mc->CentralityCut()==0)
     {
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       b = sqrt((bmax*bmax - bmin*bmin)*drand48()+bmin*bmin);
       mc->generateNucleus(b,proj,targ);
       binary = mc->getBinaryCollision();
@@ -1944,15 +1947,19 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
           tries=0;
       }
     }
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
     Npart = mc->getNpart1()+mc->getNpart2();
     Nbin = mc->getNcoll();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
 
     // compute eccentricity.
     mc->getTA2();
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
 
     bool cutdSdypassFlag = true;
     for(int iy=0;iy<binRapidity;iy++) {
       mc->setDensity(iy, -1);
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
       // cut total entropy
       if(iy == 0 && cutdSdy == 1)
       {
@@ -1966,6 +1973,7 @@ cout << __FILE__ << ":" << __LINE__ << ":" << string(file2) << endl;
       // entropy first
       if (paraRdr->getVal("use_sd"))
       {
+cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
         setSd(dens1, iy);
 cout << __FILE__ << ":" << __LINE__ << ":" << string(file1) << endl;
         dumpEccentricities(file1, dens1, iy, from_order, to_order, Npart, Nbin, b);
