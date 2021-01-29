@@ -157,7 +157,7 @@ MakeDensity::~MakeDensity()
 void MakeDensity::generate_profile_ebe_Jet(int nevent)
 {
   // binary profile:
-  char resultsPath_CString[] = resultsPath.c_str();
+  char resultsPath_CString[] = {resultsPath.c_str()};
   char file_binary[] = {resultsPath_CString"/BinaryCollisionTable_event_%d.dat"};
   char file_participant[] = (resultsPath + "/ParticipantTable_event_%d.dat").c_str();
 
