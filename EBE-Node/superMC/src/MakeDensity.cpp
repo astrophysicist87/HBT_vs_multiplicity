@@ -1888,6 +1888,10 @@ void MakeDensity::generate_profile_average(int nevent)
 }
 //----------------------------------------------------------------------
 
+std::string get_path( std::string s1, std::string s2 )
+{
+	return ( s1 + s2 );
+}
 
 //**********************************************************************
 void MakeDensity::generateEccTable(int nevent)
