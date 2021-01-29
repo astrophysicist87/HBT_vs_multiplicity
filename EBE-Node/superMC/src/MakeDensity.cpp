@@ -157,8 +157,8 @@ MakeDensity::~MakeDensity()
 void MakeDensity::generate_profile_ebe_Jet(int nevent)
 {
   // binary profile:
-  const char resultsPath_CString[] = resultsPath.c_str();
-  const char file_binary[] = {resultsPath_CString"/BinaryCollisionTable_event_%d.dat"};
+  const char * resultsPath_CString = resultsPath.c_str();
+  const char file_binary[] = (resultsPath_CString"/BinaryCollisionTable_event_%d.dat");
   char file_participant[] = (resultsPath + "/ParticipantTable_event_%d.dat").c_str();
 
   // entropy profile:
