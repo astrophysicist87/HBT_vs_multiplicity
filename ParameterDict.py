@@ -43,8 +43,8 @@ superMCParameters = {
     'cc_fluctuation_Gamma_theta'    :   0.75,       
     'maxx'                          :   20.0,       # grid size in x (fm)
     'maxy'                          :   20.0,       # grid size in y (fm)
-    'dx'                            :   0.1,        # grid spacing in x (fm)
-    'dy'                            :   0.1,        # grid spacing in y (fm)
+    'dx'                            :   0.025,        # grid spacing in x (fm)
+    'dy'                            :   0.025,        # grid spacing in y (fm)
     'nev'                           :   1,
     'shape_of_entropy'              :   3,
     #'generate_reaction_plane_avg_profile' : 1,
@@ -69,10 +69,10 @@ hydroParameters = {
     'T0'        :   0.6,      # tau_0
     'dt'        :   0.02,     # dtau
     'Tdec'      :   0.12,
-    'iLS'       :   200,      # lattice size in transverse plane 2*iLS+1
-    'dx'        :   0.1,     # lattice spacing in x (fm) 
+    'iLS'       :   800,      # lattice size in transverse plane 2*iLS+1
+    'dx'        :   0.025,     # lattice spacing in x (fm) 
                               # need to be the same as dx in superMC
-    'dy'        :   0.1,     # lattice spacing in y (fm)
+    'dy'        :   0.025,     # lattice spacing in y (fm)
                               # need to be the same as dy in superMC
     'Edec'      :   0.048,  #
     'ndx'       :   2,

@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-    This script duplicates the EBE-Node folder and generate a collection of pbs
+    This script duplicates the EBE-Node folder and generate a collection of sbatch
     files to be batch-submitted. For efficiency all codes inside EBE-Node should
     be compiled.
 """
@@ -39,13 +39,7 @@ try:
     if len(argv)>=argId+1: # set wall time
         walltime = argv[argId]
     else:
-        walltime = "%d:00:00" % (2*numberOfEventsPerJob) # 3 hours per job
-
-    argId += 1
-    if len(argv)>=argId+1: # whether to compress final results folder
-        compressResultsFolderAnswer = argv[argId]
-    else:
-        compressResultsFolderAnswer = "yes"
+        walltime = "%d:00:00" % (3*numberOfEventsPerJob) # 3 hours per job
 
     argId += 1
     if len(argv)>=argId+1: # whether to compress final results folder
@@ -53,7 +47,7 @@ try:
     else:
         parameterDictFilename = "ParameterDict.py"
 except:
-    print('Usage: generateJobs.py number_of_jobs number_of_events_per_job cluster_name [working_folder="./PlayGround"] [results_folder="./RESULTS"] [walltime="03:00:00" (per event)] [compress_results_folder="yes"] [compress_results_folder="yes"]')
+    print('Usage: ./generateJobs_cluster.py number_of_jobs number_of_events_per_job cluster_name [working_folder="./PlayGround"] [results_folder="./RESULTS"] [walltime="03:00:00" (per event)] [parameterDictFilename="ParameterDict.py"]')
     exit()
 
 # save config files
@@ -64,10 +58,9 @@ iEbeConfigs = {
     "working_folder"            :   "%s",
     "results_folder"            :   "%s",
     "walltime"                  :   "%s",
-    "compress_results_folder"   :   "%s",
     "parameter_dict_filename"   :   "%s",
 }
-""" % (numberOfJobs, numberOfEventsPerJob, workingFolder, resultsFolder, walltime, compressResultsFolderAnswer, parameterDictFilename)
+""" % (numberOfJobs, numberOfEventsPerJob, workingFolder, resultsFolder, walltime, parameterDictFilename)
 )
 
 # define colors
@@ -80,8 +73,8 @@ normal = "\033[0m"
 
 # print welcome message
 print(yellow)
-greetings(3)
-print(purple + "\n" + "-"*80 + "\n>>>>> Welcome to the event generator! <<<<<\n" + "-"*80 + normal)
+greetings(1)
+print(purple + "\n" + "-"*80 + "\n>>>>> Welcome to the iEBE-VISHNU event generator! <<<<<\n" + "-"*80 + normal)
 
 # check prerequisites
 print(green + "\n>>>>> Checking for required libraries <<<<<\n" + normal)
@@ -119,19 +112,20 @@ copy(parameterDictFilename,
 copy(path.join(crankFolder, "SequentialEventDriver.py"), resultsFolder)
 copy(path.join(crankFolder, "ParameterDict.py"), resultsFolder)
 
-# duplicate EBE-Node folder to working directory, write .pbs file
+# duplicate EBE-Node folder to working directory, write .sbatch file
 for i in range(1, numberOfJobs+1):
     targetWorkingFolder = path.join(workingFolder, "job-%d" % i)
     # copy folder
     copytree(ebeNodeFolder, targetWorkingFolder)
-    open(path.join(targetWorkingFolder, "job-%d.pbs" % i), "w").write(
-"""
-#!/usr/bin/env bash
-#PBS -N iEBE-%d
-#PBS -l walltime=%s
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-#PBS -S /bin/bash
+    open(path.join(targetWorkingFolder, "job-%d.sbatch" % i), "w").write(
+"""#!/bin/bash
+#SBATCH -N 1
+#SBATCH -J iEBE-%d
+#SBATCH -t %s
+#SBATCH -A qgp
+#SBATCH -p qgp
+#SBATCH -o iEBE.o%s
+#SBATCH -e iEBE.e%s
 cd %s
 (cd %s
     ulimit -n 1000
@@ -139,40 +133,7 @@ cd %s
     cp RunRecord.txt ErrorRecord.txt ../finalResults/
 )
 mv ./finalResults %s/job-%d
-""" % (i, walltime, targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
-    )
-    if compressResultsFolderAnswer == "yes":
-        open(path.join(targetWorkingFolder, "job-%d.pbs" % i), "a").write(
-"""
-(cd %s
-    tar -zcf job-%d.tar.gz job-%d
-    rm -fr job-%d
-)
-""" % (resultsFolder, i, i, i)
-        )
-
-# add a data collector watcher
-if compressResultsFolderAnswer == "yes":
-    EbeCollectorFolder = "EbeCollector"
-    utilitiesFolder = "utilities"
-    watcherDirectory = path.join(workingFolder, "watcher")
-    makedirs(path.join(watcherDirectory, ebeNodeFolder))
-    copytree(path.join(ebeNodeFolder, EbeCollectorFolder), path.join(watcherDirectory, ebeNodeFolder, EbeCollectorFolder))
-    copytree(utilitiesFolder, path.join(watcherDirectory, utilitiesFolder))
-    open(path.join(watcherDirectory, "watcher.pbs"), "w").write(
-"""
-#!/usr/bin/env bash
-#PBS -N watcher
-#PBS -l walltime=%s
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-#PBS -S /bin/bash
-cd %s
-(cd %s
-    python autoZippedResultsCombiner.py %s %d "job-(\d*).tar.gz" 60 1> WatcherReport.txt
-    mv WatcherReport.txt %s
-)
-""" % (walltime, watcherDirectory, utilitiesFolder, resultsFolder, numberOfJobs, resultsFolder)
+""" % (i, walltime, '%j', '%j', targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
     )
 
 from importlib import import_module
@@ -192,5 +153,3 @@ print("Jobs generated. Submit them using submitJobs scripts.")
 
 
 ###########################################################################
-# 05-23-2013:
-#   Bugfix: "cd %s" added to the pbs files.

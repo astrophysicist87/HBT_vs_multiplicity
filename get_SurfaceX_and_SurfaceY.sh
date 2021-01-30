@@ -8,8 +8,8 @@
                 #unzip -o $direc/job-1.zip job-1/event-1/decdat2.dat -d $direc
 		tmpfile=tmp.out
 		paste $direc/job-1/event-1/surface.dat $direc/job-1/event-1/decdat2.dat > "$tmpfile"
-		awk '$4**2<=0.04 {print $2, $5, sqrt($12**2+$13**2), $3, $12+0.0, $4, $13+0.0}' "$tmpfile" | column -t > $direc/job-1/event-1/SurfaceX.dat
-                awk '$3**2<=0.04 {print $2, $5, sqrt($12**2+$13**2), $3, $12+0.0, $4, $13+0.0}' "$tmpfile" | column -t > $direc/job-1/event-1/SurfaceY.dat
+		awk '$4**2<=0.01 {print $2, $5, sqrt($12**2+$13**2), $3, $12+0.0, $4, $13+0.0}' "$tmpfile" | column -t > $direc/job-1/event-1/SurfaceX.dat
+                awk '$3**2<=0.01 {print $2, $5, sqrt($12**2+$13**2), $3, $12+0.0, $4, $13+0.0}' "$tmpfile" | column -t > $direc/job-1/event-1/SurfaceY.dat
 		rm "$tmpfile"
 #	done
 #done
