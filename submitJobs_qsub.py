@@ -34,6 +34,7 @@ for aFolder in listdir(targetWorkingDirectory):
         if path.splitext(aFile)[1].lower() == '.pbs':
             commandString = "qsub %s" % aFile
             print("Submitting %s in %s..." % (aFile, subFolder))
+            print("commandString =", commandString)
             call(commandString, shell=True, cwd=subFolder)
 
 print("Job submission done. See RunRecord.txt file in each job folder for progress.")
