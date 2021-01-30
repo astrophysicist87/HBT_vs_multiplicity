@@ -506,7 +506,9 @@ def generateSuperMCInitialConditions(numberOfEvents):
     assignments = formAssignmentStringFromDict(superMCParameters)
     # form executable string
     executableString = ("nice -n %d ./" % (ProcessNiceness) 
-                        + superMCExecutable + assignments)
+                        + superMCExecutable + ' '
+                        + superMCControl['dataDir']
+                        + ' ' + assignments)
     # execute!
     run(executableString, cwd=superMCDirectory)
 
