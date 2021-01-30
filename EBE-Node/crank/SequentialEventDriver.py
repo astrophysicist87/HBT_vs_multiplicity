@@ -347,25 +347,26 @@ def translate_centrality_cut():
     collision_energy = str(superMCParameters['ecm'])
 
     Aproj = superMCParameters['Aproj']
-    Atrag = superMCParameters['Atarg']
+    Atarg = superMCParameters['Atarg']
     nucleus_name_dict = {
         208: 'Pb',
         197: 'Au',
         238: 'U',
         63: 'Cu',
         27: 'Al',
+        16: 'O',
         1: 'p',
         2: 'd',
         3: 'He',
     }
-    if Aproj == Atrag:  #symmetric collision
-        nucleus_name = nucleus_name_dict[Aproj]+nucleus_name_dict[Atrag]
+    if Aproj == Atarg:  #symmetric collision
+        nucleus_name = nucleus_name_dict[Aproj]+nucleus_name_dict[Atarg]
     else:  # asymmetric collision
-        nucleus_name = (nucleus_name_dict[min(Aproj, Atrag)]
-                        + nucleus_name_dict[max(Aproj, Atrag)])
+        nucleus_name = (nucleus_name_dict[min(Aproj, Atarg)]
+                        + nucleus_name_dict[max(Aproj, Atarg)])
 
 
-    if Aproj == 1 or Atrag == 1:
+    if Aproj == 1 or Atarg == 1:
         shapeOfEntropy = '_SoE' + str(superMCParameters['shape_of_entropy'])
     else:
         shapeOfEntropy = ''
