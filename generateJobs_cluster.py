@@ -112,8 +112,8 @@ copy(parameterDictFilename,
 copy(path.join(crankFolder, "SequentialEventDriver.py"), resultsFolder)
 copy(path.join(crankFolder, "ParameterDict.py"), resultsFolder)
 
-accountAndPartitionInfo = {'pitzer': """#SBATCH -A qgp
-#SBATCH -p qgp""", 'ICCP': """#SBATCH -A PAS0254"""}[cluster_name]
+accountAndPartitionInfo = {'ICCP': """#SBATCH -A qgp
+#SBATCH -p qgp""", 'pitzer': """#SBATCH -A PAS0254"""}[cluster_name]
 
 # duplicate EBE-Node folder to working directory, write .sbatch file
 for i in range(1, numberOfJobs+1):
