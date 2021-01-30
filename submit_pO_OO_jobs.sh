@@ -25,10 +25,10 @@ case "$sys" in
 			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				18:00:00 "no" \
+				18:00:00 \
 				ParameterDict_EA_${sys}_C${cen}.py
 
-			./submitJobs_qsub.py
+			./submitJobs_cluster.py
 
 			sleep 5
 		done
@@ -54,10 +54,10 @@ case "$sys" in
 			./generateJobs_cluster.py 1 $count pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				18:00:00 "no" \
+				18:00:00 \
 				ParameterDict_EA_${sys}_C${cen}.py
 
-			./submitJobs_qsub.py
+			./submitJobs_cluster.py
 
 			sleep 5
 		done
@@ -82,10 +82,10 @@ case "$sys" in
 			./generateJobs_cluster.py 1 10000 pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				24:00:00 "no" \
+				24:00:00 \
 				ParameterDict_EA_${sys}_C${cen}.py
 
-			./submitJobs_qsub.py
+			./submitJobs_cluster.py
 
 			sleep 5
 		done
@@ -110,10 +110,10 @@ case "$sys" in
 			./generateJobs_cluster.py 1 10000 pitzer \
 				PlayGround_EA_${sys}_C${cen} \
 				RESULTS_EA_${sys}_C${cen} \
-				24:00:00 "no" \
+				24:00:00 \
 				ParameterDict_EA_${sys}_C${cen}.py
 
-			./submitJobs_qsub.py
+			./submitJobs_cluster.py
 
 			sleep 5
 		done
