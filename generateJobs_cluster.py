@@ -112,6 +112,9 @@ copy(parameterDictFilename,
 copy(path.join(crankFolder, "SequentialEventDriver.py"), resultsFolder)
 copy(path.join(crankFolder, "ParameterDict.py"), resultsFolder)
 
+accountAndPartitionInfo = {'pitzer': """#SBATCH -A qgp
+#SBATCH -p qgp""", 'ICCP': """#SBATCH -A PAS0254"""}[cluster_name]
+
 # duplicate EBE-Node folder to working directory, write .sbatch file
 for i in range(1, numberOfJobs+1):
     targetWorkingFolder = path.join(workingFolder, "job-%d" % i)
@@ -122,8 +125,7 @@ for i in range(1, numberOfJobs+1):
 #SBATCH -N 1
 #SBATCH -J iEBE-%d
 #SBATCH -t %s
-#SBATCH -A qgp
-#SBATCH -p qgp
+%s
 #SBATCH -o iEBE.o%s
 #SBATCH -e iEBE.e%s
 cd %s
@@ -133,7 +135,7 @@ cd %s
     cp RunRecord.txt ErrorRecord.txt ../finalResults/
 )
 mv ./finalResults %s/job-%d
-""" % (i, walltime, '%j', '%j', targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
+""" % (i, walltime, accountAndPartitionInfo, '%j', '%j', targetWorkingFolder, crankFolderName, numberOfEventsPerJob, resultsFolder, i)
     )
 
 from importlib import import_module
